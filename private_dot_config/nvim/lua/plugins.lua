@@ -298,7 +298,7 @@ use {
 }
 
 -- Track mouse
-use 'DanilaMihailov/beacon.nvim'
+-- use 'DanilaMihailov/beacon.nvim'
 
 --------------------------------------------------
 
@@ -464,11 +464,6 @@ use {
 
 	end
 }
--- Markdown previewer
-use {
-	'iamcco/markdown-preview.nvim',
-	run = 'cd app && npm install',
-}
 
 -- modify filepath and file contents in Quickfix buffer
 use 'gabrielpoca/replacer.nvim'
@@ -476,30 +471,21 @@ use 'gabrielpoca/replacer.nvim'
 --------------------------------
 
 
--------- Development --------
+-- Additional Omnisharp functionality
+use 'Hoffs/omnisharp-extended-lsp.nvim'
 
--- Reusable UI components
--- use 'MunifTanjim/nui.nvim'
-
------------------------------
-
+-- Undo Tree
+use 'mbbill/undotree'
 
 -------- Currently Unused --------
 
 local CurrentlyUnused = function()
-	-- Note taking functionality
-	use {
-		'phaazon/mind.nvim',
-		config = function()
-			require('mind').setup {}
-		end,
-	}
 	-- Breakdown of what vim spends time on when starting up
 	use 'dstein64/vim-startuptime'
-	-- Additional Omnisharp functionality
-	use 'Hoffs/omnisharp-extended-lsp.nvim'
+
 	-- Assorted things
 	use 'echasnovski/mini.nvim'
+
 	-- Manipulate object surrounding characters
 	use {
 		'https://github.com/kylechui/nvim-surround',
@@ -507,12 +493,10 @@ local CurrentlyUnused = function()
 			require("nvim-surround").setup()
 		end
 	}
+
 	-- Per project navigation
 	use 'ThePrimeagen/harpoon'
-	-- Undo Tree
-	use 'mbbill/undotree'
-	-- Develop inside Docker containers
-	use 'jamestthompson3/nvim-remote-containers'
+
 	-- gdb for neovim
 	use {
 		'sakhnik/nvim-gdb',
@@ -526,56 +510,15 @@ local CurrentlyUnused = function()
 		config = function()
 			vim.defer_fn(function()
 				require('copilot').setup({
-					panel = {
-						enabled = true,
-						auto_refresh = false,
-						keymap = {
-							jump_prev = "[[",
-							jump_next = "]]",
-							accept = "<CR>",
-							refresh = "gr",
-							open = "<M-CR>"
-						},
-					},
-					suggestion = {
-						enabled = true,
-						auto_trigger = false,
-						debounce = 75,
-						keymap = {
-							accept = "<C-J>",
-							next = "<M-]>",
-							prev = "<M-[>",
-							dismiss = "<C-]>",
-						},
-					},
-					filetypes = {
-						yaml = false,
-						markdown = false,
-						help = false,
-						gitcommit = false,
-						gitrebase = false,
-						hgcommit = false,
-						svn = false,
-						cvs = false,
-						["."] = false,
-					},
-					copilot_node_command = 'node', -- Node version must be < 18
-					plugin_manager_path = vim.fn.stdpath("data") .. "/site/pack/packer",
-					server_opts_overrides = {},
+					suggestion = { keymap = { accept = "<C-J>" } }
+					-- plugin_manager_path = vim.fn.stdpath("data") .. "/site/pack/packer",
 				})
-				-- require("copilot").setup()
 			end, 100)
 		end,
 	}
 
 	-- operate on remote text objects
 	use 'ggandor/leap-spooky.nvim'
-
-	-- LSP progress (taken over by Noice, likely)
-	use {
-		'j-hui/fidget.nvim',
-		config = function() require('fidget').setup() end
-	}
 
 	-- Folding
 	use {
@@ -590,11 +533,21 @@ local CurrentlyUnused = function()
 		}
 	}
 
+	--  initially brought in to be used with lazy docker
 	use {
 		"akinsho/toggleterm.nvim",
 		tag = '*',
 		config = function()
 			require("toggleterm").setup()
 		end
+	}
+
+	-- Develop inside Docker containers
+	use 'jamestthompson3/nvim-remote-containers'
+
+	-- Markdown previewer
+	use {
+		'iamcco/markdown-preview.nvim',
+		run = 'cd app && npm install',
 	}
 end
