@@ -249,6 +249,10 @@ use {
 -- Track mouse
 -- use 'DanilaMihailov/beacon.nvim'
 
+use {
+	'michaelb/sniprun',
+	run = 'bash install.sh',
+}
 
 ------------------------------------------------------------------------------------------
 -- Completion
@@ -332,7 +336,7 @@ use 'jose-elias-alvarez/null-ls.nvim'
 
 -- Make working with TS LS better
 use {
-	'https://github.com/jose-elias-alvarez/typescript.nvim',
+	'jose-elias-alvarez/typescript.nvim',
 	config = function()
 		require('typescript').setup{}
 	end
