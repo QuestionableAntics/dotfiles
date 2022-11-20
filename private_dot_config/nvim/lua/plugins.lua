@@ -34,26 +34,27 @@ use 'tomasiser/vim-code-dark'
 -- 	end
 -- }
 -- Nice status bar
-use {
-	'nvim-lualine/lualine.nvim',
-	requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-	config = function()
-		require('lualine').setup {
-			options = { theme = 'onedark' },
-			sections = {
-				lualine_a = {
-					{ 'filename', path = 1 },
-				},
-			},
-		}
-	end
-}
+
+-- use {
+-- 	'nvim-lualine/lualine.nvim',
+-- 	requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+-- 	config = function()
+-- 		require('lualine').setup {
+-- 			options = { theme = 'onedark' },
+-- 			sections = {
+-- 				lualine_a = {
+-- 					{ 'filename', path = 1 },
+-- 				},
+-- 			},
+-- 		}
+-- 	end
+-- }
 
 -- Tabline
-use {
-	'nanozuki/tabby.nvim',
-	-- config = function() require('tabby').setup {} end
-}
+-- use {
+-- 	'nanozuki/tabby.nvim',
+-- 	config = function() require('tabby').setup {} end
+-- }
 
 use {
 	"folke/noice.nvim",
@@ -148,10 +149,15 @@ use 'David-Kunz/jester'
 
 ---------- Code Functionality ----------
 
--- Automatic pairing of ([{--'
+-- Little bit of everything
 use {
-	'windwp/nvim-autopairs',
-	config = function() require('nvim-autopairs').setup {} end
+	'echasnovski/mini.nvim',
+	config = function()
+		require('mini.cursorword').setup {}
+		require('mini.statusline').setup {}
+		require('mini.pairs').setup {}
+		require('mini.comment').setup {}
+	end
 }
 
 -- Syntax tree parser for better syntax highlighting among other things
@@ -256,37 +262,6 @@ use {
 		require('auto-session').setup {
 			auto_session_root_dir = os.getenv('HOME') .. '/.vim/sessions/',
 			auto_session_suppress_dirs = { '~/' },
-		}
-	end
-}
-
--- Comment stuff out with lua
-use {
-	'numToStr/Comment.nvim',
-	config = function()
-		require('Comment').setup {
-			pre_hook = function(ctx)
-				-- Only calculate commentstring for tsx filetypes
-				if vim.bo.filetype == 'typescriptreact' then
-					local U = require('Comment.utils')
-
-					-- Determine whether to use linewise or blockwise commentstring
-					local type = ctx.ctype == U.ctype.linewise and '__default' or '__multiline'
-
-					-- Determine the location where to calculate commentstring from
-					local location = nil
-					if ctx.ctype == U.ctype.blockwise then
-						location = require('ts_context_commentstring.utils').get_cursor_location()
-					elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-						location = require('ts_context_commentstring.utils').get_visual_start_location()
-					end
-
-					return require('ts_context_commentstring.internal').calculate_commentstring({
-						key = type,
-						location = location,
-					})
-				end
-			end,
 		}
 	end
 }
@@ -404,6 +379,7 @@ use {
 }
 -- More speed up
 use 'nathom/filetype.nvim'
+
 -- Virtual text to add indentation guides
 use {
 	'lukas-reineke/indent-blankline.nvim',
@@ -414,6 +390,7 @@ use {
 		}
 	end
 }
+
 -- Hints for keybindings
 use 'folke/which-key.nvim'
 -- Rest Client
