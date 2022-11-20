@@ -54,13 +54,6 @@ local lspconfig = require 'lspconfig'
 
 		tsserver = {
 			root_dir = util.root_pattern("package.json"),
-			on_attach = function(client, _)
-				local ts_utils = require("nvim-lsp-ts-utils")
-				ts_utils.setup {
-					always_organize_imports = false,
-				}
-				ts_utils.setup_client(client)
-			end,
 			init_options = {
 				lint = true,
 			},
@@ -69,7 +62,7 @@ local lspconfig = require 'lspconfig'
 		eslint = {},
 
 		-- Setup guide for C#
-		-- https://rudism.com/coding-csharp-in-neovim/
+-- https://rudism.com/coding-csharp-in-neovim/
 		omnisharp = {
 			on_attach = function(_, bufnr)
 				vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')

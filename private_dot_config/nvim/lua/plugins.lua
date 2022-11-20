@@ -13,48 +13,26 @@ use {
 -- package manager
 use 'wbthomason/packer.nvim'
 
----------------------------------------------- Visuals ----------------------------------------------
+------------------------------------------------------------------------------------------
+-- Visuals
+------------------------------------------------------------------------------------------
 
 -- More pretty icons
 use 'kyazdani42/nvim-web-devicons'
+
 -- highlight matching html tags
 use 'gregsexton/MatchTag'
+
 -- VS Code theme
-use 'tomasiser/vim-code-dark'
--- Other VS Code theme
--- use {
--- 	'Mofiqul/vscode.nvim',
--- 	config = function()
--- 		-- vim.o.background = 'dark'
---
--- 		require('vscode').setup{
--- 			transparent = true,
--- 			italic_comments = true,
--- 		}
--- 	end
--- }
--- Nice status bar
-
--- use {
--- 	'nvim-lualine/lualine.nvim',
--- 	requires = { 'kyazdani42/nvim-web-devicons', opt = true },
--- 	config = function()
--- 		require('lualine').setup {
--- 			options = { theme = 'onedark' },
--- 			sections = {
--- 				lualine_a = {
--- 					{ 'filename', path = 1 },
--- 				},
--- 			},
--- 		}
--- 	end
--- }
-
--- Tabline
--- use {
--- 	'nanozuki/tabby.nvim',
--- 	config = function() require('tabby').setup {} end
--- }
+use {
+	'Mofiqul/vscode.nvim',
+	config = function()
+		require('vscode').setup{
+			transparent = true,
+			italic_comments = true,
+		}
+	end
+}
 
 use {
 	"folke/noice.nvim",
@@ -62,19 +40,15 @@ use {
 		require("noice").setup()
 	end,
 	requires = {
-		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 		"MunifTanjim/nui.nvim",
-		-- OPTIONAL:
-		--   `nvim-notify` is only needed, if you want to use the notification view.
-		--   If not available, we use `mini` as the fallback
 		"rcarriga/nvim-notify",
 	}
 }
 
------------------------------------------------------------------------------------------------------
 
-
------------------------------------ DB -----------------------------------
+------------------------------------------------------------------------------------------
+-- Database
+------------------------------------------------------------------------------------------
 
 -- DB interface
 use 'tpope/vim-dadbod'
@@ -85,10 +59,10 @@ use 'kristijanhusak/vim-dadbod-ui'
 -- Postgres driver
 use 'jackc/pgx'
 
-----------------------------
 
-
----------- Version Control ----------
+------------------------------------------------------------------------------------------
+-- Version Control
+------------------------------------------------------------------------------------------
 
 -- git in vim (required for other git plugins)
 use 'tpope/vim-fugitive'
@@ -110,10 +84,10 @@ use 'junegunn/gv.vim'
 -- Diff View
 use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
-------------------------------------------------------
 
-
-------------- Debug/Test -------------
+------------------------------------------------------------------------------------------
+-- Debugging and Testing
+------------------------------------------------------------------------------------------
 
 -- Debug adapter protocol, base plugin {name = for debugging}
 use 'mfussenegger/nvim-dap'
@@ -144,10 +118,10 @@ use {
 -- Debug Jest
 use 'David-Kunz/jester'
 
----------------------------------
 
-
----------- Code Functionality ----------
+------------------------------------------------------------------------------------------
+-- Code Functionality
+------------------------------------------------------------------------------------------
 
 -- Little bit of everything
 use {
@@ -166,7 +140,7 @@ use {
 	run = ':TSUpdate',
 	-- Last commit before a breaking change that changes what highlight groups use to work
 	-- check if this is still needed
-	commit = '4cccb6f',
+	-- commit = '4cccb6f',
 	config = function()
 		require('nvim-treesitter.configs').setup {
 			-- either "all" or {"a", "list", "of", "languages"}
@@ -229,10 +203,10 @@ use 'metakirby5/codi.vim'
 -- Change the surroundings
 use 'tpope/vim-surround'
 
-------------------------------------------------------------
 
-
----------- Functionality ----------
+------------------------------------------------------------------------------------------
+-- Functionality
+------------------------------------------------------------------------------------------
 
 -- File explorer
 use {
@@ -275,10 +249,10 @@ use {
 -- Track mouse
 -- use 'DanilaMihailov/beacon.nvim'
 
---------------------------------------------------
 
-
----------- Completion ----------
+------------------------------------------------------------------------------------------
+-- Completion
+------------------------------------------------------------------------------------------
 
 -- Fast as FUCK autocompletion
 use { 'ms-jpq/coq_nvim', branch = 'coq' }
@@ -304,10 +278,10 @@ use 'github/copilot.vim'
 -- Autocomplete source for vim dadbod (database)
 use 'kristijanhusak/vim-dadbod-completion'
 
---------------------------------------------
 
-
----------- Search ----------
+------------------------------------------------------------------------------------------
+-- Search
+------------------------------------------------------------------------------------------
 
 -- Pretty Pick List
 use {
@@ -327,10 +301,10 @@ use 'nvim-telescope/telescope-dap.nvim'
 -- Uses telescope for the native ui-select
 use 'nvim-telescope/telescope-ui-select.nvim'
 
-------------------------------------
 
-
----------- Language Server Stuff ----------
+------------------------------------------------------------------------------------------
+-- Language Server Stuff
+------------------------------------------------------------------------------------------
 
 -- A collection of common configurations for Neovim's built-in language server client
 -- Handles automatically launching and initializing installed language servers
@@ -357,26 +331,18 @@ use 'nvim-lua/plenary.nvim'
 use 'jose-elias-alvarez/null-ls.nvim'
 
 -- Make working with TS LS better
-use 'jose-elias-alvarez/nvim-lsp-ts-utils'
-
-------------------------------------------------------------------
-
-
----------- Misc ----------
-
--- Don't change initial buffer position when opening new buffer
 use {
-	'luukvbaal/stabilize.nvim',
+	'https://github.com/jose-elias-alvarez/typescript.nvim',
 	config = function()
-		require('stabilize').setup {
-			dap = {
-				breakpoints = {
-					icon = "🛑"
-				}
-			}
-		}
+		require('typescript').setup{}
 	end
 }
+
+
+------------------------------------------------------------------------------------------
+-- Miscellaneous
+------------------------------------------------------------------------------------------
+
 -- More speed up
 use 'nathom/filetype.nvim'
 
@@ -445,31 +411,20 @@ use {
 -- modify filepath and file contents in Quickfix buffer
 use 'gabrielpoca/replacer.nvim'
 
---------------------------------
-
-
--- Additional Omnisharp functionality
-use 'Hoffs/omnisharp-extended-lsp.nvim'
-
 -- Undo Tree
 use 'mbbill/undotree'
 
--------- Currently Unused --------
+
+------------------------------------------------------------------------------------------
+-- Currently Unused
+------------------------------------------------------------------------------------------
 
 local CurrentlyUnused = function()
 	-- Breakdown of what vim spends time on when starting up
 	use 'dstein64/vim-startuptime'
 
-	-- Assorted things
-	use 'echasnovski/mini.nvim'
-
-	-- Manipulate object surrounding characters
-	use {
-		'https://github.com/kylechui/nvim-surround',
-		config = function()
-			require("nvim-surround").setup()
-		end
-	}
+	-- Additional Omnisharp functionality
+	use 'Hoffs/omnisharp-extended-lsp.nvim'
 
 	-- Per project navigation
 	use 'ThePrimeagen/harpoon'
@@ -526,5 +481,37 @@ local CurrentlyUnused = function()
 	use {
 		'iamcco/markdown-preview.nvim',
 		run = 'cd app && npm install',
+	}
+end
+
+local DeprecationStation = function()
+	-- Nice status bar
+	use {
+		'nvim-lualine/lualine.nvim',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+		config = function()
+			require('lualine').setup {
+				options = { theme = 'onedark' },
+				sections = {
+					lualine_a = {
+						{ 'filename', path = 1 },
+					},
+				},
+			}
+		end
+	}
+
+	-- Tabline
+	use {
+		'nanozuki/tabby.nvim',
+		config = function() require('tabby').setup {} end
+	}
+
+	-- Manipulate object surrounding characters
+	use {
+		'https://github.com/kylechui/nvim-surround',
+		config = function()
+			require("nvim-surround").setup()
+		end
 	}
 end

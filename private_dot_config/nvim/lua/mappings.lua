@@ -17,10 +17,10 @@ tmap('jk', [[<C-\><C-N>]])
 local stems = {}
 local mappings = {}
 
-------------------- Random -------------------
+------------------------------------------------------------------------------------------
+-- Random 
+------------------------------------------------------------------------------------------
 
-	-- local harpoon_ui = require('harpoon.ui')
-	-- local harpoon_mark = require('harpoon.mark')
 	local replacer = require('replacer')
 	local rest_nvim = require('rest-nvim')
 
@@ -44,10 +44,6 @@ local mappings = {}
 		['='] = { mode = 'n', action = ':resize +5<CR>', label = 'Horizontal Size Increase' },
 		['-'] = { mode = 'n', action = ':resize -5<CR>', label = 'Horizontal Size Decrease' },
 
-		-- harpoon
-		-- ['<Leader>jm'] = { mode = 'n', action = harpoon_ui.toggle_quick_menu, label = 'Open Harpoon Quick Menu' },
-		-- ['<Leader>am'] = { mode = 'n', action = harpoon_mark.add_file, label = 'Add file to Harpoon Mark' },
-
 		-- REPL
 		['<Leader>rpy'] = { mode = 'n', action = '<cmd>Codi python<CR>', label = 'Open Python REPL' },
 		['<Leader>rjs'] = { mode = 'n', action = '<cmd>Codi javascript<CR>', label = 'Open JS REPL' },
@@ -64,7 +60,7 @@ local mappings = {}
 		['<Leader>md'] = { mode = 'n', action = ':MarkdownPreview', label = 'Open Markdown Previewer' },
 
 		-- modify quickfix contents
-		['<Leader>qm'] = { mode = 'n', action = replacer.run, label = 'Modify Quickfix Contents' },
+		['<Leader>qm'] = { mode = 'n', action = function() replacer.run {rename_files = false} end, label = 'Modify Quickfix Contents' },
 
 		-- Run http request
 		['<Leader>k'] = { mode = 'n', action = rest_nvim.run, label = "Run http request", buffer = vim.api.nvim_get_current_buf() }
@@ -72,10 +68,10 @@ local mappings = {}
 
 	stems['<Leader>r'] = { label =  'REPL' }
 
------------------------------------------------
 
-
---------------- Fuzzy Finder ---------------
+------------------------------------------------------------------------------------------
+-- Fuzzy Finder
+------------------------------------------------------------------------------------------
 
 	local telescope = require('telescope')
 	local telescope_builtin = require('telescope.builtin')
@@ -95,10 +91,10 @@ local mappings = {}
 	stems['<Leader>f'] = { label = 'Fuzzy Finder' }
 	stems['<Leader>fx'] = { label = 'Find Diagnostics' }
 
------------------------------------------
 
-
------------- Testing ------------
+------------------------------------------------------------------------------------------
+-- Testing
+------------------------------------------------------------------------------------------
 
 	local neotest = require('neotest')
 
@@ -114,10 +110,10 @@ local mappings = {}
 
 	stems['<Leader>u'] = { label = 'Testing' }
 
----------------------------------
 
-
---------------- Debug ---------------
+------------------------------------------------------------------------------------------
+-- Debugging
+------------------------------------------------------------------------------------------
 
 	local dap_python = require('dap-python')
 	local dap = require('dap')
@@ -160,10 +156,12 @@ local mappings = {}
 	stems['<Leader>du'] = { label = 'Debug UI' }
 	stems['<Leader>dc'] = { label = 'Debug Telescope' }
 
--------------------------------------
 
+------------------------------------------------------------------------------------------
+-- LSP Mappings
+------------------------------------------------------------------------------------------
 
------------------- LSP Mappings ------------------
+	local typescript = require("typescript")
 
 	mappings['lsp'] = {
 		['gd'] = { mode = 'n', action = vim.lsp.buf.definition, label = 'Go to definition' },
@@ -181,14 +179,14 @@ local mappings = {}
 		['<Leader>='] = { mode = 'n', action = vim.lsp.buf.format, label = 'Formatting' },
 		['<Leader>-'] = { mode = 'n', action = vim.diagnostic.setloclist, label = 'diagnostic Locations' },
 
-		['gi'] = { mode = 'n', action = ":TSLspImportCurrent<CR>", label = "Import Current"},
-		['gia'] = { mode = 'n', action = ":TSLspImportAll<CR>", label = "Import All"},
+		['gi'] = { mode = 'n', action = typescript.actions.addMissingImports, label = "Import Current"},
+		['gtfr'] = { mode = 'n', action = ":TypescriptRenameFile<CR>", label = "Rename File"},
 	}
 
----------------------------------------------------
 
-
----------------------------- Git ------------------------
+------------------------------------------------------------------------------------------
+-- Git
+------------------------------------------------------------------------------------------
 
 	local gitsigns = require('gitsigns')
 
@@ -207,10 +205,10 @@ local mappings = {}
 
 	stems['<Leader>h'] = { label = 'Git' }
 
----------------------------------------------------------
 
-
----------------- Motions ----------------
+------------------------------------------------------------------------------------------
+-- Motions
+------------------------------------------------------------------------------------------
 
 	local hop = require('hop')
 
@@ -225,10 +223,10 @@ local mappings = {}
 		['k' ] = { mode = '', action = 'gk', label = 'Move up' },
 	}
 
------------------------------------------
 
-
----------------- Tabs ----------------
+------------------------------------------------------------------------------------------
+-- Tabs
+------------------------------------------------------------------------------------------
 
 	mappings['tab'] = {
 		['<Leader>ta'] = { mode = 'n', action = ':$tabnew<CR>', label = 'New tab' },
@@ -243,7 +241,7 @@ local mappings = {}
 	stems['<Leader>t'] = { label = 'Tabs' }
 	stems['<Leader>tm'] = { label = 'Move tab' }
 
---------------------------------------
+------------------------------------------------------------------------------------------
 
 local all_mappings = {}
 
@@ -266,7 +264,9 @@ end
 local which_key = require 'which-key'
 
 
------------ Which Key ---------------
+------------------------------------------------------------------------------------------
+-- Which Key
+------------------------------------------------------------------------------------------
 
 	local which_key_mappings = {}
 
@@ -280,7 +280,7 @@ local which_key = require 'which-key'
 
 	which_key.register(which_key_mappings)
 
-------------------------------------
+------------------------------------------------------------------------------------------
 
 return {
 	all_mappings = all_mappings,

@@ -8,10 +8,6 @@ local autocmd = require 'utils'.autocmd
 -- Let me backspace like I want
 opt.backspace = { 'indent', 'eol', 'start' }
 
--- Hybrid line numbers: shows relative number for all lines, but shows absolute for current line
-wo.relativenumber = true
-wo.nu = true
-
 -- Case insensitive searching
 opt.ignorecase = true
 
@@ -65,9 +61,6 @@ opt.scrolloff = 8
 -- I save often enough
 opt.swapfile = false
 
--- No noise please (no sound effects for errors)
-opt.errorbells = false
-
 -- Always use system clipboard
 opt.clipboard = 'unnamed,unnamedplus'
 
@@ -78,10 +71,10 @@ opt.clipboard = 'unnamed,unnamedplus'
 opt.smarttab = true
 opt.smartindent = true
 
--- Set the height of the command bar to 0 line
-opt.cmdheight = 1
 
------ Visuals -----
+------------------------------------------------------------------------------------------
+-- Visuals
+------------------------------------------------------------------------------------------
 
 -- Highlight yanked text on yank
 vim.api.nvim_create_augroup("reset_group", { clear = true })
@@ -90,13 +83,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
 	callback = function() require("vim.highlight").on_yank() end,
 })
-
--- Set the colorscheme
-vim.cmd [[colorscheme codedark]]
--- vim.api.nvim_cmd({
--- 	cmd = 'colorscheme',
--- 	args = {'codedark'}
--- }, {})
 
 -- Nice icons for DBUI
 vim.g.db_ui_use_nerd_fonts = 1
@@ -110,20 +96,23 @@ opt.termguicolors = true
 -- Allow for width of numbers and arbitrary symbols in sign column
 opt.signcolumn = 'yes:1'
 
--------------------
+-- Set the height of the command bar to 0 line
+opt.cmdheight = 0
 
+-- Hybrid line numbers: shows relative number for all lines, but shows absolute for current line
+wo.relativenumber = true
+wo.nu = true
 
---------- Miscellaneous ----------
+------------------------------------------------------------------------------------------
+-- Miscellaneous
+------------------------------------------------------------------------------------------
 
 -- Check if file changed outside vim & re-read file
 autocmd('focus_gain', [[FocusGained * silent! noautocmd checktime]], true)
 
--- Use the beta lua filetype checker
--- vim.g.do_filetype_lua = 1
-
--- Faster file type checking
-vim.g.did_load_filetypes = 1
-
+-- where python packages used by plugins are installed to
 vim.g.python3_host_prog = os.getenv('HOME') .. [[/.pyenv/versions/3.9.7/envs/nvim/bin/python3.9/]]
 
-----------------------------------
+-- No noise please (no sound effects for errors)
+opt.errorbells = false
+
