@@ -2,20 +2,19 @@ local utils = require 'utils'
 
 local map = utils.base_map
 local imap = utils.imap
-local nmap = utils.nmap
 local tmap = utils.tmap
-local cmap = utils.cmap
 
 vim.g.mapleader = ' '
-nmap(';', ':')
+map({'v','n'}, ';', ':')
 
-imap('jk', '<ESC>')
-cmap('jk', '<ESC>')
+
+map({'c','i'}, 'jk', '<ESC>')
 -- Get me the fuck out of the terminal
 tmap('jk', [[<C-\><C-N>]])
 
 local stems = {}
 local mappings = {}
+
 
 ------------------------------------------------------------------------------------------
 -- Random 
@@ -23,17 +22,17 @@ local mappings = {}
 
 	local replacer = require('replacer')
 	local rest_nvim = require('rest-nvim')
+	local sniprun = require('sniprun')
 
 	-- These clash despite lua table indexes being case sensitive?
 	imap('<C-J>', 'copilot#Accept("\\<CR>")', { override = true }, { expr = true, silent = true, script = true })
-	map('', '<C-j>', '<C-W>j')
 
 	mappings['random'] = {
 		['<esc>'] = { mode = 'n', action = '<esc>:noh<CR>', label = 'Remove Highlights' },
 		['<Leader>v'] = { mode = 'n', action = '<cmd>CHADopen<cr>', label = 'Open file explorer' },
 
 		-- change pane by direction
-		-- ['<C-j>'] = { mode = 'n', action = '<C-W>j', label = 'Go to pane underneath' },
+		['<C-j>'] = { mode = 'n', action = '<C-W>j', label = 'Go to pane underneath' },
 		['<C-k>'] = { mode = 'n', action = '<C-W>k', label = 'Go to pane above' },
 		['<C-h>'] = { mode = 'n', action = '<C-W>h', label = 'Go to pane to the left' },
 		['<C-l>'] = { mode = 'n', action = '<C-W>l', label = 'Go to pane to the right' },
@@ -44,10 +43,8 @@ local mappings = {}
 		['='] = { mode = 'n', action = ':resize +5<CR>', label = 'Horizontal Size Increase' },
 		['-'] = { mode = 'n', action = ':resize -5<CR>', label = 'Horizontal Size Decrease' },
 
-		-- REPL
-		['<Leader>rpy'] = { mode = 'n', action = '<cmd>Codi python<CR>', label = 'Open Python REPL' },
-		['<Leader>rjs'] = { mode = 'n', action = '<cmd>Codi javascript<CR>', label = 'Open JS REPL' },
-		['<Leader>rts'] = { mode = 'n', action = '<cmd>Codi typescript<CR>', label = 'Open TS REPL' },
+		-- snip run
+		['<Leader>sr'] = { mode = 'v', action = function() sniprun.run('v') end, label = 'Sniprun Visual' },
 
 		-- copy path to file from CWD
 		['cp'] = { mode = 'n', action = ':let @* = expand("%")<CR>', label = 'Copy file path from CWD' },
@@ -65,8 +62,6 @@ local mappings = {}
 		-- Run http request
 		['<Leader>k'] = { mode = 'n', action = rest_nvim.run, label = "Run http request", buffer = vim.api.nvim_get_current_buf() }
 	}
-
-	stems['<Leader>r'] = { label =  'REPL' }
 
 
 ------------------------------------------------------------------------------------------
@@ -240,6 +235,23 @@ local mappings = {}
 
 	stems['<Leader>t'] = { label = 'Tabs' }
 	stems['<Leader>tm'] = { label = 'Move tab' }
+
+
+------------------------------------------------------------------------------------------
+-- Terminal
+------------------------------------------------------------------------------------------
+
+	local Terminal = require('toggleterm.terminal').Terminal
+
+	local horizontal = Terminal:new({ direction = 'horizontal' })
+	local lazydocker = Terminal:new({ cmd = 'lazydocker', hidden = true, direction = 'float' })
+
+	mappings['terminal'] = {
+		['<Leader>tv'] = { mode = 'n', action = function() horizontal:toggle() end, label = 'Toggle terminal' },
+		['<Leader>td'] = { mode = 'n', action = function() lazydocker:toggle() end, label = 'Toggle lazydocker' },
+	}
+
+	stems['<Leader>tt'] = { label = 'Terminal' }
 
 ------------------------------------------------------------------------------------------
 

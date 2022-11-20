@@ -13,6 +13,10 @@ use {
 -- package manager
 use 'wbthomason/packer.nvim'
 
+-- Track mouse (enable when pairing)
+-- use 'DanilaMihailov/beacon.nvim'
+
+
 ------------------------------------------------------------------------------------------
 -- Visuals
 ------------------------------------------------------------------------------------------
@@ -38,6 +42,7 @@ use {
 	"folke/noice.nvim",
 	config = function()
 		require("noice").setup()
+		require("notify").setup { background_colour = "#000000" }
 	end,
 	requires = {
 		"MunifTanjim/nui.nvim",
@@ -82,7 +87,10 @@ use {
 use 'junegunn/gv.vim'
 
 -- Diff View
-use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+use {
+	'sindrets/diffview.nvim',
+	requires = 'nvim-lua/plenary.nvim'
+}
 
 
 ------------------------------------------------------------------------------------------
@@ -108,7 +116,6 @@ use {
 	requires = {
 		'nvim-lua/plenary.nvim',
 		'nvim-treesitter/nvim-treesitter',
-		'antoinemadec/FixCursorHold.nvim',
 		'haydenmeade/neotest-jest',
 		'nvim-neotest/neotest-python',
 		'nvim-neotest/neotest-vim-test'
@@ -120,7 +127,7 @@ use 'David-Kunz/jester'
 
 
 ------------------------------------------------------------------------------------------
--- Code Functionality
+-- Editing Functionality
 ------------------------------------------------------------------------------------------
 
 -- Little bit of everything
@@ -197,9 +204,6 @@ use {
 -- jsx aware commenting
 use 'JoosepAlviste/nvim-ts-context-commentstring'
 
--- REPL
-use 'metakirby5/codi.vim'
-
 -- Change the surroundings
 use 'tpope/vim-surround'
 
@@ -246,13 +250,28 @@ use {
 	config = function() require('bqf').setup() end
 }
 
--- Track mouse
--- use 'DanilaMihailov/beacon.nvim'
-
 use {
 	'michaelb/sniprun',
+	config = function()
+		require('sniprun').setup {
+			display = {
+				"VirtualTextOk",
+				"VirtualTextErr",
+			}
+		}
+	end,
 	run = 'bash install.sh',
 }
+
+--  initially brought in to be used with lazy docker
+use {
+	"akinsho/toggleterm.nvim",
+	tag = '*',
+	config = function()
+		require("toggleterm").setup{}
+	end
+}
+
 
 ------------------------------------------------------------------------------------------
 -- Completion
@@ -307,7 +326,7 @@ use 'nvim-telescope/telescope-ui-select.nvim'
 
 
 ------------------------------------------------------------------------------------------
--- Language Server Stuff
+-- Language Server
 ------------------------------------------------------------------------------------------
 
 -- A collection of common configurations for Neovim's built-in language server client
@@ -327,9 +346,6 @@ use {
 ---- General dependencies
 -- popup window interface
 use 'nvim-lua/popup.nvim'
-
--- a bunch of nice functions that creators of nvim plugins don't want to rewrite
-use 'nvim-lua/plenary.nvim'
 
 -- language server for alternative completions provided through LSP
 use 'jose-elias-alvarez/null-ls.nvim'
@@ -467,15 +483,6 @@ local CurrentlyUnused = function()
 			'anuvyklack/nvim-keymap-amend',
 			'anuvyklack/fold-preview.nvim'
 		}
-	}
-
-	--  initially brought in to be used with lazy docker
-	use {
-		"akinsho/toggleterm.nvim",
-		tag = '*',
-		config = function()
-			require("toggleterm").setup()
-		end
 	}
 
 	-- Develop inside Docker containers
