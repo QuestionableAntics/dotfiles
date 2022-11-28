@@ -24,7 +24,6 @@ local mappings = {}
 	local rest_nvim = require('rest-nvim')
 	local sniprun = require('sniprun')
 
-	-- These clash despite lua table indexes being case sensitive?
 	imap('<C-J>', 'copilot#Accept("\\<CR>")', { override = true }, { expr = true, silent = true, script = true })
 
 	mappings['random'] = {
@@ -44,7 +43,7 @@ local mappings = {}
 		['-'] = { mode = 'n', action = ':resize -5<CR>', label = 'Horizontal Size Decrease' },
 
 		-- snip run
-		['<Leader>sr'] = { mode = 'v', action = function() sniprun.run('v') end, label = 'Sniprun Visual' },
+		['f'] = { mode = 'v', action = function() sniprun.run('v') end, label = 'Sniprun Visual' },
 
 		-- copy path to file from CWD
 		['cp'] = { mode = 'n', action = ':let @* = expand("%")<CR>', label = 'Copy file path from CWD' },
@@ -53,14 +52,13 @@ local mappings = {}
 		-- copy current file name
 		['cn'] = { mode = 'n', action = ':let @* = expand("%:t")<CR>', label = 'Copy current file name' },
 
-		-- open markdown previewer
-		['<Leader>md'] = { mode = 'n', action = ':MarkdownPreview', label = 'Open Markdown Previewer' },
-
 		-- modify quickfix contents
 		['<Leader>qm'] = { mode = 'n', action = function() replacer.run {rename_files = false} end, label = 'Modify Quickfix Contents' },
 
 		-- Run http request
-		['<Leader>k'] = { mode = 'n', action = rest_nvim.run, label = "Run http request", buffer = vim.api.nvim_get_current_buf() }
+		['<Leader>k'] = { mode = 'n', action = rest_nvim.run, label = "Run http request", buffer = vim.api.nvim_get_current_buf() },
+
+		['gq'] = { mode= 'v', action = vim.lsp.buf.format, label = "format" }
 	}
 
 
@@ -70,6 +68,7 @@ local mappings = {}
 
 	local telescope = require('telescope')
 	local telescope_builtin = require('telescope.builtin')
+	local session_lens = require('session-lens')
 
 	mappings['fuzzy_finder'] = {
 		['<Leader>ff'] = { mode = 'n', action = telescope_builtin.find_files, label = 'Find files' },
@@ -78,6 +77,8 @@ local mappings = {}
 		['<Leader>fh'] = { mode = 'n', action = telescope_builtin.help_tags, label = 'Find Help Tags' },
 		['<Leader>fo'] = { mode = 'n', action = telescope_builtin.oldfiles, label = 'Find Old Files' },
 		['<Leader>fl'] = { mode = 'n', action = telescope_builtin.resume, label = 'Last Search Results' },
+		-- ['<Leader>fp'] = { mode = 'n', action = telescope.extensions.project.project, label = 'Last Search Results' },
+		['<Leader>fp'] = { mode = 'n', action = session_lens.search_session, label = 'Last Search Results' },
 		['<Leader>fxd'] = { mode = 'n', action = function() telescope_builtin.diagnostics {bufnr=0} end, label = 'Find Diagnostics in Focused Buffer'},
 		['<Leader>fxw'] = { mode = 'n', action = telescope_builtin.diagnostics, label = 'Find Diagnostics in Open Buffers'},
 		['gh'] = { mode = 'n', action = telescope_builtin.lsp_references, label = 'Find References' },
@@ -225,16 +226,11 @@ local mappings = {}
 
 	mappings['tab'] = {
 		['<Leader>ta'] = { mode = 'n', action = ':$tabnew<CR>', label = 'New tab' },
-		['<Leader>tc'] = { mode = 'n', action = ':tabclose<CR>', label = 'Close tab' },
-		['<Leader>to'] = { mode = 'n', action = ':tabonly<CR>', label = 'Close Other Tabs' },
 		['<Leader>tn'] = { mode = 'n', action = ':tabnext<CR>', label = 'Next tab' },
 		['<Leader>tp'] = { mode = 'n', action = ':tabprevious<CR>', label = 'Previous tab' },
-		['<Leader>tmp'] = { mode = 'n', action = ':-tabmove<CR>', label = 'Move tab to previous position' },
-		['<Leader>tmn'] = { mode = 'n', action = ':+tabmove<CR>', label = 'Move tab to next position' },
 	}
 
 	stems['<Leader>t'] = { label = 'Tabs' }
-	stems['<Leader>tm'] = { label = 'Move tab' }
 
 
 ------------------------------------------------------------------------------------------
@@ -244,14 +240,14 @@ local mappings = {}
 	local Terminal = require('toggleterm.terminal').Terminal
 
 	local horizontal = Terminal:new({ direction = 'horizontal' })
+	local float = Terminal:new({ direction = 'float' })
 	local lazydocker = Terminal:new({ cmd = 'lazydocker', hidden = true, direction = 'float' })
 
 	mappings['terminal'] = {
-		['<Leader>tv'] = { mode = 'n', action = function() horizontal:toggle() end, label = 'Toggle terminal' },
+		['<Leader>tt'] = { mode = 'n', action = function() horizontal:toggle() end, label = 'Toggle terminal' },
 		['<Leader>td'] = { mode = 'n', action = function() lazydocker:toggle() end, label = 'Toggle lazydocker' },
+		['<Leader>tf'] = { mode = 'n', action = function() float:toggle() end, label = 'Toggle float terminal' },
 	}
-
-	stems['<Leader>tt'] = { label = 'Terminal' }
 
 ------------------------------------------------------------------------------------------
 

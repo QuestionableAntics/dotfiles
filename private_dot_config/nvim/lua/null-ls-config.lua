@@ -8,6 +8,8 @@ local sources = {
 	-- builtins.formatting.prettier
 	builtins.diagnostics.sqlfluff,
 	builtins.formatting.sqlfluff,
+	-- null_ls.builtins.diagnostics.pycodestyle,
+	null_ls.builtins.formatting.autopep8,
 }
 
 null_ls.setup {

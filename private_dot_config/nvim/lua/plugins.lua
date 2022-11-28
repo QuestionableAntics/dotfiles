@@ -134,9 +134,12 @@ use 'David-Kunz/jester'
 use {
 	'echasnovski/mini.nvim',
 	config = function()
+		-- underline instances of the word under the cursor
 		require('mini.cursorword').setup {}
 		require('mini.statusline').setup {}
+		-- auto pairing of ({["'`< etc
 		require('mini.pairs').setup {}
+		-- comments
 		require('mini.comment').setup {}
 	end
 }
@@ -145,9 +148,6 @@ use {
 use {
 	'nvim-treesitter/nvim-treesitter',
 	run = ':TSUpdate',
-	-- Last commit before a breaking change that changes what highlight groups use to work
-	-- check if this is still needed
-	-- commit = '4cccb6f',
 	config = function()
 		require('nvim-treesitter.configs').setup {
 			-- either "all" or {"a", "list", "of", "languages"}
@@ -170,7 +170,8 @@ use {
 				"json",
 				"json5",
 				"markdown",
-				"http"
+				"http",
+				"bash"
 			},
 			highlight = { enable = true },
 			-- async installation of parsers
@@ -253,17 +254,12 @@ use {
 use {
 	'michaelb/sniprun',
 	config = function()
-		require('sniprun').setup {
-			display = {
-				"VirtualTextOk",
-				"VirtualTextErr",
-			}
-		}
+		require('sniprun').setup {}
 	end,
 	run = 'bash install.sh',
 }
 
---  initially brought in to be used with lazy docker
+-- Better terminal (wraps text, opens terminal with command, floating buffers)
 use {
 	"akinsho/toggleterm.nvim",
 	tag = '*',
@@ -272,6 +268,11 @@ use {
 	end
 }
 
+-- use  'jamestthompson3/nvim-remote-containers' 
+use {
+	'https://codeberg.org/esensar/nvim-dev-container',
+	config = function() require("devcontainer").setup{} end
+}
 
 ------------------------------------------------------------------------------------------
 -- Completion
@@ -324,6 +325,14 @@ use 'nvim-telescope/telescope-dap.nvim'
 -- Uses telescope for the native ui-select
 use 'nvim-telescope/telescope-ui-select.nvim'
 
+use {
+	'rmagatti/session-lens',
+	config = function()
+		require('session-lens').setup {
+			path_display={"shorten"},
+		}
+	end
+}
 
 ------------------------------------------------------------------------------------------
 -- Language Server
@@ -383,49 +392,7 @@ use 'folke/which-key.nvim'
 use {
 	"rest-nvim/rest.nvim",
 	requires = { "nvim-lua/plenary.nvim" },
-	-- ft = {'http'},
-	config = function()
-		require("rest-nvim").setup({
-			json = "jq",
-		})
-
-		-- local wk = require('which-key')
-		-- local rest_nvim = require('rest-nvim')
-
-		-- utils.map('n', '<C-k>', rest_nvim.run)
-
-		-- wk.register({
-		-- 	["<C-k>"] = {
-		-- 		mode = 'n',
-		-- 		action = rest_nvim.run,
-		-- 		label = "Run",
-		-- 		buffer = vim.api.nvim_get_current_buf()
-		-- 	}
-		-- })
-		--
-		-- maybe someday
-		-- _G.WhichkeyHTTP = function()
-		-- 	local wk = require('which-key')
-		-- 	local rest_nvim = require('rest-nvim')
-
-		-- 	-- utils.map('n', '<C-k>', rest_nvim.run)
-
-
-		-- 	wk.register({
-		-- 		["<C-k>"] = {
-		-- 			mode = 'n',
-		-- 			action = rest_nvim.run,
-		-- 			label = "Run",
-		-- 			buffer = vim.api.nvim_get_current_buf()
-		-- 		}
-		-- 	})
-		-- end
-
-		-- vim.cmd[[
-		-- 	autocmd FileType http lua WhichkeyHTTP()
-		-- ]]
-
-	end
+	config = function() require("rest-nvim").setup({ json = "jq" }) end
 }
 
 -- modify filepath and file contents in Quickfix buffer
@@ -438,6 +405,8 @@ use 'mbbill/undotree'
 ------------------------------------------------------------------------------------------
 -- Currently Unused
 ------------------------------------------------------------------------------------------
+
+use 'folke/neodev.nvim'
 
 local CurrentlyUnused = function()
 	-- Breakdown of what vim spends time on when starting up
