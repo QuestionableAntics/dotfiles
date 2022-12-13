@@ -80,7 +80,7 @@ M.packer_use = function()
 	require('packer').startup({
 		function(pack_use) use = pack_use end,
 		-- does not solve, but seems to help some with packer sync/install/update not finishing checking commits for all packages
-		config = { display = { max_jobs = 10 } }
+		config = { display = { max_jobs = 20 } }
 	})
 
 	return use

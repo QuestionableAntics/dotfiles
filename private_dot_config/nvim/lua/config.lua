@@ -115,3 +115,12 @@ vim.g.python3_host_prog = os.getenv('HOME') .. [[/.pyenv/versions/3.9.7/envs/nvi
 
 -- No noise please (no sound effects for errors)
 opt.errorbells = false
+
+
+------------------------------------------------------------------------------------------
+-- Pairing
+------------------------------------------------------------------------------------------
+
+if Pairing then
+	wo.relativenumber = false
+end

@@ -20,8 +20,6 @@ local mappings = {}
 -- Random
 ------------------------------------------------------------------------------------------
 
-local replacer = require('replacer')
-local rest_nvim = require('rest-nvim')
 local sniprun = require('sniprun')
 
 imap('<C-J>', 'copilot#Accept("\\<CR>")', { override = true }, { expr = true, silent = true, script = true })
@@ -51,14 +49,6 @@ mappings['random'] = {
 	['crp'] = { mode = 'n', action = ':let @* = expand("%:~")<CR>', label = 'Copy current file path from home directory' },
 	-- copy current file name
 	['cn'] = { mode = 'n', action = ':let @* = expand("%:t")<CR>', label = 'Copy current file name' },
-
-	-- modify quickfix contents
-	['<Leader>qm'] = { mode = 'n', action = function() replacer.run { rename_files = false } end,
-		label = 'Modify Quickfix Contents' },
-
-	-- Run http request
-	['<Leader>k'] = { mode = 'n', action = rest_nvim.run, label = "Run http request",
-		buffer = vim.api.nvim_get_current_buf() },
 
 	['gq'] = { mode = 'v', action = vim.lsp.buf.format, label = "format" }
 }
@@ -242,18 +232,21 @@ stems['<Leader>t'] = { label = 'Tabs' }
 -- Terminal
 ------------------------------------------------------------------------------------------
 
-local Terminal = require('toggleterm.terminal').Terminal
+-- local Terminal = require('toggleterm.terminal').Terminal
 
-local horizontal = Terminal:new({ direction = 'horizontal' })
-local float = Terminal:new({ direction = 'float' })
-local lazydocker = Terminal:new({ cmd = 'lazydocker', hidden = true, direction = 'float' })
+-- local horizontal = Terminal:new({ direction = 'horizontal' })
+-- local float = Terminal:new({ direction = 'float' })
+-- local lazydocker = Terminal:new({ cmd = 'lazydocker', hidden = true, direction = 'float' })
 
-mappings['terminal'] = {
-	['<Leader>tt'] = { mode = 'n', action = function() horizontal:toggle() end, label = 'Toggle terminal' },
-	['<Leader>td'] = { mode = 'n', action = function() lazydocker:toggle() end, label = 'Toggle lazydocker' },
-	['<Leader>tf'] = { mode = 'n', action = function() float:toggle() end, label = 'Toggle float terminal' },
-}
+-- mappings['terminal'] = {
+-- 	['<Leader>tt'] = { mode = 'n', action = function() horizontal:toggle() end, label = 'Toggle terminal' },
+-- 	['<Leader>td'] = { mode = 'n', action = function() lazydocker:toggle() end, label = 'Toggle lazydocker' },
+-- 	['<Leader>tf'] = { mode = 'n', action = function() float:toggle() end, label = 'Toggle float terminal' },
+-- }
 
+
+------------------------------------------------------------------------------------------
+-- Setup
 ------------------------------------------------------------------------------------------
 
 local all_mappings = {}

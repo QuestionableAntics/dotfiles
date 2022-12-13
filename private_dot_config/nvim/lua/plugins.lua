@@ -13,9 +13,6 @@ use {
 -- package manager
 use 'wbthomason/packer.nvim'
 
--- Track mouse (enable when pairing)
--- use 'DanilaMihailov/beacon.nvim'
-
 
 ------------------------------------------------------------------------------------------
 -- Visuals
@@ -38,17 +35,44 @@ use {
 	end
 }
 
+-- Nice status bar
 use {
-	"folke/noice.nvim",
+	'nvim-lualine/lualine.nvim',
+	requires = { 'kyazdani42/nvim-web-devicons', opt = true },
 	config = function()
-		require("noice").setup()
-		require("notify").setup { background_colour = "#000000" }
-	end,
-	requires = {
-		"MunifTanjim/nui.nvim",
-		"rcarriga/nvim-notify",
-	}
+		require('lualine').setup {
+			options = { theme = 'vscode' },
+			sections = {
+				lualine_a = {
+					{ 'filename', path = 1 },
+				},
+			},
+		}
+	end
 }
+
+-- Virtual text to add indentation guides
+use {
+	'lukas-reineke/indent-blankline.nvim',
+	config = function()
+		require('indent_blankline').setup {
+			show_current_context = true,
+			show_current_context_start = true,
+		}
+	end
+}
+
+-- use {
+-- 	"folke/noice.nvim",
+-- 	config = function()
+-- 		require("noice").setup()
+-- 		require("notify").setup { background_colour = "#000000" }
+-- 	end,
+-- 	requires = {
+-- 		"MunifTanjim/nui.nvim",
+-- 		"rcarriga/nvim-notify",
+-- 	}
+-- }
 
 
 ------------------------------------------------------------------------------------------
@@ -56,7 +80,10 @@ use {
 ------------------------------------------------------------------------------------------
 
 -- DB interface
-use 'tpope/vim-dadbod'
+use {
+	'tpope/vim-dadbod',
+	commit = '87785156a7919f51409f3e6656ea2b3a9e0e8e97'
+}
 
 -- UI for DB interface
 use 'kristijanhusak/vim-dadbod-ui'
@@ -136,7 +163,6 @@ use {
 	config = function()
 		-- underline instances of the word under the cursor
 		require('mini.cursorword').setup {}
-		require('mini.statusline').setup {}
 		-- auto pairing of ({["'`< etc
 		require('mini.pairs').setup {}
 		-- comments
@@ -259,15 +285,6 @@ use {
 	run = 'bash install.sh',
 }
 
--- Better terminal (wraps text, opens terminal with command, floating buffers)
-use {
-	"akinsho/toggleterm.nvim",
-	tag = '*',
-	config = function()
-		require("toggleterm").setup{}
-	end
-}
-
 -- use  'jamestthompson3/nvim-remote-containers' 
 use {
 	'https://codeberg.org/esensar/nvim-dev-container',
@@ -375,28 +392,8 @@ use {
 -- More speed up
 use 'nathom/filetype.nvim'
 
--- Virtual text to add indentation guides
-use {
-	'lukas-reineke/indent-blankline.nvim',
-	config = function()
-		require('indent_blankline').setup {
-			show_current_context = true,
-			show_current_context_start = true,
-		}
-	end
-}
-
 -- Hints for keybindings
 use 'folke/which-key.nvim'
--- Rest Client
-use {
-	"rest-nvim/rest.nvim",
-	requires = { "nvim-lua/plenary.nvim" },
-	config = function() require("rest-nvim").setup({ json = "jq" }) end
-}
-
--- modify filepath and file contents in Quickfix buffer
-use 'gabrielpoca/replacer.nvim'
 
 -- Undo Tree
 use 'mbbill/undotree'
@@ -462,24 +459,20 @@ local CurrentlyUnused = function()
 		'iamcco/markdown-preview.nvim',
 		run = 'cd app && npm install',
 	}
+
+	-- Better terminal (wraps text, opens terminal with command, floating buffers)
+	use {
+		"akinsho/toggleterm.nvim",
+		tag = '*',
+		config = function()
+			require("toggleterm").setup{}
+		end
+	}
+
+
 end
 
 local DeprecationStation = function()
-	-- Nice status bar
-	use {
-		'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-		config = function()
-			require('lualine').setup {
-				options = { theme = 'onedark' },
-				sections = {
-					lualine_a = {
-						{ 'filename', path = 1 },
-					},
-				},
-			}
-		end
-	}
 
 	-- Tabline
 	use {
@@ -494,4 +487,14 @@ local DeprecationStation = function()
 			require("nvim-surround").setup()
 		end
 	}
+end
+
+
+------------------------------------------------------------------------------------------
+-- Pairing
+------------------------------------------------------------------------------------------
+
+if Pairing then
+	-- Track mouse
+	use 'DanilaMihailov/beacon.nvim'
 end
