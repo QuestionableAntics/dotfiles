@@ -11,14 +11,11 @@ vim.g.completion_chain_complete_list = {
 	}
 }
 
--- Run lint on save
--- vim.cmd [[ autocmd BufWritePre <buffer> <cmd>EslintFixAll<CR> ]]
-
 -- Auto start coq (must be run before require 'coq')
 vim.g.coq_settings = {
 	-- always start coq (silently)
 	auto_start = 'shut-up',
-	-- maybe I'll use snippets eventually, but for now I get my tab key back
+	-- this takes over <C-h>?
 	keymap = { jump_to_mark = '' },
 	-- a lot of what I want from autocomplete is exploring properties on objects
 	-- this makes those properties more visible in large projects by prioritizing lsp results
@@ -37,8 +34,6 @@ local lspconfig = require 'lspconfig'
 local lua_rtp = vim.split(package.path, ";")
 table.insert(lua_rtp, "lua/?.lua")
 table.insert(lua_rtp, "lua/?/init.lua")
-
-lspconfig.eslint.setup {}
 
 local server_configs = {
 	sumneko_lua = {

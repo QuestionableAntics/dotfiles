@@ -176,5 +176,6 @@ require("neotest").setup({
 })
 
 dap_ui.setup()
+
 -- loads VS Code 'launch.json' for project (if this allows adding env variables it'd be worth adding back in)
 dap_vscode_ext.load_launchjs()

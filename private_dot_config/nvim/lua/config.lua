@@ -1,7 +1,6 @@
 local opt = vim.opt
 local wo = vim.wo
 local o = vim.o
-local autocmd = require 'utils'.autocmd
 
 -- o.runtimepath = vim.fn.stdpath('data') .. '/site/pack/*/start/*,' .. vim.o.runtimepath
 
@@ -17,11 +16,12 @@ opt.smartcase = true
 -- Show completion popup menu in command view
 opt.wildmenu = true
 
--- Set the completion popup menu to
---  - always show the menu
---  - not insert match until manually selected
---  - not auto select match
-opt.completeopt = { 'menuone', 'noinsert', 'noselect' }
+-- Completion popup menu options
+opt.completeopt = {
+	'menuone',  -- always show the menu
+	'noinsert', -- do not insert match until manually selected
+	'noselect', -- do not auto select match
+}
 
 -- enable mouse for not me
 opt.mouse = "a"
@@ -71,18 +71,9 @@ opt.clipboard = 'unnamed,unnamedplus'
 opt.smarttab = true
 opt.smartindent = true
 
-
 ------------------------------------------------------------------------------------------
 -- Visuals
 ------------------------------------------------------------------------------------------
-
--- Highlight yanked text on yank
-vim.api.nvim_create_augroup("reset_group", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-	group = "reset_group",
-	pattern = "*",
-	callback = function() require("vim.highlight").on_yank() end,
-})
 
 -- Nice icons for DBUI
 vim.g.db_ui_use_nerd_fonts = 1
@@ -90,7 +81,7 @@ vim.g.db_ui_use_nerd_fonts = 1
 -- Highlight the current line
 opt.cursorline = true
 
--- ooo pretty colors 😯
+-- ooo pretty colors o.o
 opt.termguicolors = true
 
 -- Allow for width of numbers and arbitrary symbols in sign column
@@ -103,12 +94,10 @@ opt.cmdheight = 0
 wo.relativenumber = true
 wo.nu = true
 
+
 ------------------------------------------------------------------------------------------
 -- Miscellaneous
 ------------------------------------------------------------------------------------------
-
--- Check if file changed outside vim & re-read file
-autocmd('focus_gain', [[FocusGained * silent! noautocmd checktime]], true)
 
 -- where python packages used by plugins are installed to
 vim.g.python3_host_prog = os.getenv('HOME') .. [[/.pyenv/versions/3.9.7/envs/nvim/bin/python3.9/]]
@@ -116,11 +105,5 @@ vim.g.python3_host_prog = os.getenv('HOME') .. [[/.pyenv/versions/3.9.7/envs/nvi
 -- No noise please (no sound effects for errors)
 opt.errorbells = false
 
-
-------------------------------------------------------------------------------------------
--- Pairing
-------------------------------------------------------------------------------------------
-
-if Pairing then
-	wo.relativenumber = false
-end
+-- Minimal Statusline
+-- opt.statusline = ' %f %r %m%=%y %{&fileencoding?&fileencoding:&encoding}[%{&fileformat}] %p%% %l:%c '

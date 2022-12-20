@@ -7,7 +7,7 @@ local tmap = utils.tmap
 vim.g.mapleader = ' '
 map({ 'v', 'n' }, ';', ':')
 
-
+-- Easy exit to normal mode from insert and command mode
 map({ 'c', 'i' }, 'jk', '<ESC>')
 -- Get me the fuck out of the terminal
 tmap('jk', [[<C-\><C-N>]])
@@ -17,7 +17,7 @@ local mappings = {}
 
 
 ------------------------------------------------------------------------------------------
--- Random
+-- Miscellaneous
 ------------------------------------------------------------------------------------------
 
 local sniprun = require('sniprun')
@@ -26,6 +26,7 @@ imap('<C-J>', 'copilot#Accept("\\<CR>")', { override = true }, { expr = true, si
 
 mappings['random'] = {
 	['<esc>'] = { mode = 'n', action = '<esc>:noh<CR>', label = 'Remove Highlights' },
+	-- ['<esc>'] = { mode = 'n', action = '<esc>:noh<CR>', opts = { desc = 'Remove Highlights' } },
 	['<Leader>v'] = { mode = 'n', action = '<cmd>CHADopen<cr>', label = 'Open file explorer' },
 
 	-- change pane by direction
@@ -75,6 +76,16 @@ mappings['fuzzy_finder'] = {
 		label = 'Find Diagnostics in Focused Buffer' },
 	['<Leader>fxw'] = { mode = 'n', action = telescope_builtin.diagnostics, label = 'Find Diagnostics in Open Buffers' },
 	['gh'] = { mode = 'n', action = telescope_builtin.lsp_references, label = 'Find References' },
+	['<Leader>/'] = {
+		mode = 'n',
+		action = function()
+			require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+				winblend = 10,
+				previewer = false,
+			})
+		end,
+		label = 'Fuzzily search in current buffer'
+	}
 }
 
 stems['<Leader>f'] = { label = 'Fuzzy Finder' }
@@ -171,7 +182,7 @@ mappings['lsp'] = {
 	['<Leader>-'] = { mode = 'n', action = vim.diagnostic.setloclist, label = 'diagnostic Locations' },
 
 	['gi'] = { mode = 'n', action = typescript.actions.addMissingImports, label = "Import Current" },
-	['gtfr'] = { mode = 'n', action = ":TypescriptRenameFile<CR>", label = "Rename File" },
+	['<Leader>rtf'] = { mode = 'n', action = ":TypescriptRenameFile<CR>", label = "Rename File" },
 }
 
 
@@ -267,12 +278,12 @@ for k, v in pairs(all_mappings) do
 	end
 end
 
-local which_key = require 'which-key'
-
 
 ------------------------------------------------------------------------------------------
 -- Which Key
 ------------------------------------------------------------------------------------------
+
+local which_key = require 'which-key'
 
 local which_key_mappings = {}
 

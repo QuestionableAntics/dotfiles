@@ -61,7 +61,7 @@ M.autocmd = function(group, cmds, clear)
 	cmd [[augroup END]]
 end
 
-M.packer_use = function()
+local packer_use = function()
 	local use = nil
 	local fn = vim.fn
 	local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -85,5 +85,7 @@ M.packer_use = function()
 
 	return use
 end
+
+M.use = packer_use()
 
 return M

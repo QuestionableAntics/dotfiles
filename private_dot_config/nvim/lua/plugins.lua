@@ -1,7 +1,6 @@
 -- https://github.com/wbthomason/packer.nvim
 
-local utils = require('utils')
-local use = utils.packer_use()
+local use = require('utils').use
 
 -- Speeds up loading of lua modules for better start up time.
 -- Periodically check if this is needed (it will be merged into neovim main at some point)
@@ -28,7 +27,7 @@ use 'gregsexton/MatchTag'
 use {
 	'Mofiqul/vscode.nvim',
 	config = function()
-		require('vscode').setup{
+		require('vscode').setup {
 			transparent = true,
 			italic_comments = true,
 		}
@@ -80,10 +79,7 @@ use {
 ------------------------------------------------------------------------------------------
 
 -- DB interface
-use {
-	'tpope/vim-dadbod',
-	commit = '87785156a7919f51409f3e6656ea2b3a9e0e8e97'
-}
+use 'tpope/vim-dadbod'
 
 -- UI for DB interface
 use 'kristijanhusak/vim-dadbod-ui'
@@ -205,6 +201,15 @@ use {
 			indent = { enable = true },
 			-- enable nvim-ts-context-commentstring
 			context_commentstring = { enable = true },
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+				init_selection = '<c-space>',
+					node_incremental = '<c-space>',
+					scope_incremental = '<c-s>',
+					node_decremental = '<c-backspace>',
+				},
+			},
 			textobjects = {
 				select = {
 					enable = true,
@@ -285,10 +290,10 @@ use {
 	run = 'bash install.sh',
 }
 
--- use  'jamestthompson3/nvim-remote-containers' 
+-- use  'jamestthompson3/nvim-remote-containers'
 use {
 	'https://codeberg.org/esensar/nvim-dev-container',
-	config = function() require("devcontainer").setup{} end
+	config = function() require("devcontainer").setup {} end
 }
 
 ------------------------------------------------------------------------------------------
@@ -346,7 +351,7 @@ use {
 	'rmagatti/session-lens',
 	config = function()
 		require('session-lens').setup {
-			path_display={"shorten"},
+			path_display = { "shorten" },
 		}
 	end
 }
@@ -369,10 +374,6 @@ use {
 	requires = { 'williamboman/mason-lspconfig.nvim' }
 }
 
----- General dependencies
--- popup window interface
-use 'nvim-lua/popup.nvim'
-
 -- language server for alternative completions provided through LSP
 use 'jose-elias-alvarez/null-ls.nvim'
 
@@ -380,9 +381,13 @@ use 'jose-elias-alvarez/null-ls.nvim'
 use {
 	'jose-elias-alvarez/typescript.nvim',
 	config = function()
-		require('typescript').setup{}
+		require('typescript').setup {}
 	end
 }
+
+---- General dependencies
+-- popup window interface
+use 'nvim-lua/popup.nvim'
 
 
 ------------------------------------------------------------------------------------------
@@ -403,9 +408,11 @@ use 'mbbill/undotree'
 -- Currently Unused
 ------------------------------------------------------------------------------------------
 
-use 'folke/neodev.nvim'
 
 local CurrentlyUnused = function()
+	-- types for vim api
+	use 'folke/neodev.nvim'
+
 	-- Breakdown of what vim spends time on when starting up
 	use 'dstein64/vim-startuptime'
 
@@ -465,10 +472,9 @@ local CurrentlyUnused = function()
 		"akinsho/toggleterm.nvim",
 		tag = '*',
 		config = function()
-			require("toggleterm").setup{}
+			require("toggleterm").setup {}
 		end
 	}
-
 
 end
 
@@ -487,14 +493,4 @@ local DeprecationStation = function()
 			require("nvim-surround").setup()
 		end
 	}
-end
-
-
-------------------------------------------------------------------------------------------
--- Pairing
-------------------------------------------------------------------------------------------
-
-if Pairing then
-	-- Track mouse
-	use 'DanilaMihailov/beacon.nvim'
 end
