@@ -378,12 +378,7 @@ use {
 use 'jose-elias-alvarez/null-ls.nvim'
 
 -- Make working with TS LS better
-use {
-	'jose-elias-alvarez/typescript.nvim',
-	config = function()
-		require('typescript').setup {}
-	end
-}
+use 'jose-elias-alvarez/typescript.nvim'
 
 ---- General dependencies
 -- popup window interface

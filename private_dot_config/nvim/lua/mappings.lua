@@ -181,7 +181,7 @@ mappings['lsp'] = {
 	['<Leader>='] = { mode = 'n', action = vim.lsp.buf.format, label = 'Formatting' },
 	['<Leader>-'] = { mode = 'n', action = vim.diagnostic.setloclist, label = 'diagnostic Locations' },
 
-	['gi'] = { mode = 'n', action = typescript.actions.addMissingImports, label = "Import Current" },
+	['<Leader>gi'] = { mode = 'n', action = typescript.actions.addMissingImports, label = "Import Current" },
 	['<Leader>rtf'] = { mode = 'n', action = ":TypescriptRenameFile<CR>", label = "Rename File" },
 }
 

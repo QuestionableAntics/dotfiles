@@ -54,13 +54,6 @@ local server_configs = {
 		}
 	},
 
-	tsserver = {
-		root_dir = util.root_pattern("package.json"),
-		init_options = {
-			lint = true,
-		},
-	},
-
 	eslint = {},
 
 	-- Setup guide for C#
@@ -86,3 +79,17 @@ for server, config in pairs(server_configs) do
 	-- LSP Snippets
 	lspconfig[server].setup(coq.lsp_ensure_capabilities(config))
 end
+
+
+------------------------------------------------------------------------------------------
+-- Typescript Specific Setup
+------------------------------------------------------------------------------------------
+
+local tsserver = {
+	root_dir = util.root_pattern("package.json"),
+	init_options = {
+		lint = true,
+	},
+}
+
+require('typescript').setup(coq.lsp_ensure_capabilities(tsserver))
