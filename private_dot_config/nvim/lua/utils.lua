@@ -61,31 +61,4 @@ M.autocmd = function(group, cmds, clear)
 	cmd [[augroup END]]
 end
 
-local packer_use = function()
-	local use = nil
-	local fn = vim.fn
-	local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-	local packer_bootstrap = false
-
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
-		vim.cmd [[packadd packer.nvim]]
-		packer_bootstrap = true
-	end
-
-	if packer_bootstrap then
-		require('packer').sync()
-	end
-
-	require('packer').startup({
-		function(pack_use) use = pack_use end,
-		-- does not solve, but seems to help some with packer sync/install/update not finishing checking commits for all packages
-		config = { display = { max_jobs = 20 } }
-	})
-
-	return use
-end
-
-M.use = packer_use()
-
 return M

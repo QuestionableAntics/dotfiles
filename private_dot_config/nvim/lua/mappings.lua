@@ -234,6 +234,7 @@ mappings['tab'] = {
 	['<Leader>ta'] = { mode = 'n', action = ':$tabnew<CR>', label = 'New tab' },
 	['<Leader>tn'] = { mode = 'n', action = ':tabnext<CR>', label = 'Next tab' },
 	['<Leader>tp'] = { mode = 'n', action = ':tabprevious<CR>', label = 'Previous tab' },
+	['<Leader>tc'] = { mode = 'n', action = ':tabclose<CR>', label = 'Close tab' },
 }
 
 stems['<Leader>t'] = { label = 'Tabs' }

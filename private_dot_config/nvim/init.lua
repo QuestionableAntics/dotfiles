@@ -9,6 +9,7 @@ vim.opt.emoji = true
 -- Not Important
 ------------------------------------------------------------------------------------------
 
+require('ensure-installed')
 require('plugins')
 require('null-ls-config')
 require('telescope-config')
