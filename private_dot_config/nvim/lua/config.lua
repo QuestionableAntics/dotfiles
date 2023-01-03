@@ -94,6 +94,9 @@ opt.cmdheight = 0
 wo.relativenumber = true
 wo.nu = true
 
+-- Colorscheme
+-- vim.cmd [[colorscheme vscode]]
+
 
 ------------------------------------------------------------------------------------------
 -- Miscellaneous

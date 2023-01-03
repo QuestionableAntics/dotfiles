@@ -1,13 +1,4 @@
 require("lazy").setup({
-	-- Speeds up loading of lua modules for better start up time.
-	-- Periodically check if this is needed (it will be merged into neovim main at some point)
-	-- This is not required with lazy.nvim (https://github.com/folke/lazy.nvim#-performance)
-	-- {
-	-- 	'lewis6991/impatient.nvim',
-	-- 	config = function() require('impatient') end
-	-- },
-
-
 	------------------------------------------------------------------------------------------
 	-- Visuals
 	------------------------------------------------------------------------------------------
@@ -27,7 +18,6 @@ require("lazy").setup({
 				italic_comments = true,
 			}
 		end,
-		lazy = false
 	},
 
 	-- Nice status bar
@@ -36,7 +26,7 @@ require("lazy").setup({
 		dependencies = { 'kyazdani42/nvim-web-devicons' },
 		config = function()
 			require('lualine').setup {
-				options = { theme = 'vscode' },
+				options = { theme = require('lualine.themes.onedark') },
 				sections = {
 					lualine_a = {
 						{ 'filename', path = 1 },
@@ -44,7 +34,6 @@ require("lazy").setup({
 				},
 			}
 		end,
-		lazy = false
 	},
 
 	-- Virtual text to add indentation guides
@@ -277,14 +266,12 @@ require("lazy").setup({
 	-- Better Quickfix
 	{
 		'kevinhwang91/nvim-bqf',
-		config = function() require('bqf').setup() end
+		config = function() require('bqf').setup {} end
 	},
 
 	{
 		'michaelb/sniprun',
-		config = function()
-			require('sniprun').setup {}
-		end,
+		config = function() require('sniprun').setup {} end,
 		build = 'bash install.sh',
 	},
 
@@ -297,14 +284,14 @@ require("lazy").setup({
 	-- Folding
 	{
 		'anuvyklack/pretty-fold.nvim',
-		config = function()
-			require('pretty-fold').setup {}
-			require('fold-preview').setup {}
-		end,
-		dependencies = {
-			'anuvyklack/nvim-keymap-amend',
-			'anuvyklack/fold-preview.nvim',
-		}
+		config = function() require('pretty-fold').setup {} end,
+	},
+
+	-- Fold preview
+	{
+		'anuvyklack/fold-preview.nvim',
+		config = function() require('fold-preview').setup() end,
+		dependencies = { 'anuvyklack/keymap-amend.nvim' },
 	},
 
 	-- Tabline
@@ -390,7 +377,7 @@ require("lazy").setup({
 		dependencies = { 'williamboman/mason-lspconfig.nvim' }
 	},
 
-	-- language server for alternative completions provided through LSP
+	-- Language server for alternative completions provided through LSP
 	'jose-elias-alvarez/null-ls.nvim',
 
 	-- Make working with TS LS better
@@ -405,7 +392,7 @@ require("lazy").setup({
 	-- Miscellaneous
 	------------------------------------------------------------------------------------------
 
-	-- More speed up
+	-- Speed up
 	'nathom/filetype.nvim',
 
 	-- Hints for keybindings
@@ -414,7 +401,7 @@ require("lazy").setup({
 	-- Undo Tree
 	'mbbill/undotree',
 
-	-- types for vim api
+	-- Types for vim api
 	'folke/neodev.nvim',
 })
 
@@ -469,16 +456,12 @@ local unused_plugins = {
 	{
 		"akinsho/toggleterm.nvim",
 		tag = '*',
-		config = function()
-			require("toggleterm").setup {}
-		end
+		config = function() require("toggleterm").setup {} end
 	},
 
 	-- Manipulate object surrounding characters
 	{
 		'https://github.com/kylechui/nvim-surround',
-		config = function()
-			require("nvim-surround").setup()
-		end
+		config = function() require("nvim-surround").setup() end
 	},
 }
