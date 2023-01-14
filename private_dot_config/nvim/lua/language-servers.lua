@@ -1,5 +1,6 @@
 local util = require("lspconfig.util")
 
+
 ------------------------------------------------------------------------------------------
 -- Config
 ------------------------------------------------------------------------------------------
@@ -14,7 +15,7 @@ vim.g.completion_chain_complete_list = {
 -- Auto start coq (must be run before require 'coq')
 vim.g.coq_settings = {
 	-- always start coq (silently)
-	auto_start = 'shut-up',
+	-- auto_start = 'shut-up',
 	-- this takes over <C-h>?
 	keymap = { jump_to_mark = '' },
 	-- a lot of what I want from autocomplete is exploring properties on objects

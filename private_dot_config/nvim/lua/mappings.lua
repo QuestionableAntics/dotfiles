@@ -20,6 +20,8 @@ local mappings = {}
 -- Miscellaneous
 ------------------------------------------------------------------------------------------
 
+local harpoon_mark = require('harpoon.mark')
+local harpoon_ui = require('harpoon.ui')
 local sniprun = require('sniprun')
 
 imap('<C-J>', 'copilot#Accept("\\<CR>")', { override = true }, { expr = true, silent = true, script = true })
@@ -41,16 +43,43 @@ mappings['random'] = {
 	['='] = { mode = 'n', action = ':resize +5<CR>', label = 'Horizontal Size Increase' },
 	['-'] = { mode = 'n', action = ':resize -5<CR>', label = 'Horizontal Size Decrease' },
 
+	-- harpoon
+	['<Leader>ah'] = { mode = 'n', action = harpoon_mark.add_file, label = 'Add file to harpoon' },
+	['<Leader>uh'] = { mode = 'n', action = harpoon_ui.toggle_quick_menu, label = 'Open harpoon quick menu' },
+
 	-- snip run
 	['m'] = { mode = 'v', action = function() sniprun.run('v') end, label = 'Sniprun Visual' },
 
-	-- copy path to file from CWD
-	['cp'] = { mode = 'n', action = ':let @* = expand("%")<CR>', label = 'Copy file path from CWD' },
+	-- copy path to file from CWD with lua
+	['cp'] = {
+		mode = 'n', action = function()
+			local path = vim.fn.expand('%')
+			local cwd = vim.fn.getcwd()
+			local relative_path = path:gsub(cwd, '')
+			vim.fn.setreg('+', relative_path)
+		end,
+		label = 'Copy CWD path to clipboard'
+	},
 	-- copy current relative file path
-	['crp'] = { mode = 'n', action = ':let @* = expand("%:~")<CR>', label = 'Copy current file path from home directory' },
+	['crp'] = {
+		mode = 'n',
+		action = function() vim.fn.setreg('+', vim.fn.expand('%:~')) end,
+		label = 'Copy relative path to clipboard'
+	},
 	-- copy current file name
-	['cn'] = { mode = 'n', action = ':let @* = expand("%:t")<CR>', label = 'Copy current file name' },
+	['cn'] = {
+		mode = 'n',
+		action = function() vim.fn.setreg('+', vim.fn.expand('%:t')) end,
+		label = 'Copy file name to clipboard'
+	},
+	-- copy current line number
+	['cln'] = {
+		mode = 'n',
+		action = function() vim.fn.setreg('+', vim.fn.line('.')) end,
+		label = 'Copy line number to clipboard'
+	},
 
+	-- Format visual selection
 	['gq'] = { mode = 'v', action = vim.lsp.buf.format, label = "format" }
 }
 

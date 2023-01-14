@@ -185,17 +185,17 @@ require("lazy").setup({
 				highlight = { enable = true },
 				-- async installation of parsers
 				sync_install = false,
-				indent = { enable = false },
+				indent = { enable = true },
 				-- enable nvim-ts-context-commentstring
 				context_commentstring = { enable = true },
 				incremental_selection = {
 					enable = true,
-					keymaps = {
-						init_selection = '<c-space>',
-						node_incremental = '<c-space>',
-						scope_incremental = '<c-s>',
-						node_decremental = '<c-backspace>',
-					},
+					-- keymaps = {
+					-- 	init_selection = '<c-space>',
+					-- 	node_incremental = '<c-space>',
+					-- 	scope_incremental = '<c-s>',
+					-- 	node_decremental = '<c-backspace>',
+					-- },
 				},
 				textobjects = {
 					select = {
@@ -226,6 +226,18 @@ require("lazy").setup({
 	-- Change the surroundings
 	'tpope/vim-surround',
 
+	-- Refactoring capabilities
+	{
+		'ThePrimeagen/refactoring.nvim',
+		config = function()
+			require('refactoring').setup {}
+		end,
+		depenencies = {
+			'nvim-treesitter/nvim-treesitter',
+			'nvim-lua/plenary.nvim',
+		},
+	},
+
 
 	------------------------------------------------------------------------------------------
 	-- Functionality
@@ -248,6 +260,9 @@ require("lazy").setup({
 			}
 		end
 	},
+
+	-- Per project navigation
+	'ThePrimeagen/harpoon',
 
 	-- Additional treesitter functionality (in/around function/class/etc. operations)
 	'nvim-treesitter/nvim-treesitter-textobjects',
@@ -324,7 +339,21 @@ require("lazy").setup({
 	},
 
 	-- AI in my code
-	'github/copilot.vim',
+	{
+		'zbirenbaum/copilot.lua',
+		event = { "VimEnter" },
+		config = function()
+			vim.defer_fn(function()
+				require('copilot').setup({
+					suggestion = {
+						enabled = true,
+						auto_trigger = true,
+						keymap = { accept = "<C-J>", },
+					}
+				})
+			end, 100)
+		end,
+	},
 
 	-- Autocomplete source for vim dadbod (database)
 	'kristijanhusak/vim-dadbod-completion',
@@ -417,29 +446,12 @@ local unused_plugins = {
 	-- Additional Omnisharp functionality
 	'Hoffs/omnisharp-extended-lsp.nvim',
 
-	-- Per project navigation
-	'ThePrimeagen/harpoon',
-
 	-- gdb for neovim
 	{
 		'sakhnik/nvim-gdb',
 		build = ':!./install.sh',
 	},
-
-	-- Lua AI in my code
-	{
-		'zbirenbaum/copilot.lua',
-		-- event = {"VimEnter"},
-		config = function()
-			vim.defer_fn(function()
-				require('copilot').setup({
-					suggestion = { keymap = { accept = "<C-J>" } }
-					-- plugin_manager_path = vim.fn.stdpath("data") .. "/site/pack/packer",
-				})
-			end, 100)
-		end,
-	},
-
+	
 	-- operate on remote text objects
 	'ggandor/leap-spooky.nvim',
 

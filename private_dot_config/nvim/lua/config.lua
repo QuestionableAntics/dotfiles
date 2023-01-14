@@ -2,20 +2,16 @@ local opt = vim.opt
 local wo = vim.wo
 local o = vim.o
 
--- o.runtimepath = vim.fn.stdpath('data') .. '/site/pack/*/start/*,' .. vim.o.runtimepath
-
 -- Let me backspace like I want
 opt.backspace = { 'indent', 'eol', 'start' }
 
 -- Case insensitive searching
 opt.ignorecase = true
-
 -- If a capital is included, make the search case sensitive
 opt.smartcase = true
 
 -- Show completion popup menu in command view
 opt.wildmenu = true
-
 -- Completion popup menu options
 opt.completeopt = {
 	'menuone',  -- always show the menu
@@ -23,7 +19,7 @@ opt.completeopt = {
 	'noselect', -- do not auto select match
 }
 
--- enable mouse for not me
+-- Enable mouse for not me
 opt.mouse = "a"
 
 -- Set default grep to ripgrep (faster fuzzy finding)
@@ -51,6 +47,7 @@ opt.shortmess:append('c')
 -- Maintain undo history between sessions
 opt.undofile = true
 opt.undodir = os.getenv('HOME') .. [[/.vim/undodir/]]
+opt.undolevels = 10000
 
 -- Recommended settings for auto-session via the readme file
 o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
@@ -70,6 +67,7 @@ opt.clipboard = 'unnamed,unnamedplus'
 -- Better indenting
 opt.smarttab = true
 opt.smartindent = true
+
 
 ------------------------------------------------------------------------------------------
 -- Visuals
