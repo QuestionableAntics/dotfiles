@@ -9,6 +9,8 @@ vim.opt.emoji = true
 -- Not Important
 ------------------------------------------------------------------------------------------
 
+Pairing = false
+
 require('ensure-installed')
 require('plugins')
 require('null-ls-config')
@@ -24,4 +26,6 @@ require('autocommands')
 -- Pairing
 ------------------------------------------------------------------------------------------
 
--- require('pairing')
+if Pairing then
+	require('pairing')
+end

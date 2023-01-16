@@ -47,18 +47,18 @@ require("lazy").setup({
 		end
 	},
 
-	-- A ton of pretty things
-	{
-		"folke/noice.nvim",
-		config = function()
-			require("noice").setup()
-			require("notify").setup { background_colour = "#000000" }
-		end,
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
-		}
-	},
+	-- -- A ton of pretty things
+	-- {
+	-- 	"folke/noice.nvim",
+	-- 	config = function()
+	-- 		require("noice").setup()
+	-- 		require("notify").setup { background_colour = "#000000" }
+	-- 	end,
+	-- 	dependencies = {
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		"rcarriga/nvim-notify",
+	-- 	}
+	-- },
 
 
 	------------------------------------------------------------------------------------------
@@ -348,7 +348,11 @@ require("lazy").setup({
 					suggestion = {
 						enabled = true,
 						auto_trigger = true,
-						keymap = { accept = "<C-J>", },
+						keymap = {
+							accept = "<C-J>",
+							accept_word = "<C-f>",
+							accept_line = "<C-l>",
+						},
 					}
 				})
 			end, 100)
