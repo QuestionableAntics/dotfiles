@@ -174,8 +174,7 @@ mappings['debug'] = {
 	-- dap ui
 	['<Leader>dui'] = { mode = 'n', action = dapui.toggle, label = 'Debug UI' },
 	['<Leader>duh'] = { mode = 'n', action = dap_ui_widgets.hover, label = 'Debug Hover' },
-	['<Leader>duf'] = { mode = 'n', action = (function() dap_ui_widgets.centered_float(dap_ui_widgets.scopes) end),
-		label = 'Debug Scopes' },
+	['<Leader>duf'] = { mode = 'n', action = (function() dap_ui_widgets.centered_float(dap_ui_widgets.scopes) end), label = 'Debug Scopes' },
 
 	-- telescope-dap
 	['<Leader>dcc'] = { mode = 'n', action = telescope.extensions.dap.commands, label = 'Debug Commands' },
@@ -193,6 +192,7 @@ stems['<Leader>dc'] = { label = 'Debug Telescope' }
 ------------------------------------------------------------------------------------------
 
 local typescript = require("typescript")
+local lightbulb = require('nvim-lightbulb')
 
 mappings['lsp'] = {
 	['gd'] = { mode = 'n', action = vim.lsp.buf.definition, label = 'Go to definition' },

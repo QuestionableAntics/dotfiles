@@ -47,18 +47,18 @@ require("lazy").setup({
 		end
 	},
 
-	-- -- A ton of pretty things
-	-- {
-	-- 	"folke/noice.nvim",
-	-- 	config = function()
-	-- 		require("noice").setup()
-	-- 		require("notify").setup { background_colour = "#000000" }
-	-- 	end,
-	-- 	dependencies = {
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		"rcarriga/nvim-notify",
-	-- 	}
-	-- },
+	-- A ton of pretty UI things
+	{
+		"folke/noice.nvim",
+		config = function()
+			require("noice").setup()
+			require("notify").setup { background_colour = "#000000" }
+		end,
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		}
+	},
 
 
 	------------------------------------------------------------------------------------------
@@ -262,7 +262,16 @@ require("lazy").setup({
 	},
 
 	-- Per project navigation
-	'ThePrimeagen/harpoon',
+	{
+		'ThePrimeagen/harpoon',
+		config = function()
+			require('harpoon').setup {
+				menu = {
+					width = 100
+				}
+			}
+		end
+	},
 
 	-- Additional treesitter functionality (in/around function/class/etc. operations)
 	'nvim-treesitter/nvim-treesitter-textobjects',
@@ -337,6 +346,9 @@ require("lazy").setup({
 			}
 		end
 	},
+
+	-- Code actions lightbulb
+	'kosayoda/nvim-lightbulb',
 
 	-- AI in my code
 	{

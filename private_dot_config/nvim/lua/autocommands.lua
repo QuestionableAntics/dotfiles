@@ -1,3 +1,10 @@
+-- Startup autocommands
+vim.api.nvim_create_autocmd(
+	"VimEnter",
+	{ callback = function() vim.cmd [[ :COQnow ]] end }
+)
+
+
 -- Highlight yanked text on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
 	callback = function() vim.highlight.on_yank() end,
@@ -56,7 +63,7 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
 })
 
 
--- Resize splits if window got resized
+-- Resize splits if window was resized
 vim.api.nvim_create_autocmd(
 	{ "VimResized" },
 	{ callback = function() vim.cmd("tabdo wincmd =") end }
@@ -94,8 +101,20 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Startup autocommands
-vim.api.nvim_create_autocmd(
-	"VimEnter",
-	{ callback = function() vim.cmd [[ :COQnow ]] end }
-)
+
+-- On TermEnter, set term able to be killed by wqa
+vim.api.nvim_create_autocmd("TermOpen",  {
+	callback = function()
+		vim.cmd [[
+			command Z wa | qa silent
+			cabbrev wqa Z
+		]]
+	end
+})
+
+
+-- Show code action lightbulb on cursorhold
+local lightbulb = require('nvim-lightbulb')
+vim.api.nvim_create_autocmd({"CursorHold, CursorHoldI"}, {
+	callback = lightbulb.update_lightbulb
+})
