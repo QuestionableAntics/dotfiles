@@ -103,14 +103,14 @@ vim.api.nvim_create_autocmd("FileType", {
 
 
 -- On TermEnter, set term able to be killed by wqa
-vim.api.nvim_create_autocmd("TermOpen",  {
-	callback = function()
-		vim.cmd [[
-			command Z wa | qa silent
-			cabbrev wqa Z
-		]]
-	end
-})
+-- vim.api.nvim_create_autocmd("TermOpen",  {
+-- 	callback = function()
+-- 		vim.cmd [[
+-- 			command Z wa | qa silent
+-- 			cabbrev wqa Z
+-- 		]]
+-- 	end
+-- })
 
 
 -- Show code action lightbulb on cursorhold

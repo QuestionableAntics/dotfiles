@@ -1,8 +1,6 @@
 local utils = require 'utils'
 
 local map = utils.base_map
-local imap = utils.imap
-local tmap = utils.tmap
 
 vim.g.mapleader = ' '
 map({ 'v', 'n' }, ';', ':')
@@ -10,7 +8,7 @@ map({ 'v', 'n' }, ';', ':')
 -- Easy exit to normal mode from insert and command mode
 map({ 'c', 'i' }, 'jk', '<ESC>')
 -- Get me the fuck out of the terminal
-tmap('jk', [[<C-\><C-N>]])
+map('t', 'jk', [[<C-\><C-N>]])
 
 local stems = {}
 local mappings = {}
@@ -23,8 +21,6 @@ local mappings = {}
 local harpoon_mark = require('harpoon.mark')
 local harpoon_ui = require('harpoon.ui')
 local sniprun = require('sniprun')
-
-imap('<C-J>', 'copilot#Accept("\\<CR>")', { override = true }, { expr = true, silent = true, script = true })
 
 mappings['random'] = {
 	['<esc>'] = { mode = 'n', action = '<esc>:noh<CR>', label = 'Remove Highlights' },
@@ -80,7 +76,13 @@ mappings['random'] = {
 	},
 
 	-- Format visual selection
-	['gq'] = { mode = 'v', action = vim.lsp.buf.format, label = "format" }
+	['gq'] = { mode = 'v', action = vim.lsp.buf.format, label = 'format' },
+
+	-- Save with control s
+	['<C-s>'] = { mode = 'n', action = '<cmd>w<cr>', label = 'Save' },
+
+	-- Delete all buffers except current
+	['<Leader>bd'] = { mode = 'n', action = '<cmd>%bd|e#<cr>', label = 'Delete all buffers except current' },
 }
 
 
@@ -104,7 +106,6 @@ mappings['fuzzy_finder'] = {
 	['<Leader>fxd'] = { mode = 'n', action = function() telescope_builtin.diagnostics { bufnr = 0 } end,
 		label = 'Find Diagnostics in Focused Buffer' },
 	['<Leader>fxw'] = { mode = 'n', action = telescope_builtin.diagnostics, label = 'Find Diagnostics in Open Buffers' },
-	['gh'] = { mode = 'n', action = telescope_builtin.lsp_references, label = 'Find References' },
 	['<Leader>/'] = {
 		mode = 'n',
 		action = function()
@@ -129,11 +130,11 @@ local neotest = require('neotest')
 
 mappings['testing'] = {
 	-- TODO: Revisit this later and see if there's clearer errors around it not working
-	['<Leader>dn'] = { mode = 'n', action = function() neotest.run.run({ strategy = "dap" }) end,
+	['<Leader>dn'] = { mode = 'n', action = function() neotest.run.run({ strategy = 'dap' }) end,
 		label = 'Debug Nearest Test' },
 	['<Leader>un'] = { mode = 'n', action = function() neotest.run.run() end, label = 'Run Nearest Test' },
 	['<Leader>ul'] = { mode = 'n', action = function() neotest.run.run_last() end, label = 'Run Last Test' },
-	['<Leader>uf'] = { mode = 'n', action = function() neotest.run.run(vim.fn.expand("%")) end, label = 'Run File' },
+	['<Leader>uf'] = { mode = 'n', action = function() neotest.run.run(vim.fn.expand('%')) end, label = 'Run File' },
 	['<Leader>us'] = { mode = 'n', action = function() neotest.summary.open() end, label = 'Open Test Summary' },
 	['<Leader>uo'] = { mode = 'n', action = function() neotest.output.open() end, label = 'Test Output' },
 }
@@ -160,12 +161,12 @@ mappings['debug'] = {
 	['<Leader>db'] = { mode = 'n', action = dap.toggle_breakpoint, label = 'Debug Toggle Breakpoint' },
 	['<Leader>dsbr'] = {
 		mode = 'n',
-		action = function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end,
+		action = function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
 		label = 'Debug Set Breakpoint'
 	},
 	['<Leader>dsbm'] = {
 		mode = 'n',
-		action = function() dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end,
+		action = function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,
 		label = 'Debug Set Breakpoint Message'
 	},
 	['<Leader>dr'] = { mode = 'n', action = dap.repl.open, label = 'Debug REPL' },
@@ -191,27 +192,41 @@ stems['<Leader>dc'] = { label = 'Debug Telescope' }
 -- LSP Mappings
 ------------------------------------------------------------------------------------------
 
-local typescript = require("typescript")
-local lightbulb = require('nvim-lightbulb')
+local typescript = require('typescript')
 
 mappings['lsp'] = {
-	['gd'] = { mode = 'n', action = vim.lsp.buf.definition, label = 'Go to definition' },
+	-- Builtin
 	['gD'] = { mode = 'n', action = vim.lsp.buf.declaration, label = 'Go to declaration' },
 	-- ['gi'] = { mode = 'n', action = vim.lsp.buf.implementation, label = 'Go to implementation' },
+	['gd'] = { mode = 'n', action = vim.lsp.buf.definition, label = 'Go to definition' },
 	['gs'] = { mode = 'n', action = vim.lsp.buf.signature_help, label = 'Signature help' },
-	['gr'] = { mode = 'n', action = vim.lsp.buf.rename, label = 'Rename' },
+	-- ['gr'] = { mode = 'n', action = vim.lsp.buf.rename, label = 'Rename' },
 	['gt'] = { mode = 'n', action = vim.lsp.buf.type_definition, label = 'Go to type definition' },
-	['K'] = { mode = 'n', action = vim.lsp.buf.hover, label = 'Hover' },
-	['ca'] = { mode = 'n', action = vim.lsp.buf.code_action, label = 'Code actions' },
-	[']e'] = { mode = 'n', action = vim.diagnostic.goto_next, label = 'Next diagnostic' },
-	['[e'] = { mode = 'n', action = vim.diagnostic.goto_prev, label = 'Previous diagnostic' },
+	-- ['[e'] = { mode = 'n', action = vim.diagnostic.goto_prev, label = 'Previous diagnostic' },
+	-- [']e'] = { mode = 'n', action = vim.diagnostic.goto_next, label = 'Next diagnostic' },
 	['<Leader>gw'] = { mode = 'n', action = vim.lsp.buf.document_symbol, label = 'Document symbols' },
 	['<Leader>gW'] = { mode = 'n', action = vim.lsp.buf.workspace_symbol, label = 'Workspace symbols' },
 	['<Leader>='] = { mode = 'n', action = vim.lsp.buf.format, label = 'Formatting' },
-	['<Leader>-'] = { mode = 'n', action = vim.diagnostic.setloclist, label = 'diagnostic Locations' },
+	['<Leader>-'] = { mode = 'n', action = vim.diagnostic.setloclist, label = 'Diagnostic Locations' },
 
-	['<Leader>gi'] = { mode = 'n', action = typescript.actions.addMissingImports, label = "Import Current" },
-	['<Leader>rtf'] = { mode = 'n', action = ":TypescriptRenameFile<CR>", label = "Rename File" },
+	-- Typescript Specific
+	['<Leader>gi'] = { mode = 'n', action = typescript.actions.addMissingImports, label = 'Import Current' },
+	['<Leader>rtf'] = { mode = 'n', action = ':TypescriptRenameFile<CR>', label = 'Rename File' },
+
+	-- LSP Saga
+	['<Leader>o'] = { mode = 'n', action = '<cmd>Lspsaga outline<CR>', label = 'Outline' },
+	['gh'] = { mode = 'n', action = '<cmd>Lspsaga lsp_finder<CR>', label =  'Find references' },
+	['ca'] = { mode = { 'n', 'v' }, action = '<cmd>Lspsaga code_action<CR>', label = 'Code Action' },
+	['gr'] = { mode = 'n', action = '<cmd>Lspsaga rename<CR>', label = 'Rename' },
+	['gp'] = { mode = 'n', action = '<cmd>Lspsaga peek_definition<CR>', label = 'Peek Definition' },
+	-- ['gd'] = { mode = 'n', action = '<cmd>Lspsaga goto_definition<CR>', label = 'Peek Definition' },
+	['K'] = { mode = 'n', action = '<cmd>Lspsaga hover_doc<CR>', label = 'Hover' },
+	['[e'] = { mode = 'n', action = '<cmd>Lspsaga diagnostic_jump_prev<CR>', label = 'Previous Diagnostic' },
+	[']e'] = { mode = 'n', action = '<cmd>Lspsaga diagnostic_jump_next<CR>', label = 'Next Diagnostic' },
+	['<Leader>ci'] = { mode = 'n', action = '<cmd>Lspsaga incoming_calls<CR>', label = 'Incoming Calls' },
+	['<Leader>co'] = { mode = 'n', action = '<cmd>Lspsaga outgoing_calls<CR>', label = 'Incoming Calls' },
+	['<C-n>'] = { mode = { 'n', 't' }, action = '<cmd>Lspsaga term_toggle<CR>', label = 'Toggle Floating Terminal' },
+	['<Leader>sb'] = { mode = 'n', action = '<cmd>Lspsaga show_buf_diagnostics<CR>', label = 'Show Buffer Diagnostics' },
 }
 
 
@@ -280,9 +295,9 @@ stems['<Leader>t'] = { label = 'Tabs' }
 -- local lazydocker = Terminal:new({ cmd = 'lazydocker', hidden = true, direction = 'float' })
 
 -- mappings['terminal'] = {
--- 	['<Leader>tt'] = { mode = 'n', action = function() horizontal:toggle() end, label = 'Toggle terminal' },
--- 	['<Leader>td'] = { mode = 'n', action = function() lazydocker:toggle() end, label = 'Toggle lazydocker' },
--- 	['<Leader>tf'] = { mode = 'n', action = function() float:toggle() end, label = 'Toggle float terminal' },
+	-- ['<Leader>tt'] = { mode = 'n', action = function() horizontal:toggle() end, label = 'Toggle terminal' },
+	-- ['<Leader>td'] = { mode = 'n', action = function() lazydocker:toggle() end, label = 'Toggle lazydocker' },
+	-- ['<C-m>'] = { mode = { 'n', 't' }, action = function() float:toggle() end, label = 'Toggle float terminal' },
 -- }
 
 

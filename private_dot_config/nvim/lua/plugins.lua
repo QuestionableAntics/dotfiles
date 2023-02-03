@@ -1,4 +1,4 @@
-require("lazy").setup({
+require('lazy').setup({
 	------------------------------------------------------------------------------------------
 	-- Visuals
 	------------------------------------------------------------------------------------------
@@ -10,8 +10,7 @@ require("lazy").setup({
 	'gregsexton/MatchTag',
 
 	-- VS Code theme
-	{
-		'Mofiqul/vscode.nvim',
+	{ 'Mofiqul/vscode.nvim',
 		config = function()
 			require('vscode').setup {
 				transparent = true,
@@ -21,8 +20,7 @@ require("lazy").setup({
 	},
 
 	-- Nice status bar
-	{
-		'nvim-lualine/lualine.nvim',
+	{ 'nvim-lualine/lualine.nvim',
 		dependencies = { 'kyazdani42/nvim-web-devicons' },
 		config = function()
 			require('lualine').setup {
@@ -37,8 +35,7 @@ require("lazy").setup({
 	},
 
 	-- Virtual text to add indentation guides
-	{
-		'lukas-reineke/indent-blankline.nvim',
+	{ 'lukas-reineke/indent-blankline.nvim',
 		config = function()
 			require('indent_blankline').setup {
 				show_current_context = true,
@@ -48,18 +45,24 @@ require("lazy").setup({
 	},
 
 	-- A ton of pretty UI things
-	{
-		"folke/noice.nvim",
+	{ 'folke/noice.nvim',
 		config = function()
-			require("noice").setup()
-			require("notify").setup { background_colour = "#000000" }
+			require('noice').setup()
+			require('notify').setup { background_colour = '#000000' }
 		end,
 		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
+			'MunifTanjim/nui.nvim',
+			'rcarriga/nvim-notify',
 		}
 	},
 
+	-- Pretty LSP interface
+	{ 'glepnir/lspsaga.nvim',
+		event = 'BufRead',
+		config = function()
+			require('lspsaga').setup({})
+		end,
+	},
 
 	------------------------------------------------------------------------------------------
 	-- Database
@@ -83,8 +86,7 @@ require("lazy").setup({
 	'tpope/vim-fugitive',
 
 	-- sign column symbols for git changes and git hunk actions
-	{
-		'lewis6991/gitsigns.nvim',
+	{ 'lewis6991/gitsigns.nvim',
 		config = function()
 			require('gitsigns').setup {
 				current_line_blame = true,
@@ -97,8 +99,7 @@ require("lazy").setup({
 	'junegunn/gv.vim',
 
 	-- Diff View
-	{
-		'sindrets/diffview.nvim',
+	{ 'sindrets/diffview.nvim',
 		dependencies = 'nvim-lua/plenary.nvim',
 	},
 
@@ -121,8 +122,7 @@ require("lazy").setup({
 
 	-- Testing
 	'vim-test/vim-test', -- required for neotest
-	{
-		'nvim-neotest/neotest',
+	{ 'nvim-neotest/neotest',
 		dependencies = {
 			'nvim-lua/plenary.nvim',
 			'nvim-treesitter/nvim-treesitter',
@@ -141,8 +141,7 @@ require("lazy").setup({
 	------------------------------------------------------------------------------------------
 
 	-- Little bit of everything
-	{
-		'echasnovski/mini.nvim',
+	{ 'echasnovski/mini.nvim',
 		config = function()
 			-- underline instances of the word under the cursor
 			require('mini.cursorword').setup {}
@@ -154,33 +153,32 @@ require("lazy").setup({
 	},
 
 	-- Syntax tree parser for better syntax highlighting among other things
-	{
-		'nvim-treesitter/nvim-treesitter',
+	{ 'nvim-treesitter/nvim-treesitter',
 		build = ':TSUpdate',
 		config = function()
 			require('nvim-treesitter.configs').setup {
-				-- either "all" or {"a", "list", "of", "languages"}
+				-- either 'all' or {'a', 'list', 'of', 'languages'}
 				ensure_installed = {
-					"python",
-					"javascript",
-					"typescript",
-					"c_sharp",
-					"tsx",
-					"lua",
-					"yaml",
-					"graphql",
-					"java",
-					"scss",
-					"css",
-					"html",
-					"jsdoc",
-					"dockerfile",
-					"toml",
-					"json",
-					"json5",
-					"markdown",
-					"http",
-					"bash"
+					'python',
+					'javascript',
+					'typescript',
+					'c_sharp',
+					'tsx',
+					'lua',
+					'yaml',
+					'graphql',
+					'java',
+					'scss',
+					'css',
+					'html',
+					'jsdoc',
+					'dockerfile',
+					'toml',
+					'json',
+					'json5',
+					'markdown',
+					'http',
+					'bash'
 				},
 				highlight = { enable = true },
 				-- async installation of parsers
@@ -203,10 +201,10 @@ require("lazy").setup({
 						-- Automatically jump forward to textobj, similar to targets.vim
 						lookahead = true,
 						keymaps = {
-							["af"] = "@function.outer",
-							["if"] = "@function.inner",
-							["ac"] = "@class.outer",
-							["ic"] = "@class.inner",
+							['af'] = '@function.outer',
+							['if'] = '@function.inner',
+							['ac'] = '@class.outer',
+							['ic'] = '@class.inner',
 						},
 					},
 				},
@@ -215,8 +213,7 @@ require("lazy").setup({
 	},
 
 	-- Auto close and update jsx tags
-	{
-		'windwp/nvim-ts-autotag',
+	{ 'windwp/nvim-ts-autotag',
 		config = function() require('nvim-ts-autotag').setup() end
 	},
 
@@ -227,8 +224,7 @@ require("lazy").setup({
 	'tpope/vim-surround',
 
 	-- Refactoring capabilities
-	{
-		'ThePrimeagen/refactoring.nvim',
+	{ 'ThePrimeagen/refactoring.nvim',
 		config = function()
 			require('refactoring').setup {}
 		end,
@@ -244,15 +240,13 @@ require("lazy").setup({
 	------------------------------------------------------------------------------------------
 
 	-- File explorer
-	{
-		'ms-jpq/chadtree',
+	{ 'ms-jpq/chadtree',
 		build = 'python3 -m chadtree deps',
 		branch = 'chad',
 	},
 
 	-- Fast motions
-	{
-		'phaazon/hop.nvim',
+	{ 'phaazon/hop.nvim',
 		config = function()
 			require('hop').setup {
 				-- Themes will overwrite this sometimes, this ensures that hop greys out non highlighted letters
@@ -262,8 +256,7 @@ require("lazy").setup({
 	},
 
 	-- Per project navigation
-	{
-		'ThePrimeagen/harpoon',
+	{ 'ThePrimeagen/harpoon',
 		config = function()
 			require('harpoon').setup {
 				menu = {
@@ -277,8 +270,7 @@ require("lazy").setup({
 	'nvim-treesitter/nvim-treesitter-textobjects',
 
 	-- Session Management
-	{
-		'rmagatti/auto-session',
+	{ 'rmagatti/auto-session',
 		config = function()
 			require('auto-session').setup {
 				auto_session_root_dir = os.getenv('HOME') .. '/.vim/sessions/',
@@ -288,39 +280,33 @@ require("lazy").setup({
 	},
 
 	-- Better Quickfix
-	{
-		'kevinhwang91/nvim-bqf',
+	{ 'kevinhwang91/nvim-bqf',
 		config = function() require('bqf').setup {} end
 	},
 
-	{
-		'michaelb/sniprun',
+	{ 'michaelb/sniprun',
 		config = function() require('sniprun').setup {} end,
 		build = 'bash install.sh',
 	},
 
 	--  'jamestthompson3/nvim-remote-containers',
-	{
-		'esensar/nvim-dev-container',
-		config = function() require("devcontainer").setup {} end
+	{ 'esensar/nvim-dev-container',
+		config = function() require('devcontainer').setup {} end
 	},
 
 	-- Folding
-	{
-		'anuvyklack/pretty-fold.nvim',
+	{ 'anuvyklack/pretty-fold.nvim',
 		config = function() require('pretty-fold').setup {} end,
 	},
 
 	-- Fold preview
-	{
-		'anuvyklack/fold-preview.nvim',
+	{ 'anuvyklack/fold-preview.nvim',
 		config = function() require('fold-preview').setup() end,
 		dependencies = { 'anuvyklack/keymap-amend.nvim' },
 	},
 
 	-- Tabline
-	{
-		'nanozuki/tabby.nvim',
+	{ 'nanozuki/tabby.nvim',
 		config = function() require('tabby').setup {} end
 	},
 
@@ -336,8 +322,7 @@ require("lazy").setup({
 	{ 'ms-jpq/coq.artifacts', branch = 'artifacts' },
 
 	-- coq.nvim snippets and other third party sources of completion
-	{
-		'ms-jpq/coq.thirdparty',
+	{ 'ms-jpq/coq.thirdparty',
 		config = function()
 			require('coq_3p') {
 				{ src = 'vim_dadbod_completion', short_name = 'DB' },
@@ -351,9 +336,8 @@ require("lazy").setup({
 	'kosayoda/nvim-lightbulb',
 
 	-- AI in my code
-	{
-		'zbirenbaum/copilot.lua',
-		event = { "VimEnter" },
+	{ 'zbirenbaum/copilot.lua',
+		event = { 'VimEnter' },
 		config = function()
 			vim.defer_fn(function()
 				require('copilot').setup({
@@ -361,9 +345,9 @@ require("lazy").setup({
 						enabled = true,
 						auto_trigger = true,
 						keymap = {
-							accept = "<C-J>",
-							accept_word = "<C-f>",
-							accept_line = "<C-l>",
+							accept = '<C-J>',
+							accept_word = '<C-f>',
+							accept_line = '<C-l>',
 						},
 					}
 				})
@@ -380,8 +364,7 @@ require("lazy").setup({
 	------------------------------------------------------------------------------------------
 
 	-- Pretty Pick List
-	{
-		'nvim-telescope/telescope.nvim',
+	{ 'nvim-telescope/telescope.nvim',
 		dependencies = {
 			-- rg raw live grep
 			'nvim-telescope/telescope-live-grep-args.nvim',
@@ -397,10 +380,9 @@ require("lazy").setup({
 	-- Uses telescope for the native ui-select
 	'nvim-telescope/telescope-ui-select.nvim',
 
-	{
-		'rmagatti/session-lens',
+	{ 'rmagatti/session-lens',
 		config = function()
-			require('session-lens').setup { path_display = { "shorten" } }
+			require('session-lens').setup { path_display = { 'shorten' } }
 		end
 	},
 
@@ -413,8 +395,7 @@ require("lazy").setup({
 	'neovim/nvim-lspconfig',
 
 	-- General external editor tooling installation management (Language servers, dap servers, linters, formatters)
-	{
-		'williamboman/mason.nvim',
+	{ 'williamboman/mason.nvim',
 		config = function()
 			require('mason').setup()
 			require('mason-lspconfig').setup()
@@ -427,11 +408,6 @@ require("lazy").setup({
 
 	-- Make working with TS LS better
 	'jose-elias-alvarez/typescript.nvim',
-
-	---- General dependencies
-	-- popup window interface
-	'nvim-lua/popup.nvim',
-
 
 	------------------------------------------------------------------------------------------
 	-- Miscellaneous
@@ -448,6 +424,13 @@ require("lazy").setup({
 
 	-- Types for vim api
 	'folke/neodev.nvim',
+
+	-- Telescope integration for docker
+	'lpoto/telescope-docker.nvim',
+
+	---- General dependencies
+	-- popup window interface
+	'nvim-lua/popup.nvim',
 })
 
 
@@ -455,7 +438,7 @@ require("lazy").setup({
 -- Currently Unused
 ------------------------------------------------------------------------------------------
 
-local unused_plugins = {
+local Unused_local = {
 	-- Breakdown of what vim spends time on when starting up
 	'dstein64/vim-startuptime',
 
@@ -463,11 +446,10 @@ local unused_plugins = {
 	'Hoffs/omnisharp-extended-lsp.nvim',
 
 	-- gdb for neovim
-	{
-		'sakhnik/nvim-gdb',
+	{ 'sakhnik/nvim-gdb',
 		build = ':!./install.sh',
 	},
-	
+
 	-- operate on remote text objects
 	'ggandor/leap-spooky.nvim',
 
@@ -475,21 +457,27 @@ local unused_plugins = {
 	'jamestthompson3/nvim-remote-containers',
 
 	-- Markdown previewer
-	{
-		'iamcco/markdown-preview.nvim',
+	{ 'iamcco/markdown-preview.nvim',
 		build = 'cd app && npm install',
 	},
 
-	-- Better terminal (wraps text, opens terminal with command, floating buffers)
-	{
-		"akinsho/toggleterm.nvim",
-		tag = '*',
-		config = function() require("toggleterm").setup {} end
+	-- Manipulate object surrounding characters
+	{ 'https://github.com/kylechui/nvim-surround',
+		config = function() require('nvim-surround').setup() end
 	},
 
-	-- Manipulate object surrounding characters
-	{
-		'https://github.com/kylechui/nvim-surround',
-		config = function() require("nvim-surround").setup() end
+	-- Edit terminal
+	{ 'chomosuke/term-edit.nvim',
+		config = function()
+			require 'term-edit'.setup { prompt_end = '%$ ' }
+		end,
+		lazy = false, -- or ft = 'toggleterm' if you use toggleterm.nvim
+		version = '1.*',
+	},
+
+	-- Better terminal (wraps text, opens terminal with command, floating buffers)
+	{ 'akinsho/toggleterm.nvim',
+		tag = '*',
+		config = function() require('toggleterm').setup {} end
 	},
 }
