@@ -2,7 +2,6 @@ local utils = require 'utils'
 
 local map = utils.base_map
 
-vim.g.mapleader = ' '
 map({ 'v', 'n' }, ';', ':')
 
 -- Easy exit to normal mode from insert and command mode

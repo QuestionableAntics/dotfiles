@@ -9,10 +9,14 @@ vim.opt.emoji = true
 -- Not Important
 ------------------------------------------------------------------------------------------
 
+-- Sets up some sensible defaults and plugins for pairing
 Pairing = false
 
+-- Needs to be set before any plugins are loaded
+vim.g.mapleader = ' '
+
 require('ensure-installed')
-require('plugins')
+require('lazy').setup('plugins')
 require('null-ls-config')
 require('telescope-config')
 require('language-servers')
@@ -21,11 +25,10 @@ require('config')
 require('mappings')
 require('autocommands')
 
-
 ------------------------------------------------------------------------------------------
 -- Pairing
 ------------------------------------------------------------------------------------------
 
 if Pairing then
-	require('pairing')
+	require('pairing-config')
 end
