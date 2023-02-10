@@ -9,7 +9,7 @@ vim.opt.emoji = true
 -- Not Important
 ------------------------------------------------------------------------------------------
 
--- Sets up some sensible defaults and plugins for pairing
+-- Set up some sensible defaults and plugins for pairing
 Pairing = false
 
 -- Needs to be set before any plugins are loaded

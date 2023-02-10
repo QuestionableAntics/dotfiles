@@ -4,7 +4,7 @@ local builtins = null_ls.builtins
 
 local sources = {
 	-- builtins.diagnostics.eslint,
-	builtins.code_actions.eslint_d,
+	-- builtins.code_actions.eslint_d,
 	-- builtins.formatting.prettier
 	builtins.diagnostics.sqlfluff,
 	builtins.formatting.sqlfluff,

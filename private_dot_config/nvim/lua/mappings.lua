@@ -197,7 +197,7 @@ mappings['lsp'] = {
 	-- Builtin
 	['gD'] = { mode = 'n', action = vim.lsp.buf.declaration, label = 'Go to declaration' },
 	-- ['gi'] = { mode = 'n', action = vim.lsp.buf.implementation, label = 'Go to implementation' },
-	['gd'] = { mode = 'n', action = vim.lsp.buf.definition, label = 'Go to definition' },
+	-- ['gd'] = { mode = 'n', action = vim.lsp.buf.definition, label = 'Go to definition' },
 	['gs'] = { mode = 'n', action = vim.lsp.buf.signature_help, label = 'Signature help' },
 	-- ['gr'] = { mode = 'n', action = vim.lsp.buf.rename, label = 'Rename' },
 	['gt'] = { mode = 'n', action = vim.lsp.buf.type_definition, label = 'Go to type definition' },
@@ -218,7 +218,7 @@ mappings['lsp'] = {
 	['ca'] = { mode = { 'n', 'v' }, action = '<cmd>Lspsaga code_action<CR>', label = 'Code Action' },
 	['gr'] = { mode = 'n', action = '<cmd>Lspsaga rename<CR>', label = 'Rename' },
 	['gp'] = { mode = 'n', action = '<cmd>Lspsaga peek_definition<CR>', label = 'Peek Definition' },
-	-- ['gd'] = { mode = 'n', action = '<cmd>Lspsaga goto_definition<CR>', label = 'Peek Definition' },
+	['gd'] = { mode = 'n', action = '<cmd>Lspsaga goto_definition<CR>', label = 'Peek Definition' },
 	['K'] = { mode = 'n', action = '<cmd>Lspsaga hover_doc<CR>', label = 'Hover' },
 	['[e'] = { mode = 'n', action = '<cmd>Lspsaga diagnostic_jump_prev<CR>', label = 'Previous Diagnostic' },
 	[']e'] = { mode = 'n', action = '<cmd>Lspsaga diagnostic_jump_next<CR>', label = 'Next Diagnostic' },

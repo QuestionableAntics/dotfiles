@@ -19,9 +19,6 @@ opt.completeopt = {
 	'noselect', -- do not auto select match
 }
 
--- Enable mouse for not me
-opt.mouse = "a"
-
 -- Set default grep to ripgrep (faster fuzzy finding)
 opt.grepprg = [[rg\]] ---vimgrep
 
