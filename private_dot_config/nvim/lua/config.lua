@@ -19,6 +19,9 @@ opt.completeopt = {
 	'noselect', -- do not auto select match
 }
 
+-- opt.winblend = 0
+-- o.avoid_statusline = true
+
 -- Set default grep to ripgrep (faster fuzzy finding)
 opt.grepprg = [[rg\]] ---vimgrep
 
@@ -88,9 +91,6 @@ opt.cmdheight = 0
 -- Hybrid line numbers: shows relative number for all lines, but shows absolute for current line
 wo.relativenumber = true
 wo.nu = true
-
--- Colorscheme
--- vim.cmd [[colorscheme vscode]]
 
 
 ------------------------------------------------------------------------------------------

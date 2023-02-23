@@ -37,7 +37,7 @@ table.insert(lua_rtp, "lua/?.lua")
 table.insert(lua_rtp, "lua/?/init.lua")
 
 local server_configs = {
-	sumneko_lua = {
+	lua_ls = {
 		settings = {
 			Lua = {
 				runtime = {

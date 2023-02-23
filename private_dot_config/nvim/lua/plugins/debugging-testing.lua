@@ -11,6 +11,15 @@ return {
 	-- Virtual Text
 	'theHamsta/nvim-dap-virtual-text',
 
+	-- DAP <> Mason bridge
+	-- { 'jay-babu/mason-nvim-dap.nvim',
+	-- 	config = function()
+	-- 		require('mason-nvim-dap').setup({
+	-- 			automatic_setup = true
+	-- 		})
+	-- 	end,
+	-- },
+
 	-- Testing
 	'vim-test/vim-test', -- required for neotest
 	{ 'nvim-neotest/neotest',

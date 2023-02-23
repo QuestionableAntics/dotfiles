@@ -17,4 +17,9 @@ return {
 
 	-- Make working with TS LS better
 	'jose-elias-alvarez/typescript.nvim',
+
+	-- null-ls bridge for Mason
+	{ 'jay-babu/mason-null-ls.nvim',
+		config = function() require('mason-null-ls').setup() end,
+	},
 }

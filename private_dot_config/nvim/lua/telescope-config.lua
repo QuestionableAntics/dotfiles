@@ -13,7 +13,8 @@ telescope.setup {
 			".idea",
 			".pytest_cache",
 			"bin/Debug",
-			"obj/"
+			"obj/",
+			".yarn/*"
 		},
 		vimgrep_arguments = {
 			"rg",

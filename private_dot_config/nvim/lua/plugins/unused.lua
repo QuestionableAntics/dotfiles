@@ -40,6 +40,9 @@ local Unused_local = {
 		tag = '*',
 		config = function() require('toggleterm').setup {} end
 	},
+
+	-- Remote environment interactions
+	'miversen33/netman.nvim',
 }
 
 return {}
