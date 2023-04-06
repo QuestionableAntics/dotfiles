@@ -8,10 +8,12 @@ return {
 	-- VS Code theme
 	{ 'Mofiqul/vscode.nvim',
 		config = function()
-			require('vscode').setup {
+			local vscode = require('vscode')
+			vscode.setup {
 				transparent = true,
 				italic_comments = true,
 			}
+			vscode.load()
 		end,
 	},
 

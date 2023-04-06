@@ -69,4 +69,10 @@ return {
 	{ 'nanozuki/tabby.nvim',
 		config = function() require('tabby').setup {} end
 	},
+
+	-- Better terminal (wraps text, opens terminal with command, floating buffers)
+	{ 'akinsho/toggleterm.nvim',
+		version = '*',
+		config = true
+	},
 }

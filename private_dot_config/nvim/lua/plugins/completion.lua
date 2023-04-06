@@ -19,6 +19,24 @@ return {
 	-- Code actions lightbulb
 	'kosayoda/nvim-lightbulb',
 
+	{ 'jackMort/ChatGPT.nvim',
+		config = function()
+			require("chatgpt").setup({
+				openai_params = {
+					model = "gpt-4",
+				},
+				keymaps = {
+					submit = "<C-j>",
+				},
+			})
+		end,
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim"
+		}
+	},
+
 	-- AI in my code
 	{ 'zbirenbaum/copilot.lua',
 		event = { 'VimEnter' },

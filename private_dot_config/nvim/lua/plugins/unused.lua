@@ -35,14 +35,16 @@ local Unused_local = {
 		version = '1.*',
 	},
 
-	-- Better terminal (wraps text, opens terminal with command, floating buffers)
-	{ 'akinsho/toggleterm.nvim',
-		tag = '*',
-		config = function() require('toggleterm').setup {} end
-	},
-
 	-- Remote environment interactions
 	'miversen33/netman.nvim',
+
+	-- Toggle split/join
+	-- Does not support C# currently
+	{ 'Wansmer/treesj',
+		keys = { '<space>m', '<space>j', '<space>s' },
+		dependencies = { 'nvim-treesitter/nvim-treesitter' },
+		config = function() require('treesj').setup({}) end,
+	}
 }
 
 return {}

@@ -210,7 +210,7 @@ mappings['lsp'] = {
 	['<Leader>-'] = { mode = 'n', action = vim.diagnostic.setloclist, label = 'Diagnostic Locations' },
 
 	-- Typescript Specific
-	['<Leader>gi'] = { mode = 'n', action = typescript.actions.addMissingImports, label = 'Import Current' },
+	['<Leader>gi'] = { mode = 'n', action = function() typescript.actions.addMissingImports() end, label = 'Import Current' },
 	['<Leader>rtf'] = { mode = 'n', action = ':TypescriptRenameFile<CR>', label = 'Rename File' },
 
 	-- LSP Saga
@@ -225,7 +225,6 @@ mappings['lsp'] = {
 	[']e'] = { mode = 'n', action = '<cmd>Lspsaga diagnostic_jump_next<CR>', label = 'Next Diagnostic' },
 	['<Leader>ci'] = { mode = 'n', action = '<cmd>Lspsaga incoming_calls<CR>', label = 'Incoming Calls' },
 	['<Leader>co'] = { mode = 'n', action = '<cmd>Lspsaga outgoing_calls<CR>', label = 'Incoming Calls' },
-	['<C-n>'] = { mode = { 'n', 't' }, action = '<cmd>Lspsaga term_toggle<CR>', label = 'Toggle Floating Terminal' },
 	['<Leader>sb'] = { mode = 'n', action = '<cmd>Lspsaga show_buf_diagnostics<CR>', label = 'Show Buffer Diagnostics' },
 }
 
@@ -288,17 +287,17 @@ stems['<Leader>t'] = { label = 'Tabs' }
 -- Terminal
 ------------------------------------------------------------------------------------------
 
--- local Terminal = require('toggleterm.terminal').Terminal
+local Terminal = require('toggleterm.terminal').Terminal
 
--- local horizontal = Terminal:new({ direction = 'horizontal' })
--- local float = Terminal:new({ direction = 'float' })
--- local lazydocker = Terminal:new({ cmd = 'lazydocker', hidden = true, direction = 'float' })
+local horizontal = Terminal:new({ direction = 'horizontal' })
+local float = Terminal:new({ direction = 'float' })
+local lazydocker = Terminal:new({ cmd = 'lazydocker', hidden = true, direction = 'float' })
 
--- mappings['terminal'] = {
-	-- ['<Leader>tt'] = { mode = 'n', action = function() horizontal:toggle() end, label = 'Toggle terminal' },
-	-- ['<Leader>td'] = { mode = 'n', action = function() lazydocker:toggle() end, label = 'Toggle lazydocker' },
-	-- ['<C-m>'] = { mode = { 'n', 't' }, action = function() float:toggle() end, label = 'Toggle float terminal' },
--- }
+mappings['terminal'] = {
+	['<Leader>tt'] = { mode = 'n', action = function() horizontal:toggle() end, label = 'Toggle terminal' },
+	['<Leader>td'] = { mode = 'n', action = function() lazydocker:toggle() end, label = 'Toggle lazydocker' },
+	['<C-n>'] = { mode = { 'n', 't' }, action = function() float:toggle() end, label = 'Toggle float terminal' },
+}
 
 
 ------------------------------------------------------------------------------------------
