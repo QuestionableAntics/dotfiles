@@ -16,9 +16,5 @@ return {
 	-- Uses telescope for the native ui-select
 	'nvim-telescope/telescope-ui-select.nvim',
 
-	{ 'rmagatti/session-lens',
-		config = function()
-			require('session-lens').setup { path_display = { 'shorten' } }
-		end
-	},
+	-- ,
 }

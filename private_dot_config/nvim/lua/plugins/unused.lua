@@ -44,7 +44,22 @@ local Unused_local = {
 		keys = { '<space>m', '<space>j', '<space>s' },
 		dependencies = { 'nvim-treesitter/nvim-treesitter' },
 		config = function() require('treesj').setup({}) end,
-	}
+	},
+
+	-- Pets
+	{ 'giusgad/pets.nvim',
+		dependencies = {
+			'MunifTanjim/nui.nvim',
+			'edluffy/hologram.nvim',
+		},
+		config = function() require('pets').setup() end,
+	},
+
+	{ 'rmagatti/session-lens',
+		config = function()
+			require('session-lens').setup { path_display = { 'shorten' } }
+		end
+	},
 }
 
 return {}

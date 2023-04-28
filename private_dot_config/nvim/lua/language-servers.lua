@@ -74,6 +74,8 @@ local server_configs = {
 	pyright = {},
 
 	bashls = {},
+
+	-- vtsls = {},
 }
 
 for server, config in pairs(server_configs) do
@@ -86,11 +88,19 @@ end
 -- Typescript Specific Setup
 ------------------------------------------------------------------------------------------
 
+-- local lspconfig_configs = require('lspconfig.configs')
+-- local vtsls = require('vtsls')
+-- lspconfig_configs.vtsls = vtsls.lspconfig
+
+-- require("lspconfig.configs").vtsls = require("vtsls").lspconfig -- set default server config
+-- require("lspconfig").vtsls.setup({ --[[ your custom server config here ]] })
+
 local tsserver = {
 	root_dir = util.root_pattern("package.json"),
 	init_options = {
 		lint = true,
 	},
 }
+
 
 require('typescript').setup(coq.lsp_ensure_capabilities(tsserver))

@@ -91,7 +91,6 @@ mappings['random'] = {
 
 local telescope = require('telescope')
 local telescope_builtin = require('telescope.builtin')
-local session_lens = require('session-lens')
 
 mappings['fuzzy_finder'] = {
 	['<Leader>ff'] = { mode = 'n', action = telescope_builtin.find_files, label = 'Find files' },
@@ -100,8 +99,6 @@ mappings['fuzzy_finder'] = {
 	['<Leader>fh'] = { mode = 'n', action = telescope_builtin.help_tags, label = 'Find Help Tags' },
 	['<Leader>fo'] = { mode = 'n', action = telescope_builtin.oldfiles, label = 'Find Old Files' },
 	['<Leader>fl'] = { mode = 'n', action = telescope_builtin.resume, label = 'Last Search Results' },
-	-- ['<Leader>fp'] = { mode = 'n', action = telescope.extensions.project.project, label = 'Last Search Results' },
-	['<Leader>fp'] = { mode = 'n', action = session_lens.search_session, label = 'Last Search Results' },
 	['<Leader>fxd'] = { mode = 'n', action = function() telescope_builtin.diagnostics { bufnr = 0 } end,
 		label = 'Find Diagnostics in Focused Buffer' },
 	['<Leader>fxw'] = { mode = 'n', action = telescope_builtin.diagnostics, label = 'Find Diagnostics in Open Buffers' },
