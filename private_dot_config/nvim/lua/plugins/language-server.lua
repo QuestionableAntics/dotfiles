@@ -12,6 +12,9 @@ return {
 		dependencies = { 'williamboman/mason-lspconfig.nvim' }
 	},
 
+	-- Alternative Typescript LSP
+	'yioneko/nvim-vtsls',
+
 	-- Make working with TS LS better
 	'jose-elias-alvarez/typescript.nvim',
 }
