@@ -83,15 +83,4 @@ return {
 
 	-- Change the surroundings
 	'tpope/vim-surround',
-
-	-- Refactoring capabilities
-	{ 'ThePrimeagen/refactoring.nvim',
-		config = function()
-			require('refactoring').setup {}
-		end,
-		depenencies = {
-			'nvim-treesitter/nvim-treesitter',
-			'nvim-lua/plenary.nvim',
-		},
-	},
 }

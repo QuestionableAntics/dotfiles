@@ -5,17 +5,6 @@ return {
 	-- coq.nvim dependency
 	{ 'ms-jpq/coq.artifacts', branch = 'artifacts' },
 
-	-- coq.nvim snippets and other third party sources of completion
-	{ 'ms-jpq/coq.thirdparty',
-		config = function()
-			require('coq_3p') {
-				{ src = 'vim_dadbod_completion', short_name = 'DB' },
-				{ src = 'dap' },
-				-- { src = 'copilot', short_name = 'COP', accept_key = '<C-J>'}
-			}
-		end
-	},
-
 	-- Code actions lightbulb
 	'kosayoda/nvim-lightbulb',
 

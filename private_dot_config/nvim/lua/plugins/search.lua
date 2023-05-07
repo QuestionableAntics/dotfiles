@@ -10,11 +10,6 @@ return {
 	-- Telescope fzf integration
 	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 
-	-- dap integration
-	'nvim-telescope/telescope-dap.nvim',
-
 	-- Uses telescope for the native ui-select
 	'nvim-telescope/telescope-ui-select.nvim',
-
-	-- ,
 }

@@ -38,6 +38,11 @@ local Unused_local = {
 	-- Remote environment interactions
 	'miversen33/netman.nvim',
 
+	--  'jamestthompson3/nvim-remote-containers',
+	{ 'esensar/nvim-dev-container',
+		config = function() require('devcontainer').setup {} end
+	},
+
 	-- Toggle split/join
 	-- Does not support C# currently
 	{ 'Wansmer/treesj',
@@ -60,6 +65,56 @@ local Unused_local = {
 			require('session-lens').setup { path_display = { 'shorten' } }
 		end
 	},
+
+	-- Per project navigation
+	{ 'ThePrimeagen/harpoon',
+		config = function()
+			require('harpoon').setup {
+				menu = {
+					width = 100
+				}
+			}
+		end
+	},
+
+	{ 'michaelb/sniprun',
+		config = function() require('sniprun').setup {} end,
+		build = 'bash install.sh',
+	},
+
+	-- Refactoring capabilities
+	{ 'ThePrimeagen/refactoring.nvim',
+		config = function()
+			require('refactoring').setup {}
+		end,
+		depenencies = {
+			'nvim-treesitter/nvim-treesitter',
+			'nvim-lua/plenary.nvim',
+		},
+	},
+
+	-- null-ls bridge for Mason
+	{ 'jay-babu/mason-null-ls.nvim',
+		config = function() require('mason-null-ls').setup() end,
+	},
+
+	-- Language server for alternative completions provided through LSP
+	'jose-elias-alvarez/null-ls.nvim',
+
+	-- dap integration
+	'nvim-telescope/telescope-dap.nvim',
+
+	-- Folding
+	{ 'anuvyklack/pretty-fold.nvim',
+		config = function() require('pretty-fold').setup {} end,
+	},
+
+	-- Fold preview
+	{ 'anuvyklack/fold-preview.nvim',
+		config = function() require('fold-preview').setup() end,
+		dependencies = { 'anuvyklack/keymap-amend.nvim' },
+	},
+
 }
 
 return {}

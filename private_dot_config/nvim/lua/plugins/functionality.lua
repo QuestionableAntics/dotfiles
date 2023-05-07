@@ -15,17 +15,6 @@ return {
 		end
 	},
 
-	-- Per project navigation
-	{ 'ThePrimeagen/harpoon',
-		config = function()
-			require('harpoon').setup {
-				menu = {
-					width = 100
-				}
-			}
-		end
-	},
-
 	-- Additional treesitter functionality (in/around function/class/etc. operations)
 	'nvim-treesitter/nvim-treesitter-textobjects',
 
@@ -44,33 +33,12 @@ return {
 		config = function() require('bqf').setup {} end
 	},
 
-	{ 'michaelb/sniprun',
-		config = function() require('sniprun').setup {} end,
-		build = 'bash install.sh',
-	},
-
-	--  'jamestthompson3/nvim-remote-containers',
-	{ 'esensar/nvim-dev-container',
-		config = function() require('devcontainer').setup {} end
-	},
-
-	-- Folding
-	{ 'anuvyklack/pretty-fold.nvim',
-		config = function() require('pretty-fold').setup {} end,
-	},
-
-	-- Fold preview
-	{ 'anuvyklack/fold-preview.nvim',
-		config = function() require('fold-preview').setup() end,
-		dependencies = { 'anuvyklack/keymap-amend.nvim' },
-	},
-
 	-- Tabline
 	{ 'nanozuki/tabby.nvim',
 		config = function() require('tabby').setup {} end
 	},
 
-	-- Better terminal (wraps text, opens terminal with command, floating buffers)
+	-- Better terminal (opens terminal with command, floating buffers)
 	{ 'akinsho/toggleterm.nvim',
 		version = '*',
 		config = true

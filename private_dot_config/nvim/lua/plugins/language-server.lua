@@ -12,14 +12,6 @@ return {
 		dependencies = { 'williamboman/mason-lspconfig.nvim' }
 	},
 
-	-- Language server for alternative completions provided through LSP
-	'jose-elias-alvarez/null-ls.nvim',
-
 	-- Make working with TS LS better
 	'jose-elias-alvarez/typescript.nvim',
-
-	-- null-ls bridge for Mason
-	{ 'jay-babu/mason-null-ls.nvim',
-		config = function() require('mason-null-ls').setup() end,
-	},
 }
