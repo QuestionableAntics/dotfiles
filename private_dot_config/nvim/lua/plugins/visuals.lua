@@ -53,12 +53,4 @@ return {
 			'rcarriga/nvim-notify',
 		}
 	},
-
-	-- Pretty LSP interface
-	{ 'glepnir/lspsaga.nvim',
-		event = 'BufRead',
-		config = function()
-			require('lspsaga').setup({})
-		end,
-	},
 }

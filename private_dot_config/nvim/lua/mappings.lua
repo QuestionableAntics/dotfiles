@@ -17,11 +17,8 @@ local mappings = {}
 -- Miscellaneous
 ------------------------------------------------------------------------------------------
 
--- local sniprun = require('sniprun')
-
 mappings['random'] = {
 	['<esc>'] = { mode = 'n', action = '<esc>:noh<CR>', label = 'Remove Highlights' },
-	-- ['<esc>'] = { mode = 'n', action = '<esc>:noh<CR>', opts = { desc = 'Remove Highlights' } },
 	['<Leader>v'] = { mode = 'n', action = '<cmd>CHADopen<cr>', label = 'Open file explorer' },
 
 	-- change pane by direction
@@ -35,9 +32,6 @@ mappings['random'] = {
 	['+'] = { mode = 'n', action = ':vertical resize +15<CR>', label = 'Vertical Size Increase' },
 	['='] = { mode = 'n', action = ':resize +5<CR>', label = 'Horizontal Size Increase' },
 	['-'] = { mode = 'n', action = ':resize -5<CR>', label = 'Horizontal Size Decrease' },
-
-	-- snip run
-	-- ['m'] = { mode = 'v', action = function() sniprun.run('v') end, label = 'Sniprun Visual' },
 
 	-- copy path to file from CWD with lua
 	['cp'] = {
@@ -195,13 +189,15 @@ mappings['lsp'] = {
 	-- Builtin
 	['gD'] = { mode = 'n', action = vim.lsp.buf.declaration, label = 'Go to declaration' },
 	-- ['gi'] = { mode = 'n', action = vim.lsp.buf.implementation, label = 'Go to implementation' },
-	-- ['gd'] = { mode = 'n', action = vim.lsp.buf.definition, label = 'Go to definition' },
+	['gd'] = { mode = 'n', action = vim.lsp.buf.definition, label = 'Go to definition' },
 	['gs'] = { mode = 'n', action = vim.lsp.buf.signature_help, label = 'Signature help' },
-	-- ['gr'] = { mode = 'n', action = vim.lsp.buf.rename, label = 'Rename' },
+	['gr'] = { mode = 'n', action = vim.lsp.buf.rename, label = 'Rename' },
 	['gt'] = { mode = 'n', action = vim.lsp.buf.type_definition, label = 'Go to type definition' },
+	['gh'] = { mode = 'n', action = vim.lsp.buf.references, label =  'Find references' },
+	['ca'] = { mode = { 'n', 'v' }, action = vim.lsp.buf.code_action, label = 'Code Action' },
 	['K'] = { mode = 'n', action = vim.lsp.buf.hover, label = 'Hover' },
-	-- ['[e'] = { mode = 'n', action = vim.diagnostic.goto_prev, label = 'Previous diagnostic' },
-	-- [']e'] = { mode = 'n', action = vim.diagnostic.goto_next, label = 'Next diagnostic' },
+	['[e'] = { mode = 'n', action = vim.diagnostic.goto_prev, label = 'Previous diagnostic' },
+	[']e'] = { mode = 'n', action = vim.diagnostic.goto_next, label = 'Next diagnostic' },
 	['<Leader>gw'] = { mode = 'n', action = vim.lsp.buf.document_symbol, label = 'Document symbols' },
 	['<Leader>gW'] = { mode = 'n', action = vim.lsp.buf.workspace_symbol, label = 'Workspace symbols' },
 	['<Leader>='] = { mode = 'n', action = vim.lsp.buf.format, label = 'Formatting' },
@@ -210,20 +206,6 @@ mappings['lsp'] = {
 	-- Typescript Specific
 	['<Leader>gi'] = { mode = 'n', action = function() typescript.actions.addMissingImports() end, label = 'Import Current' },
 	['<Leader>rtf'] = { mode = 'n', action = ':TypescriptRenameFile<CR>', label = 'Rename File' },
-
-	-- LSP Saga
-	['<Leader>o'] = { mode = 'n', action = '<cmd>Lspsaga outline<CR>', label = 'Outline' },
-	['gh'] = { mode = 'n', action = '<cmd>Lspsaga lsp_finder<CR>', label =  'Find references' },
-	['ca'] = { mode = { 'n', 'v' }, action = '<cmd>Lspsaga code_action<CR>', label = 'Code Action' },
-	['gr'] = { mode = 'n', action = '<cmd>Lspsaga rename<CR>', label = 'Rename' },
-	['gp'] = { mode = 'n', action = '<cmd>Lspsaga peek_definition<CR>', label = 'Peek Definition' },
-	['gd'] = { mode = 'n', action = '<cmd>Lspsaga goto_definition<CR>', label = 'Peek Definition' },
-	-- ['K'] = { mode = 'n', action = '<cmd>Lspsaga hover_doc<CR>', label = 'Hover' },
-	['[e'] = { mode = 'n', action = '<cmd>Lspsaga diagnostic_jump_prev<CR>', label = 'Previous Diagnostic' },
-	[']e'] = { mode = 'n', action = '<cmd>Lspsaga diagnostic_jump_next<CR>', label = 'Next Diagnostic' },
-	['<Leader>ci'] = { mode = 'n', action = '<cmd>Lspsaga incoming_calls<CR>', label = 'Incoming Calls' },
-	['<Leader>co'] = { mode = 'n', action = '<cmd>Lspsaga outgoing_calls<CR>', label = 'Incoming Calls' },
-	['<Leader>sb'] = { mode = 'n', action = '<cmd>Lspsaga show_buf_diagnostics<CR>', label = 'Show Buffer Diagnostics' },
 }
 
 
@@ -289,7 +271,13 @@ local Terminal = require('toggleterm.terminal').Terminal
 
 local horizontal = Terminal:new({ direction = 'horizontal' })
 local float = Terminal:new({ direction = 'float' })
-local lazydocker = Terminal:new({ cmd = 'lazydocker', hidden = true, direction = 'float' })
+local lazydocker = Terminal:new({
+	cmd = 'lazydocker',
+	hidden = true,
+	direction = 'float',
+	on_open = function(_) vim.keymap.del('t', 'jk') end,
+	on_close = function(_) map('t', 'jk', [[<C-\><C-n>]], { noremap = true }) end,
+})
 
 mappings['terminal'] = {
 	['<Leader>tt'] = { mode = 'n', action = function() horizontal:toggle() end, label = 'Toggle terminal' },
