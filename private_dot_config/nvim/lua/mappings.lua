@@ -19,7 +19,7 @@ local mappings = {}
 
 mappings['random'] = {
 	['<esc>'] = { mode = 'n', action = '<esc>:noh<CR>', label = 'Remove Highlights' },
-	['<Leader>v'] = { mode = 'n', action = '<cmd>CHADopen<cr>', label = 'Open file explorer' },
+	['<Leader>v'] = { mode = 'n', action = ':RnvimrToggle<cr>', label = 'Open Ranger' },
 
 	-- change pane by direction
 	['<C-j>'] = { mode = 'n', action = '<C-W>j', label = 'Go to pane underneath' },
@@ -70,6 +70,9 @@ mappings['random'] = {
 
 	-- Delete all buffers except current
 	['<Leader>bd'] = { mode = 'n', action = '<cmd>%bd|e#<cr>', label = 'Delete all buffers except current' },
+
+	-- Change in word on enter
+	['<cr>'] = { mode = 'n', action = 'ciw', label = 'Change inner word' },
 }
 
 
@@ -278,12 +281,32 @@ local lazydocker = Terminal:new({
 	on_open = function(_) vim.keymap.del('t', 'jk') end,
 	on_close = function(_) map('t', 'jk', [[<C-\><C-n>]], { noremap = true }) end,
 })
+local lazygit = Terminal:new({
+	cmd = 'lazygit',
+	hidden = true,
+	direction = 'float',
+	on_open = function(_) vim.keymap.del('t', 'jk') end,
+	on_close = function(_) map('t', 'jk', [[<C-\><C-n>]], { noremap = true }) end,
+})
 
 mappings['terminal'] = {
 	['<Leader>tt'] = { mode = 'n', action = function() horizontal:toggle() end, label = 'Toggle terminal' },
 	['<Leader>td'] = { mode = 'n', action = function() lazydocker:toggle() end, label = 'Toggle lazydocker' },
+	['<Leader>tg'] = { mode = 'n', action = function() lazygit:toggle() end, label = 'Toggle lazygit' },
 	['<C-n>'] = { mode = { 'n', 't' }, action = function() float:toggle() end, label = 'Toggle float terminal' },
 }
+
+
+------------------------------------------------------------------------------------------
+-- AI
+------------------------------------------------------------------------------------------
+
+mappings['ai'] = {
+	['<Leader>ait'] = { mode = 'n', action = ':NeoAIToggle<CR>', label = 'Toggle Neo AI' },
+	['ai'] = { mode = 'v', action = ':NeoAIContext<CR>', label = 'Inject visual selection as context' },
+}
+
+stems['a'] = { label = 'AI' }
 
 
 ------------------------------------------------------------------------------------------

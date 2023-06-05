@@ -75,6 +75,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	callback = function()
 		local mark = vim.api.nvim_buf_get_mark(0, '"')
 		local lcount = vim.api.nvim_buf_line_count(0)
+
 		if mark[1] > 0 and mark[1] <= lcount then
 			pcall(vim.api.nvim_win_set_cursor, 0, mark)
 		end
@@ -117,4 +118,13 @@ vim.api.nvim_create_autocmd("FileType", {
 local lightbulb = require('nvim-lightbulb')
 vim.api.nvim_create_autocmd({"CursorHold, CursorHoldI"}, {
 	callback = lightbulb.update_lightbulb
+})
+
+
+-- Unmap jk in ranger buffer
+vim.api.nvim_create_autocmd("Filetype", {
+	pattern = { "rnvimr" },
+	callback = function()
+		vim.api.nvim_buf_set_keymap(0, "t", "j", "j", {noremap = true, silent = true, nowait = true})
+	end
 })
