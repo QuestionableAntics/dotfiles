@@ -303,8 +303,11 @@ mappings['terminal'] = {
 
 mappings['ai'] = {
 	['<Leader>ait'] = { mode = 'n', action = ':NeoAIToggle<CR>', label = 'Toggle Neo AI' },
-	['ai'] = { mode = 'v', action = ':NeoAIContext<CR>', label = 'Inject visual selection as context' },
+	-- ['ai'] = { mode = 'v', action = ':NeoAIContext<CR>', label = 'Inject visual selection as context' },
 }
+
+-- The above mapping interferes with a in normal mode for some reason
+map('v', 'ai', ':NeoAIContext<CR>', { noremap = true })
 
 stems['a'] = { label = 'AI' }
 

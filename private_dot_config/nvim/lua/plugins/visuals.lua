@@ -1,12 +1,13 @@
 return {
 	-- More pretty icons
-	'kyazdani42/nvim-web-devicons',
+	'nvim-tree/nvim-web-devicons',
 
 	-- highlight matching html tags
 	'gregsexton/MatchTag',
 
 	-- VS Code theme
-	{ 'Mofiqul/vscode.nvim',
+	{
+		'Mofiqul/vscode.nvim',
 		config = function()
 			local vscode = require('vscode')
 			vscode.setup {
@@ -18,8 +19,9 @@ return {
 	},
 
 	-- Nice status bar
-	{ 'nvim-lualine/lualine.nvim',
-		dependencies = { 'kyazdani42/nvim-web-devicons' },
+	{
+		'nvim-lualine/lualine.nvim',
+		dependencies = { 'nvim-tree/nvim-web-devicons' },
 		config = function()
 			require('lualine').setup {
 				options = { theme = require('lualine.themes.onedark') },
@@ -33,7 +35,8 @@ return {
 	},
 
 	-- Virtual text to add indentation guides
-	{ 'lukas-reineke/indent-blankline.nvim',
+	{
+		'lukas-reineke/indent-blankline.nvim',
 		config = function()
 			require('indent_blankline').setup {
 				show_current_context = true,
@@ -43,7 +46,8 @@ return {
 	},
 
 	-- A ton of pretty UI things
-	{ 'folke/noice.nvim',
+	{
+		'folke/noice.nvim',
 		config = function()
 			require('noice').setup()
 			require('notify').setup { background_colour = '#000000' }

@@ -7,9 +7,17 @@ return {
 			-- auto pairing of parentheses, brackets, etc.
 			require('mini.pairs').setup {}
 			-- comments
-			require('mini.comment').setup {}
+			-- require('mini.comment').setup {}
 			-- additional targets to jump to next/prev
 			require('mini.bracketed').setup {}
+		end
+	},
+
+	-- Commenting
+	{
+		'numToStr/Comment.nvim',
+		config = function()
+			require('Comment').setup()
 		end
 	},
 

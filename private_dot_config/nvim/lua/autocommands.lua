@@ -1,9 +1,24 @@
--- Startup autocommands
+------------------------------------------------------------------------------------------
+-- Startup
+------------------------------------------------------------------------------------------
+
+-- Start COQ asap
 vim.api.nvim_create_autocmd(
 	"VimEnter",
 	{ callback = function() vim.cmd [[ :COQnow ]] end }
 )
 
+-- This is only used for Ranger/rnvimr because there were some bizarrely long paths for the address otherwise
+-- May need to remove this or fork rnvimr to look at a different environment variable if other problems arise
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		vim.env.NVIM_LISTEN_ADDRESS = vim.fn.serverstart("localhost:0")
+	end
+})
+
+------------------------------------------------------------------------------------------
+-- Other
+------------------------------------------------------------------------------------------
 
 -- Highlight yanked text on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -30,16 +45,6 @@ vim.api.nvim_create_autocmd(
 	},
 	{ command = "checktime" }
 )
-
-
--- Run lint on save
--- vim.api.nvim_create_autocmd('BufWritePre', {
--- 	callback = function()
--- 		vim.cmd [[ EslintFixAll ]]
--- 	end,
--- 	group = vim.api.nvim_create_augroup('Lint', { clear = true }),
--- 	pattern = '*',
--- })
 
 
 -- Show cursor line only in active window
