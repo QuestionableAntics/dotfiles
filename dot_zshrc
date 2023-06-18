@@ -47,9 +47,6 @@ export KEYTIMEOUT=1
 
 ZSH_DISABLE_COMPFIX="true"
 
-# git account switch
-source "$HOME/.git-acc"
-
 # set default editor to nvim
 export EDITOR="nvim"
 export NVIM_LISTEN_ADDRESS="/tmp/nvimsocket"
