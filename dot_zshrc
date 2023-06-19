@@ -53,10 +53,8 @@ export LC_ALL=en_US.UTF-8
 
 # Stuff to keep at the bottom of the file.
 eval $(thefuck --alias)
-eval "$(direnv hook zsh)"
-
-export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
 
 . /usr/local/opt/asdf/libexec/asdf.sh
+# . $HOME/.asdf/asdf.sh
 
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
