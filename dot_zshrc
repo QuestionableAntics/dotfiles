@@ -20,8 +20,6 @@ export PATH="$HOME/Library/Application Support/neovim/bin:$PATH"
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
-export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
 
 export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
 
@@ -31,7 +29,6 @@ export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
 export KEYTIMEOUT=1
 
 # This loads NVM
@@ -54,7 +51,7 @@ export LC_ALL=en_US.UTF-8
 # Stuff to keep at the bottom of the file.
 eval $(thefuck --alias)
 
-. /usr/local/opt/asdf/libexec/asdf.sh
-# . $HOME/.asdf/asdf.sh
+# . /usr/local/opt/asdf/libexec/asdf.sh
+. $HOME/.asdf/asdf.sh
 
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
