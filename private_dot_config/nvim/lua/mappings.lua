@@ -238,11 +238,7 @@ stems['<Leader>h'] = { label = 'Git' }
 -- Motions
 ------------------------------------------------------------------------------------------
 
-local hop = require('hop')
-
 mappings['motion'] = {
-	['s'] = { mode = '', action = hop.hint_char2, label = 'Hint character', opts = { disable = false } },
-
 	-- Quicker moving to front and back of lines
 	['H'] = { mode = '', action = '^', label = 'Move to start of line' },
 	['L'] = { mode = '', action = '$', label = 'Move to end of line' },

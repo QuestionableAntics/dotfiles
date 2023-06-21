@@ -3,22 +3,36 @@ return {
 	{
 		'kevinhwang91/rnvimr',
 		config = function()
-			vim.g.rnvimr_ranger_cmd = { 'ranger', '--cmd=set draw_borders both' }
-			-- vim.g.rnvimr_enable_bw = 1
+			vim.g.rnvimr_ranger_cmd = {
+				'ranger',
+				'--cmd=set draw_borders both',
+				'--cmd=set show_hidden true',
+			}
 			vim.g.rnvimr_enable_picker = 1
 			vim.g.rnvimr_enable_ex = 1
 		end,
 	},
 
-	-- Fast motions
+	-- Fast Motions
 	{
-		'phaazon/hop.nvim',
-		config = function()
-			require('hop').setup {
-				-- Themes will overwrite this sometimes, this ensures that hop greys out non highlighted letters
-				create_hl_autocmd = true
-			}
-		end
+		"folke/flash.nvim",
+		keys = {
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					-- default options: exact mode, multi window, all directions, with a backdrop
+					require("flash").jump()
+				end,
+			},
+			{
+				"S",
+				mode = { "o", "x" },
+				function()
+					require("flash").treesitter()
+				end,
+			},
+		},
 	},
 
 	-- Additional treesitter functionality (in/around function/class/etc. operations)
@@ -53,4 +67,10 @@ return {
 		version = '*',
 		config = true
 	},
+
+	-- Open paired files
+	-- {
+	-- 	'rgroli/other.nvim',
+	-- 	config = function() require('other-nvim').setup {} end
+	-- }
 }
