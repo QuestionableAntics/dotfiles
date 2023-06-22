@@ -186,29 +186,9 @@ local server_configs = {
 
 	bashls = {},
 
-	vtsls = {},
-
 	gopls = {},
 }
 
 for server, config in pairs(server_configs) do
 	lspconfig[server].setup(config)
 end
-
-
-------------------------------------------------------------------------------------------
--- Typescript Specific Setup
-------------------------------------------------------------------------------------------
-
-local util = require("lspconfig.util")
-
-require('lspconfig.configs').vtsls = require('vtsls').lspconfig
-
-local tsserver = {
-	root_dir = util.root_pattern("package.json"),
-	init_options = {
-		lint = true,
-	},
-}
-
-require('typescript').setup(tsserver)

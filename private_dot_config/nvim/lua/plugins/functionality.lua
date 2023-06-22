@@ -9,6 +9,7 @@ return {
 				'--cmd=set show_hidden true',
 			}
 			vim.g.rnvimr_enable_picker = 1
+			-- vim.g.rnvimr_enable_bw = 1
 			vim.g.rnvimr_enable_ex = 1
 		end,
 	},
@@ -20,17 +21,13 @@ return {
 			{
 				"s",
 				mode = { "n", "x", "o" },
-				function()
-					-- default options: exact mode, multi window, all directions, with a backdrop
-					require("flash").jump()
-				end,
+				-- default options: exact mode, multi window, all directions, with a backdrop
+				function() require("flash").jump() end,
 			},
 			{
 				"S",
 				mode = { "o", "x" },
-				function()
-					require("flash").treesitter()
-				end,
+				function() require("flash").treesitter() end,
 			},
 		},
 	},

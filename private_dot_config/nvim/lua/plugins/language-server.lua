@@ -25,16 +25,19 @@ return {
 					"jsonls",
 					"lua_ls",
 					"sqls",
-					"vtsls",
 				}
 			}
 		end,
 		dependencies = { 'williamboman/mason-lspconfig.nvim' }
 	},
 
-	-- Alternative Typescript LSP
-	'yioneko/nvim-vtsls',
-
-	-- Make working with TS LS better
-	'jose-elias-alvarez/typescript.nvim',
+	-- direct integration with tsserver
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"neovim/nvim-lspconfig",
+		},
+		opts = {},
+	}
 }

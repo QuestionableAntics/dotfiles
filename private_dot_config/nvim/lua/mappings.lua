@@ -186,8 +186,6 @@ end
 -- LSP Mappings
 ------------------------------------------------------------------------------------------
 
-local typescript = require('typescript')
-
 mappings['lsp'] = {
 	-- Builtin
 	['gD'] = { mode = 'n', action = vim.lsp.buf.declaration, label = 'Go to declaration' },
@@ -205,10 +203,6 @@ mappings['lsp'] = {
 	['<Leader>gW'] = { mode = 'n', action = vim.lsp.buf.workspace_symbol, label = 'Workspace symbols' },
 	['<Leader>='] = { mode = 'n', action = vim.lsp.buf.format, label = 'Formatting' },
 	['<Leader>-'] = { mode = 'n', action = vim.diagnostic.setloclist, label = 'Diagnostic Locations' },
-
-	-- Typescript Specific
-	['<Leader>gi'] = { mode = 'n', action = function() typescript.actions.addMissingImports() end, label = 'Import Current' },
-	['<Leader>rtf'] = { mode = 'n', action = ':TypescriptRenameFile<CR>', label = 'Rename File' },
 }
 
 

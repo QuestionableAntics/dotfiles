@@ -48,7 +48,6 @@ export NVIM_LISTEN_ADDRESS="/tmp/nvimsocket"
 
 export LC_ALL=en_US.UTF-8
 
-# . /usr/local/opt/asdf/libexec/asdf.sh
 . $HOME/.asdf/asdf.sh
 
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
