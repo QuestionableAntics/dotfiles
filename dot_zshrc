@@ -45,6 +45,7 @@ ZSH_DISABLE_COMPFIX="true"
 # set default editor to nvim
 export EDITOR="nvim"
 export NVIM_LISTEN_ADDRESS="/tmp/nvimsocket"
+alias v="nvim"
 
 export LC_ALL=en_US.UTF-8
 
