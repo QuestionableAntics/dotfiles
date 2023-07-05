@@ -71,6 +71,11 @@ return {
 		config = true
 	},
 
+	{
+		"arnaupv/nvim-devcontainer-cli",
+		opts = {}
+	},
+
 	-- Open paired files
 	-- {
 	-- 	'rgroli/other.nvim',

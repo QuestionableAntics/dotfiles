@@ -42,6 +42,7 @@ ZSH_DISABLE_COMPFIX="true"
 export EDITOR="nvim"
 export NVIM_LISTEN_ADDRESS="/tmp/nvimsocket"
 alias v="nvim"
+alias nconf="cd $HOME/.config/nvim"
 
 export LC_ALL=en_US.UTF-8
 
