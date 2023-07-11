@@ -98,7 +98,7 @@ wo.nu = true
 ------------------------------------------------------------------------------------------
 
 -- where python packages used by plugins are installed to
-vim.g.python3_host_prog = os.getenv('HOME') .. [[/.pyenv/versions/3.9.7/envs/nvim/bin/python3.9/]]
+vim.g.python3_host_prog = os.getenv('HOME') .. '/.pyenv/versions/3.9.12/envs/nvim2/bin/python'
 
 -- No noise please (no sound effects for errors)
 opt.errorbells = false

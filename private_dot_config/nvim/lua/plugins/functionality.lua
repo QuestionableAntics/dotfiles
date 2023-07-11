@@ -1,17 +1,18 @@
 return {
-	-- Ranger integration
+	-- File Explorer
 	{
-		'kevinhwang91/rnvimr',
+		"lmburns/lf.nvim",
 		config = function()
-			vim.g.rnvimr_ranger_cmd = {
-				'ranger',
-				'--cmd=set draw_borders both',
-				'--cmd=set show_hidden true',
-			}
-			vim.g.rnvimr_enable_picker = 1
-			-- vim.g.rnvimr_enable_bw = 1
-			vim.g.rnvimr_enable_ex = 1
+			-- This feature will not work if the plugin is lazy-loaded
+			vim.g.lf_netrw = 1
+
+			require("lf").setup({
+				escape_quit = false,
+				border = "rounded",
+				-- highlights = {FloatBorder = {guifg = require("kimbox.palette").colors.magenta}}
+			})
 		end,
+		dependencies = { "plenary.nvim", "toggleterm.nvim" }
 	},
 
 	-- Fast Motions

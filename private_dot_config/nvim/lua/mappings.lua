@@ -19,7 +19,7 @@ local mappings = {}
 
 mappings['random'] = {
 	['<esc>'] = { mode = 'n', action = '<esc>:noh<CR>', label = 'Remove Highlights' },
-	['<Leader>v'] = { mode = 'n', action = ':RnvimrToggle<cr>', label = 'Open Ranger' },
+	['<Leader>v'] = { mode = 'n', action = ':Lf<cr>', label = 'Open File Explorer' },
 
 	-- change pane by direction
 	['<C-j>'] = { mode = 'n', action = '<C-W>j', label = 'Go to pane underneath' },
@@ -33,9 +33,10 @@ mappings['random'] = {
 	['='] = { mode = 'n', action = ':resize +5<CR>', label = 'Horizontal Size Increase' },
 	['-'] = { mode = 'n', action = ':resize -5<CR>', label = 'Horizontal Size Decrease' },
 
-	-- copy path to file from CWD with lua
+	-- copy path to file from CWD
 	['cp'] = {
-		mode = 'n', action = function()
+		mode = 'n',
+		action = function()
 			local path = vim.fn.expand('%')
 			local cwd = vim.fn.getcwd()
 			local relative_path = path:gsub(cwd, '')

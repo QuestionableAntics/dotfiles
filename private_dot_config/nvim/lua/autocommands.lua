@@ -8,13 +8,6 @@ vim.api.nvim_create_autocmd(
 	{ callback = function() vim.cmd [[ :COQnow ]] end }
 )
 
--- This is only used for Ranger/rnvimr because there were some bizarrely long paths for the address otherwise
--- May need to remove this or fork rnvimr to look at a different environment variable if other problems arise
-vim.api.nvim_create_autocmd("VimEnter", {
-	callback = function()
-		vim.env.NVIM_LISTEN_ADDRESS = vim.fn.serverstart("localhost:0")
-	end
-})
 
 ------------------------------------------------------------------------------------------
 -- Other
@@ -108,28 +101,17 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
--- On TermEnter, set term able to be killed by wqa
--- vim.api.nvim_create_autocmd("TermOpen",  {
--- 	callback = function()
--- 		vim.cmd [[
--- 			command Z wa | qa silent
--- 			cabbrev wqa Z
--- 		]]
--- 	end
--- })
-
-
 -- Show code action lightbulb on cursorhold
 local lightbulb = require('nvim-lightbulb')
-vim.api.nvim_create_autocmd({"CursorHold, CursorHoldI"}, {
+vim.api.nvim_create_autocmd({ "CursorHold, CursorHoldI" }, {
 	callback = lightbulb.update_lightbulb
 })
 
 
 -- Unmap jk in ranger buffer
 vim.api.nvim_create_autocmd("Filetype", {
-	pattern = { "rnvimr" },
+	pattern = { "rnvimr", "lfterm" },
 	callback = function()
-		vim.api.nvim_buf_set_keymap(0, "t", "j", "j", {noremap = true, silent = true, nowait = true})
+		vim.api.nvim_buf_set_keymap(0, "t", "j", "j", { noremap = true, silent = true, nowait = true })
 	end
 })
