@@ -15,7 +15,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
-export PATH="$HOME/.asdf/installs/golang/1.20.5/packages/bin:$PATH"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -43,7 +42,6 @@ alias nconf="cd $HOME/.config/nvim"
 
 export LC_ALL=en_US.UTF-8
 
-. $HOME/.asdf/asdf.sh
 eval "$($HOME/.cargo/bin/rtx activate zsh)"
 
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
