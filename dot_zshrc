@@ -44,6 +44,7 @@ alias nconf="cd $HOME/.config/nvim"
 export LC_ALL=en_US.UTF-8
 
 . $HOME/.asdf/asdf.sh
+eval "$($HOME/.cargo/bin/rtx activate zsh)"
 
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
 
