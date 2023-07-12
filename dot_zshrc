@@ -15,7 +15,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
-export PATH="$HOME/.asdf/shims/go/bin:$PATH"
+export PATH="$HOME/.asdf/installs/golang/1.20.5/packages/bin:$PATH"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"

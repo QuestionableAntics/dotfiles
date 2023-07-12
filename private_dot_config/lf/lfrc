@@ -1,2 +1,3 @@
-# set previewer ~/.config/lf/previewer
+set previewer bat
 set hidden
+set drawbox

@@ -10,6 +10,7 @@ return {
 			-- require('mini.comment').setup {}
 			-- additional targets to jump to next/prev
 			require('mini.bracketed').setup {}
+			require('mini.files').setup {}
 		end
 	},
 
