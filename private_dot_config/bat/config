@@ -25,3 +25,6 @@
 #--map-syntax ".ignore:Git Ignore"
 
 --color=always
+--theme="Visual Studio Dark+"
+--italic-text=always
+--decorations=always
