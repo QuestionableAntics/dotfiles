@@ -1,3 +1,21 @@
+# https://github.com/gokcehan/lf/wiki/Tips
+# https://github.com/laluxx/dotfiles/blob/main/.config/lf/lfrc
+set shell zsh
+set shellopts '-euy'
 set previewer bat
 set hidden
 set drawbox
+set color256
+set icons
+
+cmd delete ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	printf "%s\n\t" "$fx"
+	printf "delete?[y/N]"
+	read ans
+	[ $ans = "y" ] && rm -rf $fx
+}}
+
+map D delete
+map a push :mkdir<space>
