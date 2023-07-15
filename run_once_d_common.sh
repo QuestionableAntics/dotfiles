@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 eval "$(rtx env -s zsh)"
+source $HOME/.zshrc
 
 rtx plugin add neovim
 rtx plugin add dotnet-core https://github.com/emersonsoares/asdf-dotnet-core.git

@@ -11,7 +11,7 @@ pip install pynvim
 curl https://rtx.pub/install.sh | sh
 curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 # cargo binstall rtx-cli -y
-# source $HOME/.zshrc
+source $HOME/.zshrc
 
 
 ################################################################################
@@ -21,7 +21,7 @@ curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-
 zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone --depth=1 \
 	https://github.com/zsh-users/zsh-syntax-highlighting.git \
-	$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting \
+	$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 # delete .zshrc and replace with pre-oh-my-zsh contents
 rm $HOME/.zshrc
