@@ -8,8 +8,9 @@ pip install pynvim
 # rtx setup
 ################################################################################
 
+curl https://rtx.pub/install.sh | sh
 curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-cargo binstall rtx-cli -y
+# cargo binstall rtx-cli -y
 # source $HOME/.zshrc
 
 
