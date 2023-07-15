@@ -33,31 +33,32 @@ source $HOME/.zshrc \
 	&& rtx use -g awscli@latest \
 	&& rtx use -g lua@latest
 
+eval "$(rtx env -s zsh)"
+
 
 ################################################################################
 # neovim setup
 ################################################################################
 
-eval "$(rtx env -s zsh)" \
-	&& nvim --headless "Lazy sync" +"sleep 20" +q
+nvim --headless "Lazy sync" +"sleep 20" +q
 
 
 ################################################################################
 # oh my zsh setup
 ################################################################################
 
-zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
-	&& git clone --depth=1 \
-		https://github.com/zsh-users/zsh-syntax-highlighting.git \
-		$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting \
-	# copy pre-oh-my-zsh contents to .zshrc
-	# delete .zshrc and replace with pre-oh-my-zsh contents
-	&& rm $HOME/.zshrc \
-	&& mv $HOME/.zshrc.pre-oh-my-zsh $HOME/.zshrc \
-	# install powerlevel10k
-	&& git clone --depth=1 \
-		https://github.com/romkatv/powerlevel10k.git \
-		${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+clone --depth=1 \
+	https://github.com/zsh-users/zsh-syntax-highlighting.git \
+	$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting \
+# copy pre-oh-my-zsh contents to .zshrc
+# delete .zshrc and replace with pre-oh-my-zsh contents
+rm $HOME/.zshrc \
+mv $HOME/.zshrc.pre-oh-my-zsh $HOME/.zshrc \
+# install powerlevel10k
+git clone --depth=1 \
+	https://github.com/romkatv/powerlevel10k.git \
+	${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 
 ################################################################################
@@ -65,8 +66,7 @@ zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/to
 ################################################################################
 
 # Install lf terminal file manager
-eval "$(rtx env -s zsh)" \
-	&& env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
+env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
 
 
 ################################################################################
