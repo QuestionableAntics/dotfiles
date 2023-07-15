@@ -33,15 +33,6 @@ rtx use -g poetry@latest
 rtx use -g awscli@latest
 rtx use -g lua@latest
 
-eval "$(rtx env -s zsh)"
-
-
-################################################################################
-# neovim setup
-################################################################################
-
-nvim --headless "Lazy sync" +"sleep 20" +q
-
 
 ################################################################################
 # oh my zsh setup
@@ -59,14 +50,6 @@ mv $HOME/.zshrc.pre-oh-my-zsh $HOME/.zshrc
 git clone --depth=1 \
 	https://github.com/romkatv/powerlevel10k.git \
 	${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-
-
-################################################################################
-# misc setup
-################################################################################
-
-# Install lf terminal file manager
-env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
 
 
 ################################################################################
