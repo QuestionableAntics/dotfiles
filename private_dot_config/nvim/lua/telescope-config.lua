@@ -1,8 +1,6 @@
 local telescope = require 'telescope'
 local lga_actions = require 'telescope-live-grep-args.actions'
 
-local is_mac = vim.fn.has('mac') == 1
-
 telescope.setup {
 	defaults = {
 		-- rip grep really lives up to the rip part in certain projects otherwise
@@ -32,7 +30,7 @@ telescope.setup {
 	pickers = {
 		find_files = {
 			-- use fd to find files
-			find_command = { is_mac and "fd" or "fdfind" },
+			find_command = { "fd" },
 			-- search hidden files in the directory
 			hidden = true
 		}

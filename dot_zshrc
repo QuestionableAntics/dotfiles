@@ -95,8 +95,8 @@ ds() {
 	elif [[ -f ".doctainer" ]]; then
 		container_name=$(cat .doctainer)
 	else
-		echo "No container name provided and no .doctainer file found"
-		return 1
+		echo "No container name provided and no .doctainer file found, using current folder name as container name."
+		container_name=${PWD##*/}
 	fi
 
     if docker ps -a --format '{{.Names}}' | grep -q "^$container_name$"; then
