@@ -57,4 +57,9 @@ return {
 			'rcarriga/nvim-notify',
 		}
 	},
+
+	{
+		'DNLHC/glance.nvim',
+		config = function() require('glance').setup() end,
+	}
 }
