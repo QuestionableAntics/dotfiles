@@ -5,8 +5,10 @@ set shellopts '-euy'
 set previewer bat
 set hidden
 set drawbox
-set color256
+# set color256
 set icons
+set sortby time
+set reverse
 
 cmd delete ${{
 	clear; tput cup $(($(tput lines)/3)); tput bold
@@ -17,5 +19,15 @@ cmd delete ${{
 	[ $ans = "y" ] && rm -rf $fx
 }}
 
+cmd newfold ${{
+    set -f
+    read newd
+    printf "Directory name: "
+    mkdir -- "$newd"
+    mv -- $fx "$newd"
+}}
+
 map D delete
-map a push :mkdir<space>
+map A push $mkdir<space>
+map a push $touch<space>
+map <a-n> newfold
