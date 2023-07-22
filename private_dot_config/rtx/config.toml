@@ -1,0 +1,10 @@
+[tools]
+neovim = "nightly"
+lazydocker = "latest"
+go = "latest"
+ripgrep = "latest"
+fzf = "latest"
+fd = "latest"
+awscli = "latest"
+lua = "latest"
+rust = "latest"
