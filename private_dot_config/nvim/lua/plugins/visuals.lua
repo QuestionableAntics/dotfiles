@@ -58,8 +58,12 @@ return {
 		}
 	},
 
+	-- VS Code style references view
 	{
 		'DNLHC/glance.nvim',
 		config = function() require('glance').setup() end,
-	}
+	},
+
+	-- Pretty theme for telescope
+	'NvChad/base46'
 }

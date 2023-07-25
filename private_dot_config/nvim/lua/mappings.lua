@@ -91,6 +91,15 @@ mappings['fuzzy_finder'] = {
 	['<Leader>fh'] = { mode = 'n', action = telescope_builtin.help_tags, label = 'Find Help Tags' },
 	['<Leader>fo'] = { mode = 'n', action = telescope_builtin.oldfiles, label = 'Find Old Files' },
 	['<Leader>fl'] = { mode = 'n', action = telescope_builtin.resume, label = 'Last Search Results' },
+	['<Leader>fs'] = {
+		mode = 'n',
+		action = function()
+			telescope.extensions.smart_open.smart_open {
+				cwd_only = true,
+			}
+		end,
+		label = 'Smart Open'
+	},
 	['<Leader>fxd'] = {
 		mode = 'n',
 		action = function() telescope_builtin.diagnostics { bufnr = 0 } end,
@@ -117,70 +126,66 @@ stems['<Leader>fx'] = { label = 'Find Diagnostics' }
 -- Testing
 ------------------------------------------------------------------------------------------
 
-if Debug then
-	local neotest = require('neotest')
+local neotest = require('neotest')
 
-	mappings['testing'] = {
-		-- TODO: Revisit this later and see if there's clearer errors around it not working
-		['<Leader>dn'] = { mode = 'n', action = function() neotest.run.run({ strategy = 'dap' }) end,
-			label = 'Debug Nearest Test' },
-		['<Leader>un'] = { mode = 'n', action = function() neotest.run.run() end, label = 'Run Nearest Test' },
-		['<Leader>ul'] = { mode = 'n', action = function() neotest.run.run_last() end, label = 'Run Last Test' },
-		['<Leader>uf'] = { mode = 'n', action = function() neotest.run.run(vim.fn.expand('%')) end, label = 'Run File' },
-		['<Leader>us'] = { mode = 'n', action = function() neotest.summary.open() end, label = 'Open Test Summary' },
-		['<Leader>uo'] = { mode = 'n', action = function() neotest.output.open() end, label = 'Test Output' },
-	}
+mappings['testing'] = {
+	-- TODO: Revisit this later and see if there's clearer errors around it not working
+	['<Leader>dn'] = { mode = 'n', action = function() neotest.run.run({ strategy = 'dap' }) end,
+		label = 'Debug Nearest Test' },
+	['<Leader>un'] = { mode = 'n', action = function() neotest.run.run() end, label = 'Run Nearest Test' },
+	['<Leader>ul'] = { mode = 'n', action = function() neotest.run.run_last() end, label = 'Run Last Test' },
+	['<Leader>uf'] = { mode = 'n', action = function() neotest.run.run(vim.fn.expand('%')) end, label = 'Run File' },
+	['<Leader>us'] = { mode = 'n', action = function() neotest.summary.open() end, label = 'Open Test Summary' },
+	['<Leader>uo'] = { mode = 'n', action = function() neotest.output.open() end, label = 'Test Output' },
+}
 
-	stems['<Leader>u'] = { label = 'Testing' }
-end
+stems['<Leader>u'] = { label = 'Testing' }
 
 
 ------------------------------------------------------------------------------------------
 -- Debugging
 ------------------------------------------------------------------------------------------
 
-if Debug then
-	local dap_python = require('dap-python')
-	local dap = require('dap')
-	local dap_ui_widgets = require('dap.ui.widgets')
-	local dapui = require('dapui')
+local dap_python = require('dap-python')
+local dap = require('dap')
+local dap_ui_widgets = require('dap.ui.widgets')
+local dapui = require('dapui')
 
-	mappings['debug'] = {
-		-- dap
-		['<Leader>ds'] = { mode = 'v', action = dap_python.debug_selection, label = 'Debug Python Selection' },
-		['<F9>'] = { mode = 'n', action = dap.continue, label = 'Debug Continue' },
-		['<F10>'] = { mode = 'n', action = dap.step_over, label = 'Debug Step Over' },
-		['<F11>'] = { mode = 'n', action = dap.step_into, label = 'Debug Step Into' },
-		['<F12>'] = { mode = 'n', action = dap.step_out, label = 'Debug Step Out' },
-		['<Leader>db'] = { mode = 'n', action = dap.toggle_breakpoint, label = 'Debug Toggle Breakpoint' },
-		['<Leader>dsbr'] = {
-			mode = 'n',
-			action = function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
-			label = 'Debug Set Breakpoint'
-		},
-		['<Leader>dsbm'] = {
-			mode = 'n',
-			action = function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,
-			label = 'Debug Set Breakpoint Message'
-		},
-		['<Leader>dr'] = { mode = 'n', action = dap.repl.open, label = 'Debug REPL' },
-		-- ['<Leader>dl'] = { mode = 'n', action = dap.repl.run_last, label = 'Debug Run Last'},
+mappings['debug'] = {
+	-- dap
+	['<Leader>ds'] = { mode = 'v', action = dap_python.debug_selection, label = 'Debug Python Selection' },
+	['<F9>'] = { mode = 'n', action = dap.continue, label = 'Debug Continue' },
+	['<F10>'] = { mode = 'n', action = dap.step_over, label = 'Debug Step Over' },
+	['<F11>'] = { mode = 'n', action = dap.step_into, label = 'Debug Step Into' },
+	['<F12>'] = { mode = 'n', action = dap.step_out, label = 'Debug Step Out' },
+	['<Leader>db'] = { mode = 'n', action = dap.toggle_breakpoint, label = 'Debug Toggle Breakpoint' },
+	['<Leader>dsbr'] = {
+		mode = 'n',
+		action = function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
+		label = 'Debug Set Breakpoint'
+	},
+	['<Leader>dsbm'] = {
+		mode = 'n',
+		action = function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,
+		label = 'Debug Set Breakpoint Message'
+	},
+	['<Leader>dr'] = { mode = 'n', action = dap.repl.open, label = 'Debug REPL' },
+	-- ['<Leader>dl'] = { mode = 'n', action = dap.repl.run_last, label = 'Debug Run Last'},
 
-		-- dap ui
-		['<Leader>dui'] = { mode = 'n', action = dapui.toggle, label = 'Debug UI' },
-		['<Leader>duh'] = { mode = 'n', action = dap_ui_widgets.hover, label = 'Debug Hover' },
-		['<Leader>duf'] = { mode = 'n', action = (function() dap_ui_widgets.centered_float(dap_ui_widgets.scopes) end), label = 'Debug Scopes' },
+	-- dap ui
+	['<Leader>dui'] = { mode = 'n', action = dapui.toggle, label = 'Debug UI' },
+	['<Leader>duh'] = { mode = 'n', action = dap_ui_widgets.hover, label = 'Debug Hover' },
+	['<Leader>duf'] = { mode = 'n', action = (function() dap_ui_widgets.centered_float(dap_ui_widgets.scopes) end), label = 'Debug Scopes' },
 
-		-- telescope-dap
-		['<Leader>dcc'] = { mode = 'n', action = telescope.extensions.dap.commands, label = 'Debug Commands' },
-		['<Leader>dco'] = { mode = 'n', action = telescope.extensions.dap.configurations, label = 'Debug Configurations' },
-		-- ['<Leader>df'] = { mode = 'n', action = telescope.extensions.dap.frames, label = 'Debug Frames'},
-	}
+	-- telescope-dap
+	-- ['<Leader>dcc'] = { mode = 'n', action = telescope.extensions.dap.commands, label = 'Debug Commands' },
+	-- ['<Leader>dco'] = { mode = 'n', action = telescope.extensions.dap.configurations, label = 'Debug Configurations' },
+	-- ['<Leader>df'] = { mode = 'n', action = telescope.extensions.dap.frames, label = 'Debug Frames'},
+}
 
-	stems['<Leader>d'] = { label = 'Debug' }
-	stems['<Leader>du'] = { label = 'Debug UI' }
-	stems['<Leader>dc'] = { label = 'Debug Telescope' }
-end
+stems['<Leader>d'] = { label = 'Debug' }
+stems['<Leader>du'] = { label = 'Debug UI' }
+stems['<Leader>dc'] = { label = 'Debug Telescope' }
 
 
 ------------------------------------------------------------------------------------------

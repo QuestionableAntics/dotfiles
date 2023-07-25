@@ -20,12 +20,6 @@ local Unused_local = {
 		build = 'cd app && npm install',
 	},
 
-	-- Manipulate object surrounding characters
-	{
-		'https://github.com/kylechui/nvim-surround',
-		config = function() require('nvim-surround').setup() end
-	},
-
 	-- Edit terminal
 	{
 		'chomosuke/term-edit.nvim',
@@ -39,7 +33,8 @@ local Unused_local = {
 	-- Remote environment interactions
 	'miversen33/netman.nvim',
 
-	--  'jamestthompson3/nvim-remote-containers',
+	'jamestthompson3/nvim-remote-containers',
+
 	{
 		'esensar/nvim-dev-container',
 		config = function() require('devcontainer').setup {} end
@@ -65,19 +60,6 @@ local Unused_local = {
 
 	-- dap integration
 	'nvim-telescope/telescope-dap.nvim',
-
-	-- Folding
-	{
-		'anuvyklack/pretty-fold.nvim',
-		config = function() require('pretty-fold').setup {} end,
-	},
-
-	-- Fold preview
-	{
-		'anuvyklack/fold-preview.nvim',
-		config = function() require('fold-preview').setup() end,
-		dependencies = { 'anuvyklack/keymap-amend.nvim' },
-	},
 }
 
 return {}

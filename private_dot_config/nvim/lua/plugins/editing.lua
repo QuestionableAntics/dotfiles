@@ -1,6 +1,7 @@
 return {
 	-- Little bit of everything
-	{ 'echasnovski/mini.nvim',
+	{
+		'echasnovski/mini.nvim',
 		config = function()
 			-- underline instances of the word under the cursor
 			require('mini.cursorword').setup {}
@@ -23,7 +24,8 @@ return {
 	},
 
 	-- Syntax tree parser for better syntax highlighting among other things
-	{ 'nvim-treesitter/nvim-treesitter',
+	{
+		'nvim-treesitter/nvim-treesitter',
 		build = ':TSUpdate',
 		config = function()
 			require('nvim-treesitter.configs').setup {
@@ -74,13 +76,18 @@ return {
 	},
 
 	-- Auto close and update jsx tags
-	{ 'windwp/nvim-ts-autotag',
+	{
+		'windwp/nvim-ts-autotag',
 		config = function() require('nvim-ts-autotag').setup() end
 	},
 
 	-- jsx aware commenting
 	'JoosepAlviste/nvim-ts-context-commentstring',
 
-	-- Change the surroundings
-	'tpope/vim-surround',
+	-- Manipulate object surrounding characters
+	{
+		'https://github.com/kylechui/nvim-surround',
+		event = 'VeryLazy',
+		config = function() require('nvim-surround').setup() end
+	},
 }

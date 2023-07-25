@@ -9,7 +9,6 @@ return {
 			require("lf").setup({
 				escape_quit = false,
 				border = "rounded",
-				-- highlights = {FloatBorder = {guifg = require("kimbox.palette").colors.magenta}}
 			})
 		end,
 		dependencies = { "plenary.nvim", "toggleterm.nvim" }
@@ -48,7 +47,7 @@ return {
 		config = function()
 			require('auto-session').setup {
 				auto_session_root_dir = os.getenv('HOME') .. '/.vim/sessions/',
-				auto_session_suppress_dirs = { '~/' },
+				auto_session_suppress_dirs = { os.getenv('HOME') },
 			}
 		end
 	},

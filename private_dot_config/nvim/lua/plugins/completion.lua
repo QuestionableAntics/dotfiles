@@ -1,6 +1,6 @@
 return {
 	-- Fast as FUCK autocompletion
-	{ 'ms-jpq/coq_nvim', branch = 'coq' },
+	{ 'ms-jpq/coq_nvim',      branch = 'coq' },
 
 	-- coq.nvim dependency
 	{ 'ms-jpq/coq.artifacts', branch = 'artifacts' },
@@ -8,7 +8,9 @@ return {
 	-- Code actions lightbulb
 	'kosayoda/nvim-lightbulb',
 
-	{ 'Bryley/neoai.nvim',
+	-- GPT chat interface
+	{
+		'Bryley/neoai.nvim',
 		dependencies = {
 			'MunifTanjim/nui.nvim',
 		},
@@ -40,7 +42,8 @@ return {
 	},
 
 	-- AI in my code
-	{ 'zbirenbaum/copilot.lua',
+	{
+		'zbirenbaum/copilot.lua',
 		event = { 'VimEnter' },
 		config = function()
 			vim.defer_fn(function()
