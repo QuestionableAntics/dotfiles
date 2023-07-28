@@ -1,5 +1,7 @@
 local utils = require 'utils'
 
+local Terminal = require('toggleterm.terminal').Terminal
+
 local map = utils.base_map
 
 map({ 'v', 'n' }, ';', ':')
@@ -71,9 +73,6 @@ mappings['random'] = {
 
 	-- Delete all buffers except current
 	['<Leader>bd'] = { mode = 'n', action = '<cmd>%bd|e#<cr>', label = 'Delete all buffers except current' },
-
-	-- Change in word on enter
-	['<cr>'] = { mode = 'n', action = 'ciw', label = 'Change inner word' },
 }
 
 
@@ -265,8 +264,6 @@ stems['<Leader>t'] = { label = 'Tabs' }
 ------------------------------------------------------------------------------------------
 -- Terminal
 ------------------------------------------------------------------------------------------
-
-local Terminal = require('toggleterm.terminal').Terminal
 
 local horizontal = Terminal:new({ direction = 'horizontal' })
 local float = Terminal:new({ direction = 'float' })
