@@ -1,7 +1,5 @@
 local utils = require 'utils'
 
-local Terminal = require('toggleterm.terminal').Terminal
-
 local map = utils.base_map
 
 map({ 'v', 'n' }, ';', ':')
@@ -19,9 +17,12 @@ local mappings = {}
 -- Miscellaneous
 ------------------------------------------------------------------------------------------
 
+-- local mini_files = require('mini.files')
+
 mappings['random'] = {
 	['<esc>'] = { mode = 'n', action = '<esc>:noh<CR>', label = 'Remove Highlights' },
 	['<Leader>v'] = { mode = 'n', action = ':Lf<cr>', label = 'Open File Explorer' },
+	-- ['<Leader>v'] = { mode = 'n', action = mini_files.open, label = 'Open File Explorer' },
 
 	-- change pane by direction
 	['<C-j>'] = { mode = 'n', action = '<C-W>j', label = 'Go to pane underneath' },
@@ -175,11 +176,6 @@ mappings['debug'] = {
 	['<Leader>dui'] = { mode = 'n', action = dapui.toggle, label = 'Debug UI' },
 	['<Leader>duh'] = { mode = 'n', action = dap_ui_widgets.hover, label = 'Debug Hover' },
 	['<Leader>duf'] = { mode = 'n', action = (function() dap_ui_widgets.centered_float(dap_ui_widgets.scopes) end), label = 'Debug Scopes' },
-
-	-- telescope-dap
-	-- ['<Leader>dcc'] = { mode = 'n', action = telescope.extensions.dap.commands, label = 'Debug Commands' },
-	-- ['<Leader>dco'] = { mode = 'n', action = telescope.extensions.dap.configurations, label = 'Debug Configurations' },
-	-- ['<Leader>df'] = { mode = 'n', action = telescope.extensions.dap.frames, label = 'Debug Frames'},
 }
 
 stems['<Leader>d'] = { label = 'Debug' }
@@ -264,6 +260,8 @@ stems['<Leader>t'] = { label = 'Tabs' }
 ------------------------------------------------------------------------------------------
 -- Terminal
 ------------------------------------------------------------------------------------------
+
+local Terminal = require('toggleterm.terminal').Terminal
 
 local horizontal = Terminal:new({ direction = 'horizontal' })
 local float = Terminal:new({ direction = 'float' })

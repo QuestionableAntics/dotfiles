@@ -63,7 +63,4 @@ return {
 		'DNLHC/glance.nvim',
 		config = function() require('glance').setup() end,
 	},
-
-	-- Pretty theme for telescope
-	'NvChad/base46'
 }

@@ -27,6 +27,8 @@ telescope.setup {
 			"--smart-case",
 			"--trim"
 		},
+		prompt_prefix = "  ",
+		selection_caret = "  ",
 	},
 	pickers = {
 		find_files = {
@@ -53,57 +55,77 @@ telescope.load_extension('fzf')
 telescope.load_extension('live_grep_args')
 telescope.load_extension('ui-select')
 
+
 ------------------------------------------------------------------------------------------
 -- Telescope theming
 ------------------------------------------------------------------------------------------
 
--- https://github.com/NvChad/base46/blob/master/lua/base46/integrations/telescope.lua
--- https://github.com/Mofiqul/vscode.nvim/blob/05973862f95f85dd0564338a03baf61b56e1823f/lua/vscode/theme.lua#L540
--- https://astronvim.com/Recipes/telescope_theme
--- https://github.com/NvChad/NvChad/blob/b913bdacfdcdb05a19326019d14d9b240ac689e1/lua/plugins/configs/telescope.lua
-
 -- local colors = require('vscode.colors').get_colors()
--- local hl = vim.api.nvim_set_hl
---
--- hl(0, 'TelescopePromptBorder', { fg = colors.vscLineNumber, bg = 'NONE' })
--- hl(0, 'TelescopeResultsBorder', { fg = colors.vscLineNumber, bg = 'NONE' })
--- hl(0, 'TelescopePreviewBorder', { fg = colors.vscLineNumber, bg = 'NONE' })
--- hl(0, 'TelescopeNormal', { fg = colors.vscFront, bg = 'NONE' })
--- hl(0, 'TelescopeSelection', { fg = colors.vscFront, bg = colors.vscPopupHighlightBlue })
--- hl(0, 'TelescopeMultiSelection', { fg = colors.vscFront, bg = colors.vscPopupHighlightBlue })
--- hl(0, 'TelescopeMatching', { fg = colors.vscMediumBlue, bg = 'NONE', bold = true })
--- hl(0, 'TelescopePromptPrefix', { fg = colors.vscFront, bg = 'NONE' })
---
--- local normal = get_hlgroup "Normal"
--- local fg, bg = normal.fg, normal.bg
--- local bg_alt = get_hlgroup("Visual").bg
--- local green = get_hlgroup("String").fg
--- local red = get_hlgroup("Error").fg
+local base_hl = vim.api.nvim_set_hl
 
--- return {
--- 	TelescopeBorder = { fg = bg_alt, bg = bg },
--- 	TelescopeNormal = { bg = bg },
--- 	TelescopePreviewBorder = { fg = bg, bg = bg },
--- 	TelescopePreviewNormal = { bg = bg },
--- 	TelescopePreviewTitle = { fg = bg, bg = green },
--- 	TelescopePromptBorder = { fg = bg_alt, bg = bg_alt },
--- 	TelescopePromptNormal = { fg = fg, bg = bg_alt },
--- 	TelescopePromptPrefix = { fg = red, bg = bg_alt },
--- 	TelescopePromptTitle = { fg = bg, bg = red },
--- 	TelescopeResultsBorder = { fg = bg, bg = bg },
--- 	TelescopeResultsNormal = { bg = bg },
--- 	TelescopeResultsTitle = { fg = bg, bg = bg },
--- }
+local color2 = "#8CCF7E"
+local preview_title = "#E5C76B"
+local prompt_title = "#C47FD5"
+local results_title = "#0F1416"
+local background = "#141B1E"
+local foreground = "#DADADA"
+local cursorline = "#242e32"
 
--- hl(0, 'TelescopeBorder', { fg = bg_alt, bg = bg })
--- hl(0, 'TelescopeNormal', { bg = bg })
--- hl(0, 'TelescopePreviewBorder', { fg = bg, bg = bg })
--- hl(0, 'TelescopePreviewNormal', { bg = bg })
--- hl(0, 'TelescopePreviewTitle', { fg = bg, bg = green })
--- hl(0, 'TelescopePromptBorder', { fg = bg_alt, bg = bg_alt })
--- hl(0, 'TelescopePromptNormal', { fg = fg, bg = bg_alt })
--- hl(0, 'TelescopePromptPrefix', { fg = red, bg = bg_alt })
--- hl(0, 'TelescopePromptTitle', { fg = bg, bg = red })
--- hl(0, 'TelescopeResultsBorder', { fg = bg, bg = bg })
--- hl(0, 'TelescopeResultsNormal', { bg = bg })
--- hl(0, 'TelescopeResultsTitle', { fg = bg, bg = bg })
+local hl = function(groups)
+	for group, colors in pairs(groups) do
+		base_hl(0, group, colors)
+	end
+end
+
+local highlights = {
+	-- Prompt
+	TelescopePromptTitle = {
+		fg = background,
+		bg = prompt_title,
+	},
+	TelescopePromptPrefix = {
+		fg = color2,
+		bg = cursorline,
+	},
+	TelescopePromptBorder = {
+		fg = cursorline,
+		bg = cursorline,
+	},
+	TelescopePromptNormal = {
+		fg = foreground,
+		bg = cursorline,
+	},
+
+	-- Results
+	TelescopeResultsTitle = {
+		fg = results_title,
+		bg = '#732929',
+	},
+	TelescopeResultsBorder = {
+		fg = '#222222',
+		bg = '#222222',
+	},
+	TelescopeResultsNormal = {
+		fg = foreground,
+		bg = '#222222',
+	},
+	TelescopeResultsLine = {
+		bg = background,
+	},
+
+	-- Preview
+	TelescopePreviewTitle = {
+		fg = background,
+		bg = preview_title,
+	},
+	TelescopePreviewBorder = {
+		fg = '#222222',
+		bg = '#222222'
+	},
+	TelescopePreviewNormal = {
+		fg = foreground,
+		bg = '#222222',
+	},
+}
+
+hl(highlights)
