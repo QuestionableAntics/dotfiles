@@ -25,10 +25,10 @@ opt.completeopt = {
 -- Set default grep to ripgrep (faster fuzzy finding)
 opt.grepprg = [[rg\]] ---vimgrep
 
--- Make tab width equivalent to 4 spaces
+-- Set tab width to 4 spaces
 opt.tabstop = 4
 
--- Make an indent equivalent to 4 spaces
+-- Set an indent to 4 spaces
 opt.shiftwidth = 4
 
 -- https://vi.stackexchange.com/questions/10124/what-is-the-difference-between-filetype-plugin-indent-on-and-filetype-indent
