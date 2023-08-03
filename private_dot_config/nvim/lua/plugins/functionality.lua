@@ -1,22 +1,29 @@
 return {
 	-- File Explorer
-	{
-		"lmburns/lf.nvim",
-		config = function()
-			-- This feature will not work if the plugin is lazy-loaded
-			vim.g.lf_netrw = 1
+	-- {
+	-- 	"lmburns/lf.nvim",
+	-- 	config = function()
+	-- 		-- This feature will not work if the plugin is lazy-loaded
+	-- 		vim.g.lf_netrw = 1
+	--
+	-- 		require("lf").setup({
+	-- 			escape_quit = false,
+	-- 			border = "rounded",
+	-- 		})
+	-- 	end,
+	-- 	dependencies = { "plenary.nvim", "toggleterm.nvim" }
+	-- },
 
-			require("lf").setup({
-				escape_quit = false,
-				border = "rounded",
-			})
-		end,
-		dependencies = { "plenary.nvim", "toggleterm.nvim" }
+	-- Telescope file browser
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
 	},
 
 	-- Fast Motions
 	{
 		"folke/flash.nvim",
+		modes = { search = { enabled = false } },
 		keys = {
 			{
 				"s",

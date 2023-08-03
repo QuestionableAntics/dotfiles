@@ -99,4 +99,7 @@ return {
 		event = 'VeryLazy',
 		config = function() require('nvim-surround').setup() end
 	},
+
+	-- Structural find and replace
+	'cshuaimin/ssr.nvim'
 }

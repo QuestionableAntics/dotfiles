@@ -17,12 +17,17 @@ local mappings = {}
 -- Miscellaneous
 ------------------------------------------------------------------------------------------
 
--- local mini_files = require('mini.files')
+local telescope_fb = require('telescope').extensions.file_browser.file_browser
+local ssr = require("ssr")
 
 mappings['random'] = {
 	['<esc>'] = { mode = 'n', action = '<esc>:noh<CR>', label = 'Remove Highlights' },
-	['<Leader>v'] = { mode = 'n', action = ':Lf<cr>', label = 'Open File Explorer' },
-	-- ['<Leader>v'] = { mode = 'n', action = mini_files.open, label = 'Open File Explorer' },
+	-- ['<Leader>v'] = { mode = 'n', action = ':Lf<cr>', label = 'Open File Explorer' },
+	['<Leader>v'] = {
+		mode = 'n',
+		action = function() telescope_fb( { path = '%:p:h select_buffer=true<CR>' } ) end,
+		label = 'Open File Explorer',
+	},
 
 	-- change pane by direction
 	['<C-j>'] = { mode = 'n', action = '<C-W>j', label = 'Go to pane underneath' },
@@ -74,6 +79,9 @@ mappings['random'] = {
 
 	-- Delete all buffers except current
 	['<Leader>bd'] = { mode = 'n', action = '<cmd>%bd|e#<cr>', label = 'Delete all buffers except current' },
+
+	-- Structural find and replace
+	['<Leader>sr'] = { mode = { 'n', 'x' }, action = ssr.open, label = 'Structural find and replace' },
 }
 
 
@@ -87,6 +95,7 @@ local telescope_builtin = require('telescope.builtin')
 mappings['fuzzy_finder'] = {
 	['<Leader>ff'] = { mode = 'n', action = telescope_builtin.find_files, label = 'Find files' },
 	['<Leader>fg'] = { mode = 'n', action = telescope.extensions.live_grep_args.live_grep_args, label = 'Live Grep' },
+	['<Leader>fa'] = { mode = 'n', action = ':Telescope ast_grep<CR>', label = 'Find by AST' },
 	['<Leader>fb'] = { mode = 'n', action = telescope_builtin.buffers, label = 'Find Buffers' },
 	['<Leader>fh'] = { mode = 'n', action = telescope_builtin.help_tags, label = 'Find Help Tags' },
 	['<Leader>fo'] = { mode = 'n', action = telescope_builtin.oldfiles, label = 'Find Old Files' },

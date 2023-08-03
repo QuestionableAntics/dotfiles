@@ -1,6 +1,7 @@
 local telescope = require 'telescope'
+local actions = require 'telescope.actions'
 local lga_actions = require 'telescope-live-grep-args.actions'
-local get_hlgroup = require 'utils'.get_hlgroup
+local fb_actions = require 'telescope._extensions.file_browser.actions'
 
 telescope.setup {
 	defaults = {
@@ -49,12 +50,38 @@ telescope.setup {
 				}
 			}
 		},
+		["file_browser"] = {
+			theme = "ivy",
+			initial_mode = "normal",
+			hidden = true,
+			hijack_netrw = false,
+			mappings = {
+				["n"] = {
+					["a"] = fb_actions.create,
+					["h"] = fb_actions.goto_parent_dir,
+					["l"] = actions.select_default,
+					["<bs>"] = false,
+				}
+			}
+		},
+		["ast_grep"] = {
+			command = {
+				"sg",
+				"--json=stream",
+				-- "-p",
+			},                       -- must have --json and -p
+			grep_open_files = false, -- search in opened files
+			lang = nil,              -- string value, sepcify language for ast-grep `nil` for default
+		},
 	},
 }
 
+telescope.load_extension('ui-select')
+telescope.load_extension('fzy_native')
 telescope.load_extension('fzf')
 telescope.load_extension('live_grep_args')
-telescope.load_extension('ui-select')
+telescope.load_extension('ast_grep')
+telescope.load_extension('file_browser')
 
 
 ------------------------------------------------------------------------------------------
@@ -64,12 +91,12 @@ telescope.load_extension('ui-select')
 -- local colors = require('vscode.colors').get_colors()
 local base_hl = vim.api.nvim_set_hl
 
-local color2 = "#8CCF7E"
-local preview_title = "#E5C76B"
-local prompt_title = "#C47FD5"
+local pale_green = "#8CCF7E"
+local yellow_orange = "#E5C76B"
+local magenta = "#C47FD5"
 local results_title = "#0F1416"
 local background = "#141B1E"
-local foreground = "#DADADA"
+local light_gray = "#DADADA"
 local cursorline = "#242e32"
 
 local hl = function(groups)
@@ -82,10 +109,10 @@ local highlights = {
 	-- Prompt
 	TelescopePromptTitle = {
 		fg = background,
-		bg = prompt_title,
+		bg = magenta,
 	},
 	TelescopePromptPrefix = {
-		fg = color2,
+		fg = pale_green,
 		bg = cursorline,
 	},
 	TelescopePromptBorder = {
@@ -93,7 +120,7 @@ local highlights = {
 		bg = cursorline,
 	},
 	TelescopePromptNormal = {
-		fg = foreground,
+		fg = light_gray,
 		bg = cursorline,
 	},
 
@@ -107,7 +134,7 @@ local highlights = {
 		bg = '#222222',
 	},
 	TelescopeResultsNormal = {
-		fg = foreground,
+		fg = light_gray,
 		bg = '#222222',
 	},
 	TelescopeResultsLine = {
@@ -117,14 +144,14 @@ local highlights = {
 	-- Preview
 	TelescopePreviewTitle = {
 		fg = background,
-		bg = preview_title,
+		bg = yellow_orange,
 	},
 	TelescopePreviewBorder = {
 		fg = '#222222',
 		bg = '#222222'
 	},
 	TelescopePreviewNormal = {
-		fg = foreground,
+		fg = light_gray,
 		bg = '#222222',
 	},
 }

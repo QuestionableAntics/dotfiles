@@ -9,7 +9,10 @@ return {
 	},
 
 	-- Telescope fzf integration
-	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+	{
+		'nvim-telescope/telescope-fzf-native.nvim',
+		build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+	},
 
 	-- Uses telescope for the native ui-select
 	'nvim-telescope/telescope-ui-select.nvim',
@@ -28,4 +31,8 @@ return {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 	},
+
+	'Marskey/telescope-sg',
+
+	'nvim-telescope/telescope-fzy-native.nvim',
 }
