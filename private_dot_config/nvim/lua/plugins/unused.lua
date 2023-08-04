@@ -60,6 +60,8 @@ local Unused_local = {
 
 	-- dap integration
 	'nvim-telescope/telescope-dap.nvim',
+
+	'nvim-zh/better-escape.vim',
 }
 
 return {}
