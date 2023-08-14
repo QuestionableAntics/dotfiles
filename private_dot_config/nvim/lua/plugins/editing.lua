@@ -39,6 +39,9 @@ return {
 		config = function()
 			require('nvim-treesitter.configs').setup {
 				-- either 'all' or {'a', 'list', 'of', 'languages'}
+				modules = {},
+				auto_install = true,
+				ignore_install = {},
 				ensure_installed = {
 					'python',
 					'javascript',
@@ -59,7 +62,9 @@ return {
 					'json5',
 					'markdown',
 					'http',
-					'bash'
+					'bash',
+					'rust',
+					'go',
 				},
 				highlight = { enable = true },
 				-- async installation of parsers
@@ -101,5 +106,18 @@ return {
 	},
 
 	-- Structural find and replace
-	'cshuaimin/ssr.nvim'
+	'cshuaimin/ssr.nvim',
+
+	-- Modify quickfix buffer
+	{
+		'gabrielpoca/replacer.nvim',
+		opts = { rename_files = false },
+		keys = {
+			{
+				'<leader>h',
+				function() require('replacer').run() end,
+				desc = "run replacer.nvim"
+			}
+		}
+	}
 }

@@ -7,7 +7,7 @@ map({ 'v', 'n' }, ';', ':')
 -- Easy exit to normal mode from insert and command mode
 map({ 'c', 'i' }, 'jk', '<ESC>')
 -- Get me the fuck out of the terminal
-map('t', 'jk', [[<C-\><C-N>]])
+map('t', '<ESC>', [[<C-\><C-N>]])
 
 local stems = {}
 local mappings = {}
@@ -278,15 +278,11 @@ local lazydocker = Terminal:new({
 	cmd = 'lazydocker',
 	hidden = true,
 	direction = 'float',
-	on_open = function(_) vim.keymap.del('t', 'jk') end,
-	on_close = function(_) map('t', 'jk', [[<C-\><C-n>]], { noremap = true }) end,
 })
 local lazygit = Terminal:new({
 	cmd = 'lazygit',
 	hidden = true,
 	direction = 'float',
-	on_open = function(_) vim.keymap.del('t', 'jk') end,
-	on_close = function(_) map('t', 'jk', [[<C-\><C-n>]], { noremap = true }) end,
 })
 
 mappings['terminal'] = {

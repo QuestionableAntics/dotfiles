@@ -36,13 +36,14 @@ return {
 
 	-- Virtual text to add indentation guides
 	{
-		'lukas-reineke/indent-blankline.nvim',
+		'shellRaining/hlchunk.nvim',
+		event = { 'UIEnter' },
 		config = function()
-			require('indent_blankline').setup {
-				show_current_context = true,
-				show_current_context_start = true,
-			}
-		end
+			require('hlchunk').setup({
+				indent = { chars = { '┆' } },
+				blank = { enable = false }
+			})
+		end,
 	},
 
 	-- A ton of pretty UI things
@@ -61,6 +62,6 @@ return {
 	-- VS Code style references view
 	{
 		'DNLHC/glance.nvim',
-		config = function() require('glance').setup() end,
+		config = function() require('glance').setup({}) end,
 	},
 }

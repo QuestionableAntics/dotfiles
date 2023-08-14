@@ -108,10 +108,11 @@ vim.api.nvim_create_autocmd({ "CursorHold, CursorHoldI" }, {
 })
 
 
--- Unmap jk in ranger buffer
-vim.api.nvim_create_autocmd("Filetype", {
-	pattern = { "rnvimr", "lfterm" },
+-- Format go files on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*.go",
 	callback = function()
-		vim.api.nvim_buf_set_keymap(0, "t", "j", "j", { noremap = true, silent = true, nowait = true })
-	end
+		require('go.format').goimport()
+	end,
+	group = vim.api.nvim_create_augroup("GoFormat", {}),
 })

@@ -1,9 +1,9 @@
 return {
 	-- Fast as FUCK autocompletion
-	{ 'ms-jpq/coq_nvim',      branch = 'coq' },
+	{ 'ms-jpq/coq_nvim', branch = 'coq' },
 
-	-- coq.nvim dependency
-	{ 'ms-jpq/coq.artifacts', branch = 'artifacts' },
+	-- snippets for coq.nvim
+	-- { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
 
 	-- Code actions lightbulb
 	'kosayoda/nvim-lightbulb',
@@ -14,19 +14,6 @@ return {
 		dependencies = {
 			'MunifTanjim/nui.nvim',
 		},
-		cmd = {
-			"NeoAI",
-			"NeoAIOpen",
-			"NeoAIClose",
-			"NeoAIToggle",
-			"NeoAIContext",
-			"NeoAIContextOpen",
-			"NeoAIContextClose",
-			"NeoAIInject",
-			"NeoAIInjectCode",
-			"NeoAIInjectContext",
-			"NeoAIInjectContextCode",
-		},
 		config = function()
 			require("neoai").setup({
 				models = {
@@ -36,7 +23,15 @@ return {
 						params = nil,
 					},
 				},
-				-- Options go here
+				prompts = {
+					context = function(context)
+						return [[
+You are a software engineer, helping people solve problems related to all areas of development.
+If you are asked to provide only code, only respond with code blocks correctly labeled in the relevant language.
+The following marks the beginning of your conversation with the user.
+]] .. context
+					end
+				}
 			})
 		end,
 	},

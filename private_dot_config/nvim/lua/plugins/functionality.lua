@@ -24,6 +24,12 @@ return {
 	{
 		"folke/flash.nvim",
 		modes = { search = { enabled = false } },
+		label = {
+			rainbow = {
+				enabled = true,
+				shade = 9
+			}
+		},
 		keys = {
 			{
 				"s",
