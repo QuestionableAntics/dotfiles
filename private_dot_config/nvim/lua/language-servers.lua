@@ -187,6 +187,8 @@ local server_configs = {
 	bashls = {},
 
 	gopls = {},
+
+	sqlls = {},
 }
 
 for server, config in pairs(server_configs) do

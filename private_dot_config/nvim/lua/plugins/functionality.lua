@@ -1,23 +1,14 @@
 return {
-	-- File Explorer
-	-- {
-	-- 	"lmburns/lf.nvim",
-	-- 	config = function()
-	-- 		-- This feature will not work if the plugin is lazy-loaded
-	-- 		vim.g.lf_netrw = 1
-	--
-	-- 		require("lf").setup({
-	-- 			escape_quit = false,
-	-- 			border = "rounded",
-	-- 		})
-	-- 	end,
-	-- 	dependencies = { "plenary.nvim", "toggleterm.nvim" }
-	-- },
-
-	-- Telescope file browser
+	-- Interact with file system like a buffer
 	{
-		"nvim-telescope/telescope-file-browser.nvim",
-		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+		'stevearc/oil.nvim',
+		opts = {},
+		config = function()
+			require('oil').setup {
+				view_options = { show_hidden = true },
+			}
+		end,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 
 	-- Fast Motions
@@ -93,5 +84,27 @@ return {
 	-- {
 	-- 	'rgroli/other.nvim',
 	-- 	config = function() require('other-nvim').setup {} end
-	-- }
+	-- },
+
+	{
+		"harrisoncramer/gitlab.nvim",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"stevearc/dressing.nvim", -- Recommended but not required. Better UI for pickers.
+			enabled = true,
+		},
+		build = function() require("gitlab.server").build(true) end, -- Builds the Go binary
+		config = function()
+			require("gitlab").setup()                          -- Uses delta reviewer by default
+		end,
+	},
+
+	{
+		'Wansmer/symbol-usage.nvim',
+		event = 'LspAttach',
+		config = function()
+			require('symbol-usage').setup()
+		end
+	},
 }

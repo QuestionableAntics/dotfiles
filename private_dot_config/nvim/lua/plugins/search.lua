@@ -11,7 +11,10 @@ return {
 	-- Telescope fzf integration
 	{
 		'nvim-telescope/telescope-fzf-native.nvim',
-		build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+		build = [[
+		cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && \
+		cmake --build build --config Release && cmake --install build --prefix build
+		]],
 	},
 
 	-- Uses telescope for the native ui-select
@@ -35,4 +38,31 @@ return {
 	'Marskey/telescope-sg',
 
 	'nvim-telescope/telescope-fzy-native.nvim',
-}
+
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"debugloop/telescope-undo.nvim",
+		},
+		config = function()
+			require("telescope").setup({
+				extensions = {
+					undo = {
+						-- telescope-undo.nvim config, see below
+					},
+				},
+			})
+			require("telescope").load_extension("undo")
+			-- optional: vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
+		end,
+		keys = {
+			{
+				"<leader>fu",
+				function()
+					require("telescope").extensions.undo.undo()
+				end,
+				desc = "open telescope-undo.nvim"
+			}
+		}
+	}, }

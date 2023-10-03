@@ -1,7 +1,5 @@
 local telescope = require 'telescope'
-local actions = require 'telescope.actions'
 local lga_actions = require 'telescope-live-grep-args.actions'
-local fb_actions = require 'telescope._extensions.file_browser.actions'
 
 telescope.setup {
 	defaults = {
@@ -50,20 +48,6 @@ telescope.setup {
 				}
 			}
 		},
-		["file_browser"] = {
-			theme = "ivy",
-			initial_mode = "normal",
-			hidden = true,
-			hijack_netrw = false,
-			mappings = {
-				["n"] = {
-					["a"] = fb_actions.create,
-					["h"] = fb_actions.goto_parent_dir,
-					["l"] = actions.select_default,
-					["<bs>"] = false,
-				}
-			}
-		},
 		["ast_grep"] = {
 			command = {
 				"sg",
@@ -81,7 +65,6 @@ telescope.load_extension('fzy_native')
 telescope.load_extension('fzf')
 telescope.load_extension('live_grep_args')
 telescope.load_extension('ast_grep')
-telescope.load_extension('file_browser')
 
 
 ------------------------------------------------------------------------------------------

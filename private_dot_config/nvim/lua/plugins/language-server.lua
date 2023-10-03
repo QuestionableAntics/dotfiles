@@ -24,7 +24,7 @@ return {
 					"html",
 					"jsonls",
 					"lua_ls",
-					"sqls",
+					"sqlls",
 				}
 			}
 		end,

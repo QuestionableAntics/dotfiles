@@ -17,16 +17,24 @@ local mappings = {}
 -- Miscellaneous
 ------------------------------------------------------------------------------------------
 
-local telescope_fb = require('telescope').extensions.file_browser.file_browser
+local oil = require('oil')
 local ssr = require("ssr")
 
 mappings['random'] = {
 	['<esc>'] = { mode = 'n', action = '<esc>:noh<CR>', label = 'Remove Highlights' },
-	-- ['<Leader>v'] = { mode = 'n', action = ':Lf<cr>', label = 'Open File Explorer' },
+
 	['<Leader>v'] = {
 		mode = 'n',
-		action = function() telescope_fb( { path = '%:p:h select_buffer=true<CR>' } ) end,
+		action = function() oil.open() end,
 		label = 'Open File Explorer',
+	},
+
+	['<Leader>fq'] = {
+		mode = 'n',
+		action = function()
+			require('conform').format({bufnr = 0, lsp_fallback = true})
+		end,
+		label = 'format sql'
 	},
 
 	-- change pane by direction
@@ -81,7 +89,7 @@ mappings['random'] = {
 	['<Leader>bd'] = { mode = 'n', action = '<cmd>%bd|e#<cr>', label = 'Delete all buffers except current' },
 
 	-- Structural find and replace
-	['<Leader>sr'] = { mode = { 'n', 'x' }, action = ssr.open, label = 'Structural find and replace' },
+	['<Leader>sr'] = { mode = { 'n', 'x' }, action = function() ssr.open() end, label = 'Structural find and replace' },
 }
 
 
@@ -289,7 +297,7 @@ mappings['terminal'] = {
 	['<Leader>tt'] = { mode = 'n', action = function() horizontal:toggle() end, label = 'Toggle terminal' },
 	['<Leader>td'] = { mode = 'n', action = function() lazydocker:toggle() end, label = 'Toggle lazydocker' },
 	['<Leader>tg'] = { mode = 'n', action = function() lazygit:toggle() end, label = 'Toggle lazygit' },
-	['<C-n>'] = { mode = { 'n', 't' }, action = function() float:toggle() end, label = 'Toggle float terminal' },
+	['<C-v>'] = { mode = { 'n', 't' }, action = function() float:toggle() end, label = 'Toggle float terminal' },
 }
 
 
@@ -303,7 +311,7 @@ mappings['ai'] = {
 }
 
 -- The above mapping interferes with a in normal mode for some reason
-map('v', 'ai', ':NeoAIContext<CR>', { noremap = true })
+map('v', 'na', ':NeoAIContext<CR>', { noremap = true })
 
 stems['a'] = { label = 'AI' }
 

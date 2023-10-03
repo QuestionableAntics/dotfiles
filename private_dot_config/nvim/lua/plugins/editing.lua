@@ -82,6 +82,17 @@ return {
 							['if'] = '@function.inner',
 							['ac'] = '@class.outer',
 							['ic'] = '@class.inner',
+							['ab'] = '@block.outer',
+							['ib'] = '@block.inner',
+							['al'] = '@loop.outer',
+							['il'] = '@loop.inner',
+							['ai'] = '@conditional.outer',
+							['ii'] = '@conditional.inner',
+							['as'] = '@statement.outer',
+							['is'] = '@statement.inner',
+							['ad'] = '@comment.outer',
+							['am'] = '@call.outer',
+							['im'] = '@call.inner',
 						},
 					},
 				},
@@ -119,5 +130,47 @@ return {
 				desc = "run replacer.nvim"
 			}
 		}
-	}
+	},
+
+	-- Formatter plugin
+	{
+		'stevearc/conform.nvim',
+		opts = {},
+		config = function()
+			require('conform').setup({
+				formatters_by_ft = {
+					sql = { "psql" },
+				},
+				formatters = {
+					psql = {
+						command = "sql-formatter",
+						args = function(ctx)
+							return {
+								"--config=$HOME/.config/sql-formatter/postgres-config.json",
+								"--language=postgresql",
+								-- ctx.filename
+								-- "$FILENAME",
+							}
+						end,
+					}
+				},
+			})
+		end
+	},
+
+	{
+		'nvim-pack/nvim-spectre',
+		config = function()
+			require('spectre').setup()
+		end,
+		keys = {
+			{
+				'<leader>sp',
+				function()
+					require('spectre').toggle()
+				end,
+				desc = "open spectre"
+			}
+		}
+	},
 }
