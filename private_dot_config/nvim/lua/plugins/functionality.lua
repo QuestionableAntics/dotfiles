@@ -124,10 +124,10 @@ return {
 		config = true
 	},
 
-	{
-		"arnaupv/nvim-devcontainer-cli",
-		opts = {}
-	},
+	-- {
+	-- 	"arnaupv/nvim-devcontainer-cli",
+	-- 	opts = {}
+	-- },
 
 	-- Open paired files
 	-- {

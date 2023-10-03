@@ -41,12 +41,12 @@ return {
 		opts = {},
 	},
 
-	{
-		'simrat39/rust-tools.nvim',
-		config = function()
-			require('rust-tools').setup({})
-		end,
-	},
+	-- {
+	-- 	'simrat39/rust-tools.nvim',
+	-- 	config = function()
+	-- 		require('rust-tools').setup({})
+	-- 	end,
+	-- },
 
 	{
 		'https://github.com/ray-x/go.nvim',

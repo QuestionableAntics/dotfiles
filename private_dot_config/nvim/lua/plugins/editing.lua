@@ -7,20 +7,8 @@ return {
 			require('mini.cursorword').setup {}
 			-- auto pairing of parentheses, brackets, etc.
 			require('mini.pairs').setup {}
-			-- comments
-			-- require('mini.comment').setup {}
 			-- additional targets to jump to next/prev
 			require('mini.bracketed').setup {}
-			require('mini.files').setup {
-				mappings = {
-					synchronize = '<cr>',
-				},
-				windows = {
-					max_number = 3,
-					preview = true,
-					width_preview = 200
-				}
-			}
 		end
 	},
 

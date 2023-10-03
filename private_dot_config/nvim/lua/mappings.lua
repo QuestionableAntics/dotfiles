@@ -17,9 +17,6 @@ local mappings = {}
 -- Miscellaneous
 ------------------------------------------------------------------------------------------
 
-local oil = require('oil')
-local ssr = require("ssr")
-
 mappings['random'] = {
 	['<esc>'] = { mode = 'n', action = '<esc>:noh<CR>', label = 'Remove Highlights' },
 

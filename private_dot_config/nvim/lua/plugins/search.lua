@@ -1,44 +1,88 @@
--- ['<Leader>ff'] = { mode = 'n', action = telescope_builtin.find_files, label = 'Find files' },
--- ['<Leader>fg'] = { mode = 'n', action = telescope.extensions.live_grep_args.live_grep_args, label = 'Live Grep' },
--- ['<Leader>fa'] = { mode = 'n', action = ':Telescope ast_grep<CR>', label = 'Find by AST' },
--- ['<Leader>fb'] = { mode = 'n', action = telescope_builtin.buffers, label = 'Find Buffers' },
--- ['<Leader>fh'] = { mode = 'n', action = telescope_builtin.help_tags, label = 'Find Help Tags' },
--- ['<Leader>fo'] = { mode = 'n', action = telescope_builtin.oldfiles, label = 'Find Old Files' },
--- ['<Leader>fl'] = { mode = 'n', action = telescope_builtin.resume, label = 'Last Search Results' },
--- ['<Leader>fs'] = {
--- 	mode = 'n',
--- 	action = function()
--- 		telescope.extensions.smart_open.smart_open {
--- 			cwd_only = true,
--- 		}
--- 	end,
--- 	label = 'Smart Open'
--- },
--- ['<Leader>fxd'] = {
--- 	mode = 'n',
--- 	action = function() telescope_builtin.diagnostics { bufnr = 0 } end,
--- 	label = 'Find Diagnostics in Focused Buffer'
--- },
--- ['<Leader>fxw'] = { mode = 'n', action = telescope_builtin.diagnostics, label = 'Find Diagnostics in Open Buffers' },
--- ['<Leader>/'] = {
--- 	mode = 'n',
--- 	action = function()
--- 		require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
--- 			winblend = 10,
--- 			previewer = false,
--- 		})
--- 	end,
--- 	label = 'Fuzzily search in current buffer'
--- }
-
 return {
 	-- Pretty Pick List
 	{
 		'nvim-telescope/telescope.nvim',
 		dependencies = {
-			-- rg raw live grep
 			'nvim-telescope/telescope-live-grep-args.nvim',
+			'nvim-telescope/telescope-fzf-native.nvim',
+			'nvim-telescope/telescope-fzy-native.nvim',
+			'nvim-telescope/telescope-ui-select.nvim',
+			'danielfalk/smart-open.nvim',
+			'Marskey/telescope-sg',
+			'debugloop/telescope-undo.nvim',
 		},
+		config = function()
+			local lga_actions = require 'telescope-live-grep-args.actions'
+			local telescope = require('telescope')
+
+			require("telescope").setup({
+				defaults = {
+					-- rip grep really lives up to the rip part in certain projects otherwise
+					file_ignore_patterns = {
+						"node_modules",
+						".git/",
+						".aws-sam/",
+						"build",
+						"dist",
+						".idea",
+						".pytest_cache",
+						"bin/Debug",
+						"obj/",
+						".yarn/*"
+					},
+					vimgrep_arguments = {
+						"rg",
+						"--color=never",
+						"--no-heading",
+						"--with-filename",
+						"--line-number",
+						"--column",
+						"--smart-case",
+						"--trim"
+					},
+					prompt_prefix = "  ",
+					selection_caret = "  ",
+					winblend = 10,
+				},
+				pickers = {
+					find_files = {
+						-- use fd to find files
+						find_command = { "fd" },
+						-- search hidden files in the directory
+						hidden = true
+					}
+				},
+				extensions = {
+					["ui-select"] = { require("telescope.themes").get_dropdown {} },
+					["live_grep_args"] = {
+						mappings = {
+							i = {
+								["<C-k>"] = lga_actions.quote_prompt(),
+								["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+							}
+						}
+					},
+					["ast_grep"] = {
+						command = {
+							"sg",
+							"--json=stream",
+							-- "-p",
+						},     -- must have --json and -p
+						grep_open_files = false, -- search in opened files
+						lang = nil, -- string value, sepcify language for ast-grep `nil` for default
+					},
+					["undo"] = {},
+				},
+			})
+
+			telescope.load_extension('ui-select')
+			telescope.load_extension('fzy_native')
+			telescope.load_extension('fzf')
+			telescope.load_extension('live_grep_args')
+			telescope.load_extension('ast_grep')
+			telescope.load_extension('undo')
+			telescope.load_extension('smart_open')
+		end,
 		keys = {
 			{
 				'<Leader>ff',
@@ -49,11 +93,6 @@ return {
 				'<Leader>fg',
 				function() require('telescope').extensions.live_grep_args.live_grep_args() end,
 				desc = 'Live Grep'
-			},
-			{
-				'<Leader>fa',
-				function() vim.api.nvim_exec(':Telescope ast_grep<CR>', false) end,
-				desc = 'Find by AST'
 			},
 			{
 				'<Leader>fb',
@@ -99,8 +138,13 @@ return {
 					})
 				end,
 				desc = 'Fuzzily search in current buffer'
+			},
+			{
+				"<leader>fu",
+				function() require("telescope").extensions.undo.undo() end,
+				desc = "open telescope-undo.nvim"
 			}
-		}
+		},
 	},
 
 	-- Telescope fzf integration
@@ -112,52 +156,23 @@ return {
 		]],
 	},
 
-	-- Uses telescope for the native ui-select
-	'nvim-telescope/telescope-ui-select.nvim',
-
 	{
 		"danielfalk/smart-open.nvim",
 		branch = "0.2.x",
-		config = function()
-			require("telescope").load_extension("smart_open")
-			-- require("telescope").extensions.smart_open.smart_open {
-			-- 	cwd_only = true,
-			-- }
-		end,
 		dependencies = {
 			"kkharji/sqlite.lua",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 	},
 
-	'Marskey/telescope-sg',
-
-	'nvim-telescope/telescope-fzy-native.nvim',
-
 	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"debugloop/telescope-undo.nvim",
-		},
-		config = function()
-			require("telescope").setup({
-				extensions = {
-					undo = {
-						-- telescope-undo.nvim config, see below
-					},
-				},
-			})
-			require("telescope").load_extension("undo")
-			-- optional: vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
-		end,
+		'Marskey/telescope-sg',
 		keys = {
 			{
-				"<leader>fu",
-				function()
-					require("telescope").extensions.undo.undo()
-				end,
-				desc = "open telescope-undo.nvim"
+				'<Leader>fa',
+				':Telescope ast_grep<CR>',
+				desc = 'Find by AST'
 			}
 		}
-	}, }
+	},
+}
