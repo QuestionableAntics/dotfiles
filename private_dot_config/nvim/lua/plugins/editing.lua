@@ -117,7 +117,16 @@ return {
 	},
 
 	-- Structural find and replace
-	'cshuaimin/ssr.nvim',
+	{
+		'cshuaimin/ssr.nvim',
+		keys = {
+			{
+				'<leader>sr',
+				function() require('ssr').open() end,
+				desc = "Structural find and replace"
+			}
+		}
+	},
 
 	-- Modify quickfix buffer
 	{
@@ -155,7 +164,16 @@ return {
 					}
 				},
 			})
-		end
+		end,
+		keys = {
+			{
+				'<leader>fq',
+				function()
+					require('conform').format({ bufnr = 0, lsp_fallback = true })
+				end,
+				desc = 'format sql'
+			}
+		}
 	},
 
 	{

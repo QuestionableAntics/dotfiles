@@ -8,6 +8,13 @@ return {
 				view_options = { show_hidden = true },
 			}
 		end,
+		keys = {
+			{
+				'<Leader>v',
+				function() require('oil').open() end,
+				desc = 'Open File Explorer',
+			}
+		},
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 
@@ -72,6 +79,48 @@ return {
 	{
 		'akinsho/toggleterm.nvim',
 		version = '*',
+		keys = {
+			{
+				'<Leader>tt',
+				function()
+					local Terminal = require('toggleterm.terminal').Terminal
+					local horizontal = Terminal:new({ direction = 'horizontal' })
+					horizontal:toggle()
+				end,
+				desc = 'Toggle terminal',
+				mode = {'n'},
+			},
+			{
+				'<Leader>td',
+				function()
+					local Terminal = require('toggleterm.terminal').Terminal
+					local lazydocker = Terminal:new({ cmd = 'lazydocker', hidden = true, direction = 'float' })
+					lazydocker:toggle()
+				end,
+				desc = 'Toggle lazydocker',
+				mode = {'n'},
+			},
+			{
+				'<Leader>tg',
+				function()
+					local Terminal = require('toggleterm.terminal').Terminal
+					local lazygit = Terminal:new({ cmd = 'lazygit', hidden = true, direction = 'float' })
+					lazygit:toggle()
+				end,
+				desc = 'Toggle lazygit',
+				mode = {'n'},
+			},
+			{
+				'<C-v>',
+				function()
+					local Terminal = require('toggleterm.terminal').Terminal
+					local float = Terminal:new({ direction = 'float' })
+					float:toggle()
+				end,
+				desc = 'Toggle float terminal',
+				mode = {'n', 't'},
+			}
+		},
 		config = true
 	},
 

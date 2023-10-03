@@ -34,6 +34,18 @@ The following marks the beginning of your conversation with the user.
 				}
 			})
 		end,
+		keys = {
+			{
+				'<Leader>ait',
+				 ':NeoAIToggle<CR>',
+				desc = 'Toggle Neo AI'
+			},
+			{
+				'na',
+				':NeoAIContext<CR>',
+				mode = 'v'
+			}
+		}
 	},
 
 	-- AI in my code
