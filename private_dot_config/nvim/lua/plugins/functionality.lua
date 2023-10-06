@@ -79,48 +79,41 @@ return {
 	{
 		'akinsho/toggleterm.nvim',
 		version = '*',
-		keys = {
-			{
-				'<Leader>tt',
-				function()
-					local Terminal = require('toggleterm.terminal').Terminal
-					local horizontal = Terminal:new({ direction = 'horizontal' })
-					horizontal:toggle()
-				end,
-				desc = 'Toggle terminal',
-				mode = {'n'},
-			},
-			{
-				'<Leader>td',
-				function()
-					local Terminal = require('toggleterm.terminal').Terminal
-					local lazydocker = Terminal:new({ cmd = 'lazydocker', hidden = true, direction = 'float' })
-					lazydocker:toggle()
-				end,
-				desc = 'Toggle lazydocker',
-				mode = {'n'},
-			},
-			{
-				'<Leader>tg',
-				function()
-					local Terminal = require('toggleterm.terminal').Terminal
-					local lazygit = Terminal:new({ cmd = 'lazygit', hidden = true, direction = 'float' })
-					lazygit:toggle()
-				end,
-				desc = 'Toggle lazygit',
-				mode = {'n'},
-			},
-			{
-				'<C-v>',
-				function()
-					local Terminal = require('toggleterm.terminal').Terminal
-					local float = Terminal:new({ direction = 'float' })
-					float:toggle()
-				end,
-				desc = 'Toggle float terminal',
-				mode = {'n', 't'},
+		keys = function()
+			local Terminal = require('toggleterm.terminal').Terminal
+
+			local horizontal = Terminal:new({ direction = 'horizontal' })
+			local lazydocker = Terminal:new({ cmd = 'lazydocker', hidden = true, direction = 'float' })
+			local lazygit = Terminal:new({ cmd = 'lazygit', hidden = true, direction = 'float' })
+			local float = Terminal:new({ direction = 'float' })
+
+			return {
+				{
+					'<Leader>tt',
+					function() horizontal:toggle() end,
+					desc = 'Toggle terminal',
+					mode = { 'n' },
+				},
+				{
+					'<Leader>td',
+					function() lazydocker:toggle() end,
+					desc = 'Toggle lazydocker',
+					mode = { 'n' },
+				},
+				{
+					'<Leader>tg',
+					function() lazygit:toggle() end,
+					desc = 'Toggle lazygit',
+					mode = { 'n' },
+				},
+				{
+					'<C-v>',
+					function() float:toggle() end,
+					desc = 'Toggle float terminal',
+					mode = { 'n', 't' },
+				}
 			}
-		},
+		end,
 		config = true
 	},
 
