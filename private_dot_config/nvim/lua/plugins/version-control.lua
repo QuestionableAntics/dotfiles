@@ -1,6 +1,9 @@
 return {
 	-- git in vim (required for other git plugins)
-	'tpope/vim-fugitive',
+	{
+		'tpope/vim-fugitive',
+		event = 'VeryLazy',
+	},
 
 	-- sign column symbols for git changes and git hunk actions
 	{
@@ -62,6 +65,7 @@ return {
 				function() require('gitsigns').reset_buffer_index() end,
 				desc = 'Reset buffer index'
 			},
-		}
+		},
+		event = 'VeryLazy',
 	},
 }

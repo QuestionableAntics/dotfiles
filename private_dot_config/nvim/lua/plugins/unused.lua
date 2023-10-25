@@ -5,12 +5,6 @@ local Unused_local = {
 	-- Additional Omnisharp functionality
 	'Hoffs/omnisharp-extended-lsp.nvim',
 
-	-- gdb for neovim
-	{
-		'sakhnik/nvim-gdb',
-		build = ':!./install.sh',
-	},
-
 	-- Develop inside Docker containers
 	'jamestthompson3/nvim-remote-containers',
 
@@ -62,6 +56,14 @@ local Unused_local = {
 	'nvim-telescope/telescope-dap.nvim',
 
 	'nvim-zh/better-escape.vim',
+
+	{
+		'chipsenkbeil/distant.nvim',
+		branch = 'v0.3',
+		config = function()
+			require('distant'):setup()
+		end
+	},
 }
 
 return {}

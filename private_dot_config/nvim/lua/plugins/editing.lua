@@ -9,7 +9,8 @@ return {
 			require('mini.pairs').setup {}
 			-- additional targets to jump to next/prev
 			require('mini.bracketed').setup {}
-		end
+		end,
+		event = 'VeryLazy',
 	},
 
 	-- Commenting
@@ -17,7 +18,8 @@ return {
 		'numToStr/Comment.nvim',
 		config = function()
 			require('Comment').setup()
-		end
+		end,
+		event = 'VeryLazy',
 	},
 
 	-- Syntax tree parser for better syntax highlighting among other things
@@ -85,23 +87,28 @@ return {
 					},
 				},
 			}
-		end
+		end,
+		event = 'VeryLazy',
 	},
 
 	-- Auto close and update jsx tags
 	{
 		'windwp/nvim-ts-autotag',
-		config = function() require('nvim-ts-autotag').setup() end
+		config = function() require('nvim-ts-autotag').setup() end,
+		event = 'VeryLazy',
 	},
 
 	-- jsx aware commenting
-	'JoosepAlviste/nvim-ts-context-commentstring',
+	{
+		'JoosepAlviste/nvim-ts-context-commentstring',
+		event = 'VeryLazy',
+	},
 
 	-- Manipulate object surrounding characters
 	{
 		'https://github.com/kylechui/nvim-surround',
 		event = 'VeryLazy',
-		config = function() require('nvim-surround').setup() end
+		config = function() require('nvim-surround').setup() end,
 	},
 
 	-- Structural find and replace
@@ -113,7 +120,8 @@ return {
 				function() require('ssr').open() end,
 				desc = "Structural find and replace"
 			}
-		}
+		},
+		event = 'VeryLazy',
 	},
 
 	-- Modify quickfix buffer
@@ -126,7 +134,8 @@ return {
 				function() require('replacer').run() end,
 				desc = "run replacer.nvim"
 			}
-		}
+		},
+		event = 'VeryLazy',
 	},
 
 	-- Formatter plugin
@@ -161,7 +170,8 @@ return {
 				end,
 				desc = 'format sql'
 			}
-		}
+		},
+		event = 'VeryLazy',
 	},
 
 	{
@@ -177,6 +187,7 @@ return {
 				end,
 				desc = "open spectre"
 			}
-		}
+		},
+		event = 'VeryLazy',
 	},
 }

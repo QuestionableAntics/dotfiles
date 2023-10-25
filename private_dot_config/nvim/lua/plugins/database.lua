@@ -1,10 +1,19 @@
 return {
 	-- DB interface
-	'tpope/vim-dadbod',
+	{
+		'tpope/vim-dadbod',
+		event = 'VeryLazy',
+	},
 
 	-- UI for DB interface
-	'kristijanhusak/vim-dadbod-ui',
+	{
+		'kristijanhusak/vim-dadbod-ui',
+		event = 'VeryLazy',
+	},
 
 	-- Postgres driver
-	'jackc/pgx',
+	{
+		'jackc/pgx',
+		event = 'VeryLazy',
+	},
 }

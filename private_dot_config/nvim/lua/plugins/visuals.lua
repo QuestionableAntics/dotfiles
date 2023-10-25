@@ -3,7 +3,10 @@ return {
 	'nvim-tree/nvim-web-devicons',
 
 	-- highlight matching html tags
-	'gregsexton/MatchTag',
+	{
+		'gregsexton/MatchTag',
+		event = 'VeryLazy',
+	},
 
 	-- VS Code theme
 	{
@@ -37,7 +40,7 @@ return {
 	-- Virtual text to add indentation guides
 	{
 		'shellRaining/hlchunk.nvim',
-		event = { 'UIEnter' },
+		event = { 'VeryLazy' },
 		config = function()
 			require('hlchunk').setup({
 				indent = { chars = { '┆' } },
@@ -80,5 +83,12 @@ return {
 	{
 		'DNLHC/glance.nvim',
 		config = function() require('glance').setup({}) end,
+		event = 'VeryLazy',
+	},
+
+	-- Show context at the top of the file
+	{
+		'https://github.com/nvim-treesitter/nvim-treesitter-context',
+		event = 'VeryLazy',
 	},
 }

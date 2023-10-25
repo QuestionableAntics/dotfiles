@@ -12,6 +12,9 @@ vim.opt.emoji = true
 -- Set up some sensible defaults and plugins for pairing
 Pairing = false
 
+-- Debugging functionality
+Debugging = false
+
 -- Needs to be set before any plugins are loaded
 vim.g.mapleader = ' '
 
@@ -22,7 +25,16 @@ require('language-servers')
 require('config')
 require('mappings')
 require('autocommands')
-require('debug-config')
+
+
+------------------------------------------------------------------------------------------
+-- Debugging
+------------------------------------------------------------------------------------------
+
+if Debugging then
+	require('debug-config')
+end
+
 
 ------------------------------------------------------------------------------------------
 -- Pairing

@@ -28,7 +28,8 @@ return {
 						".pytest_cache",
 						"bin/Debug",
 						"obj/",
-						".yarn/*"
+						".yarn/*",
+						".obsidian/*",
 					},
 					vimgrep_arguments = {
 						"rg",
@@ -145,6 +146,7 @@ return {
 				desc = "open telescope-undo.nvim"
 			}
 		},
+		event = "VeryLazy"
 	},
 
 	-- Telescope fzf integration
@@ -154,6 +156,7 @@ return {
 		cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && \
 		cmake --build build --config Release && cmake --install build --prefix build
 		]],
+		event = "VeryLazy",
 	},
 
 	{
@@ -163,6 +166,7 @@ return {
 			"kkharji/sqlite.lua",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
+		event = "VeryLazy",
 	},
 
 	{
@@ -173,6 +177,7 @@ return {
 				':Telescope ast_grep<CR>',
 				desc = 'Find by AST'
 			}
-		}
+		},
+		event = "VeryLazy",
 	},
 }

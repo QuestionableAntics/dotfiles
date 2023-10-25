@@ -16,6 +16,7 @@ return {
 			}
 		},
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+		event = 'VeryLazy',
 	},
 
 	-- Fast Motions
@@ -47,10 +48,14 @@ return {
 				desc = "Remote Flash",
 			},
 		},
+		event = "VeryLazy",
 	},
 
 	-- Additional treesitter functionality (in/around function/class/etc. operations)
-	'nvim-treesitter/nvim-treesitter-textobjects',
+	{
+		'nvim-treesitter/nvim-treesitter-textobjects',
+		event = 'VeryLazy',
+	},
 
 	-- Session Management
 	{
@@ -66,7 +71,8 @@ return {
 	-- Better Quickfix
 	{
 		'kevinhwang91/nvim-bqf',
-		config = function() require('bqf').setup {} end
+		config = function() require('bqf').setup {} end,
+		event = 'VeryLazy',
 	},
 
 	-- Tabline
@@ -114,7 +120,8 @@ return {
 				}
 			}
 		end,
-		config = true
+		config = true,
+		event = 'VeryLazy',
 	},
 
 	-- {
@@ -140,13 +147,22 @@ return {
 		config = function()
 			require("gitlab").setup()                          -- Uses delta reviewer by default
 		end,
+		event = "VeryLazy",
+		enabled = false,
 	},
 
+	-- {
+	-- 	'Wansmer/symbol-usage.nvim',
+	-- 	event = 'LspAttach',
+	-- 	config = function()
+	-- 		require('symbol-usage').setup()
+	-- 	end
+	-- },
+
+	-- stupid easy indentation
 	{
-		'Wansmer/symbol-usage.nvim',
-		event = 'LspAttach',
-		config = function()
-			require('symbol-usage').setup()
-		end
+		'https://github.com/Darazaki/indent-o-matic',
+		config = function() require('indent-o-matic').setup {} end,
+		event = "VeryLazy",
 	},
 }

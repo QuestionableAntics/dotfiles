@@ -1,12 +1,25 @@
 return {
 	-- Fast as FUCK autocompletion
-	{ 'ms-jpq/coq_nvim', branch = 'coq' },
+	{
+		'ms-jpq/coq_nvim',
+		branch = 'coq',
+		event = 'VeryLazy',
+	},
 
 	-- snippets for coq.nvim
 	-- { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
 
 	-- Code actions lightbulb
-	'kosayoda/nvim-lightbulb',
+	{
+		'kosayoda/nvim-lightbulb',
+		event = "VeryLazy",
+	},
+
+	{
+		'https://github.com/joshuavial/aider.nvim',
+		config = function() require("aider").setup() end,
+		event = "VeryLazy",
+	},
 
 	-- GPT chat interface
 	{
@@ -45,13 +58,14 @@ The following marks the beginning of your conversation with the user.
 				':NeoAIContext<CR>',
 				mode = 'v'
 			}
-		}
+		},
+		event = "VeryLazy",
 	},
 
 	-- AI in my code
 	{
 		'zbirenbaum/copilot.lua',
-		event = { 'VimEnter' },
+		event = { 'VeryLazy' },
 		config = function()
 			vim.defer_fn(function()
 				require('copilot').setup({
@@ -70,5 +84,8 @@ The following marks the beginning of your conversation with the user.
 	},
 
 	-- Autocomplete source for vim dadbod (database)
-	'kristijanhusak/vim-dadbod-completion',
+	{
+		'kristijanhusak/vim-dadbod-completion',
+		event = { 'VeryLazy' },
+	},
 }

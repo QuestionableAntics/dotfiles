@@ -1,3 +1,7 @@
+if not Debugging then
+	return {}
+end
+
 return {
 	-- Debug adapter protocol, base plugin {name = for debugging}
 	{
@@ -153,6 +157,12 @@ return {
 				desc = 'Test Output',
 			},
 		}
+	},
+
+	-- gdb for neovim
+	{
+		'sakhnik/nvim-gdb',
+		build = ':!./install.sh',
 	},
 
 	-- Debug Jest

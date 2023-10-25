@@ -3,6 +3,10 @@ return {
 	-- Handles automatically launching and initializing installed language servers
 	'neovim/nvim-lspconfig',
 
+	{
+		'https://github.com/jmederosalvarado/roslyn.nvim'
+	},
+
 	-- General external editor tooling installation management (Language servers, dap servers, linters, formatters)
 	{
 		'williamboman/mason.nvim',
@@ -28,7 +32,8 @@ return {
 				}
 			}
 		end,
-		dependencies = { 'williamboman/mason-lspconfig.nvim' }
+		dependencies = { 'williamboman/mason-lspconfig.nvim' },
+		event = 'VeryLazy',
 	},
 
 	-- direct integration with tsserver
@@ -39,6 +44,7 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		opts = {},
+		event = 'VeryLazy',
 	},
 
 	-- {
