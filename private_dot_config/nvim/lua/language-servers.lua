@@ -17,7 +17,10 @@ vim.g.coq_settings = {
 	keymap = { jump_to_mark = '' },
 	-- a lot of what I want from autocomplete is exploring properties on objects
 	-- this makes those properties more visible in large projects by prioritizing lsp results
-	clients = { lsp = { weight_adjust = 1.6 } }
+	clients = {
+		lsp = { weight_adjust = 1.6 },
+		snippets = { warn = {} },
+	},
 }
 
 

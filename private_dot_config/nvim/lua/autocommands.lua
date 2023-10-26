@@ -92,7 +92,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Show code action lightbulb on cursorhold
 local lightbulb = require('nvim-lightbulb')
-vim.api.nvim_create_autocmd({ "CursorHold, CursorHoldI" }, {
+vim.api.nvim_create_autocmd({ "CursorHold" }, {
 	callback = lightbulb.update_lightbulb
 })
 
@@ -100,8 +100,6 @@ vim.api.nvim_create_autocmd({ "CursorHold, CursorHoldI" }, {
 -- Format go files on save
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.go",
-	callback = function()
-		require('go.format').goimport()
-	end,
+	callback = function() require('go.format').goimport() end,
 	group = vim.api.nvim_create_augroup("GoFormat", {}),
 })

@@ -6,9 +6,6 @@ return {
 		event = 'VeryLazy',
 	},
 
-	-- snippets for coq.nvim
-	-- { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
-
 	-- Code actions lightbulb
 	{
 		'kosayoda/nvim-lightbulb',
@@ -69,6 +66,7 @@ The following marks the beginning of your conversation with the user.
 		config = function()
 			vim.defer_fn(function()
 				require('copilot').setup({
+					copilot_node_command = os.getenv("HOME") .. '/.local/share/rtx/installs/node/18.16.1/bin/node',
 					suggestion = {
 						enabled = true,
 						auto_trigger = true,
