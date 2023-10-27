@@ -18,6 +18,8 @@ Debugging = false
 -- Needs to be set before any plugins are loaded
 vim.g.mapleader = ' '
 
+vim.loader.enable()
+
 require('ensure-installed')
 require('lazy').setup('plugins')
 require('telescope-config')

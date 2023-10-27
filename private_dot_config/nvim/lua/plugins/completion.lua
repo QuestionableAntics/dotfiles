@@ -44,18 +44,22 @@ The following marks the beginning of your conversation with the user.
 				}
 			})
 		end,
-		keys = {
-			{
-				'<Leader>ait',
-				 ':NeoAIToggle<CR>',
-				desc = 'Toggle Neo AI'
-			},
-			{
-				'na',
-				':NeoAIContext<CR>',
-				mode = 'v'
+		keys = function()
+			require('which-key').register({ ['<Leader>a'] = 'AI' })
+
+			return {
+				{
+					'<Leader>ait',
+					':NeoAIToggle<CR>',
+					desc = 'Toggle Neo AI'
+				},
+				{
+					'na',
+					':NeoAIContext<CR>',
+					mode = 'v'
+				}
 			}
-		},
+		end,
 		event = "VeryLazy",
 	},
 
@@ -84,6 +88,6 @@ The following marks the beginning of your conversation with the user.
 	-- Autocomplete source for vim dadbod (database)
 	{
 		'kristijanhusak/vim-dadbod-completion',
-		event = { 'VeryLazy' },
+		ft = { 'sql', 'mysql', 'plsql', 'pgsql', 'sqlite', },
 	},
 }

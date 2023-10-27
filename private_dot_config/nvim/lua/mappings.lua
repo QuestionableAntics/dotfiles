@@ -74,27 +74,23 @@ mappings['random'] = {
 
 
 ------------------------------------------------------------------------------------------
--- Fuzzy Finder
+-- Neovide Copy/Paste
 ------------------------------------------------------------------------------------------
 
-stems['<Leader>f'] = { label = 'Fuzzy Finder' }
-stems['<Leader>fx'] = { label = 'Find Diagnostics' }
+if vim.g.neovide then
+  vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
+  vim.keymap.set('v', '<D-c>', '"+y') -- Copy
+  vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
+  vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
+  vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
+  vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+end
 
-
-------------------------------------------------------------------------------------------
--- Testing
-------------------------------------------------------------------------------------------
-
-stems['<Leader>u'] = { label = 'Testing' }
-
-
-------------------------------------------------------------------------------------------
--- Debugging
-------------------------------------------------------------------------------------------
-
-stems['<Leader>d'] = { label = 'Debug' }
-stems['<Leader>du'] = { label = 'Debug UI' }
-stems['<Leader>dc'] = { label = 'Debug Telescope' }
+-- Allow clipboard copy paste in neovim
+vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true})
 
 
 ------------------------------------------------------------------------------------------
@@ -119,13 +115,6 @@ mappings['lsp'] = {
 	['<Leader>='] = { mode = 'n', action = vim.lsp.buf.format, label = 'Formatting' },
 	['<Leader>-'] = { mode = 'n', action = vim.diagnostic.setloclist, label = 'Diagnostic Locations' },
 }
-
-
-------------------------------------------------------------------------------------------
--- Git
-------------------------------------------------------------------------------------------
-
-stems['<Leader>h'] = { label = 'Git' }
 
 
 ------------------------------------------------------------------------------------------
@@ -154,13 +143,6 @@ mappings['tab'] = {
 }
 
 stems['<Leader>t'] = { label = 'Tabs' }
-
-
-------------------------------------------------------------------------------------------
--- AI
-------------------------------------------------------------------------------------------
-
-stems['a'] = { label = 'AI' }
 
 
 ------------------------------------------------------------------------------------------

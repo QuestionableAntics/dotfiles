@@ -95,13 +95,13 @@ return {
 	{
 		'windwp/nvim-ts-autotag',
 		config = function() require('nvim-ts-autotag').setup() end,
-		event = 'VeryLazy',
+		ft = { 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
 	},
 
 	-- jsx aware commenting
 	{
 		'JoosepAlviste/nvim-ts-context-commentstring',
-		event = 'VeryLazy',
+		ft = { 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
 	},
 
 	-- Manipulate object surrounding characters

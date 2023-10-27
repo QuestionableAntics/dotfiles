@@ -6,81 +6,89 @@ return {
 	-- Debug adapter protocol, base plugin {name = for debugging}
 	{
 		'mfussenegger/nvim-dap',
-		keys = {
-			{
-				'<F9>',
-				function() require('dap').continue() end,
-				desc = 'Debug Continue',
-				mode = 'n',
-			},
-			{
-				'<F10>',
-				function() require('dap').step_over() end,
-				desc = 'Debug Step Over',
-				mode = 'n',
-			},
-			{
-				'<F11>',
-				function() require('dap').step_into() end,
-				desc = 'Debug Step Into',
-				mode = 'n',
-			},
-			{
-				'<F12>',
-				function() require('dap').step_out() end,
-				desc = 'Debug Step Out',
-				mode = 'n',
-			},
-			{
-				'<Leader>db',
-				function() require('dap').toggle_breakpoint() end,
-				desc = 'Debug Toggle Breakpoint',
-				mode = 'n',
-			},
-			{
-				'<Leader>dsbr',
-				function()
-					require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
-				end,
-				desc = 'Debug Set Breakpoint',
-				mode = 'n',
-			},
-			{
-				'<Leader>dsbm',
-				function()
-					require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
-				end,
-				desc = 'Debug Set Breakpoint Message',
-				mode = 'n',
-			},
-			{
-				'<Leader>dr',
-				function() require('dap').repl.open() end,
-				desc = 'Debug REPL',
-				mode = 'n',
-			},
-			{
-				'<Leader>dui',
-				function() require('dapui').toggle() end,
-				desc = 'Debug UI',
-				mode = 'n',
-			},
-			{
-				'<Leader>duh',
-				function() require('dap.ui.widgets').hover() end,
-				desc = 'Debug Hover',
-				mode = 'n',
-			},
-			{
-				'<Leader>duf',
-				function()
-					require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes)
-				end,
-				desc = 'Debug Scopes',
-				mode = 'n',
-			}
+		keys = function()
+			local which_key = require 'which-key'
 
-		}
+			which_key.register({ ['<Leader>d'] = 'Debug' })
+			which_key.register({ ['<Leader>du'] = 'Debug UI' })
+			which_key.register({ ['<Leader>dc'] = 'Debug Telescope' })
+			which_key.register({ ['<Leader>u'] = 'Testing' })
+
+			return {
+				{
+					'<F9>',
+					function() require('dap').continue() end,
+					desc = 'Debug Continue',
+					mode = 'n',
+				},
+				{
+					'<F10>',
+					function() require('dap').step_over() end,
+					desc = 'Debug Step Over',
+					mode = 'n',
+				},
+				{
+					'<F11>',
+					function() require('dap').step_into() end,
+					desc = 'Debug Step Into',
+					mode = 'n',
+				},
+				{
+					'<F12>',
+					function() require('dap').step_out() end,
+					desc = 'Debug Step Out',
+					mode = 'n',
+				},
+				{
+					'<Leader>db',
+					function() require('dap').toggle_breakpoint() end,
+					desc = 'Debug Toggle Breakpoint',
+					mode = 'n',
+				},
+				{
+					'<Leader>dsbr',
+					function()
+						require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
+					end,
+					desc = 'Debug Set Breakpoint',
+					mode = 'n',
+				},
+				{
+					'<Leader>dsbm',
+					function()
+						require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+					end,
+					desc = 'Debug Set Breakpoint Message',
+					mode = 'n',
+				},
+				{
+					'<Leader>dr',
+					function() require('dap').repl.open() end,
+					desc = 'Debug REPL',
+					mode = 'n',
+				},
+				{
+					'<Leader>dui',
+					function() require('dapui').toggle() end,
+					desc = 'Debug UI',
+					mode = 'n',
+				},
+				{
+					'<Leader>duh',
+					function() require('dap.ui.widgets').hover() end,
+					desc = 'Debug Hover',
+					mode = 'n',
+				},
+				{
+					'<Leader>duf',
+					function()
+						require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes)
+					end,
+					desc = 'Debug Scopes',
+					mode = 'n',
+				}
+			}
+		end
 	},
 
 	-- Defaults for Python debugging

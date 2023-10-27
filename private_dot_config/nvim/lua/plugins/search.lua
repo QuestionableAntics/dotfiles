@@ -76,76 +76,95 @@ return {
 				},
 			})
 
-			telescope.load_extension('ui-select')
-			telescope.load_extension('fzy_native')
-			telescope.load_extension('fzf')
-			telescope.load_extension('live_grep_args')
-			telescope.load_extension('ast_grep')
-			telescope.load_extension('undo')
-			telescope.load_extension('smart_open')
-		end,
-		keys = {
-			{
-				'<Leader>ff',
-				function() require('telescope.builtin').find_files() end,
-				desc = 'Find files'
-			},
-			{
-				'<Leader>fg',
-				function() require('telescope').extensions.live_grep_args.live_grep_args() end,
-				desc = 'Live Grep'
-			},
-			{
-				'<Leader>fb',
-				function() require('telescope.builtin').buffers() end,
-				desc = 'Find Buffers'
-			},
-			{
-				'<Leader>fh',
-				function() require('telescope.builtin').help_tags() end,
-				desc = 'Find Help Tags'
-			},
-			{
-				'<Leader>fo',
-				function() require('telescope.builtin').oldfiles() end,
-				desc = 'Find Old Files'
-			},
-			{
-				'<Leader>fl',
-				function() require('telescope.builtin').resume() end,
-				desc = 'Last Search Results'
-			},
-			{
-				'<Leader>fs',
-				function() require('telescope').extensions.smart_open.smart_open { cwd_only = true } end,
-				desc = 'Smart Open'
-			},
-			{
-				'<Leader>fxd',
-				function() require('telescope.builtin').diagnostics { bufnr = 0 } end,
-				desc = 'Find Diagnostics in Focused Buffer'
-			},
-			{
-				'<Leader>fxw',
-				function() require('telescope.builtin').diagnostics() end,
-				desc = 'Find Diagnostics in Open Buffers'
-			},
-			{
-				'<Leader>/',
-				function()
-					require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-						winblend = 10,
-						previewer = false,
-					})
-				end,
-				desc = 'Fuzzily search in current buffer'
-			},
-			{
-				"<leader>fu",
-				function() require("telescope").extensions.undo.undo() end,
-				desc = "open telescope-undo.nvim"
+			local telescope_extensions = {
+				"smart_open",
+				"session-lens",
+				"undo",
+				"ast_grep",
+				"live_grep_args",
+				"fzf",
+				"fzy_native",
+				"ui-select",
 			}
-		},
+
+			for _, ext in ipairs(telescope_extensions) do
+				telescope.load_extension(ext)
+			end
+		end,
+		keys = function()
+			local which_key = require 'which-key'
+
+			which_key.register({ ['<Leader>f'] = 'Fuzzy Finder' })
+			which_key.register({ ['<Leader>fx'] = 'Find Diagnostics' })
+
+			return {
+				{
+					'<Leader>ff',
+					function() require('telescope.builtin').find_files() end,
+					desc = 'Find files'
+				},
+				{
+					'<Leader>fg',
+					function() require('telescope').extensions.live_grep_args.live_grep_args() end,
+					desc = 'Live Grep'
+				},
+				{
+					'<Leader>fb',
+					function() require('telescope.builtin').buffers() end,
+					desc = 'Find Buffers'
+				},
+				{
+					'<Leader>fh',
+					function() require('telescope.builtin').help_tags() end,
+					desc = 'Find Help Tags'
+				},
+				{
+					'<Leader>fo',
+					function() require('telescope.builtin').oldfiles() end,
+					desc = 'Find Old Files'
+				},
+				{
+					'<Leader>fl',
+					function() require('telescope.builtin').resume() end,
+					desc = 'Last Search Results'
+				},
+				{
+					'<Leader>fs',
+					function() require('telescope').extensions.smart_open.smart_open { cwd_only = true } end,
+					desc = 'Smart Open'
+				},
+				{
+					'<Leader>fd',
+					require("auto-session.session-lens").search_session,
+					desc = 'Find Sessions'
+				},
+				{
+					'<Leader>fxd',
+					function() require('telescope.builtin').diagnostics { bufnr = 0 } end,
+					desc = 'Find Diagnostics in Focused Buffer'
+				},
+				{
+					'<Leader>fxw',
+					function() require('telescope.builtin').diagnostics() end,
+					desc = 'Find Diagnostics in Open Buffers'
+				},
+				{
+					'<Leader>/',
+					function()
+						require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+							winblend = 10,
+							previewer = false,
+						})
+					end,
+					desc = 'Fuzzily search in current buffer'
+				},
+				{
+					"<leader>fu",
+					function() require("telescope").extensions.undo.undo() end,
+					desc = "open telescope-undo.nvim"
+				}
+			}
+		end,
 		event = "VeryLazy"
 	},
 

@@ -5,7 +5,7 @@ return {
 	-- highlight matching html tags
 	{
 		'gregsexton/MatchTag',
-		event = 'VeryLazy',
+		ft = { 'html', 'xml', 'javascript', 'typescriptreact', 'javascriptreact' },
 	},
 
 	-- VS Code theme
@@ -19,6 +19,7 @@ return {
 			}
 			vscode.load()
 		end,
+		priority = 1000,
 	},
 
 	-- Nice status bar

@@ -3,8 +3,10 @@ return {
 	-- Handles automatically launching and initializing installed language servers
 	'neovim/nvim-lspconfig',
 
+	-- beta roslyn lsp support, ideally can be removed eventually if this gets moved into mason
 	{
-		'https://github.com/jmederosalvarado/roslyn.nvim'
+		'https://github.com/jmederosalvarado/roslyn.nvim',
+		ft = { 'cs' },
 	},
 
 	-- General external editor tooling installation management (Language servers, dap servers, linters, formatters)
@@ -44,7 +46,7 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		opts = {},
-		event = 'VeryLazy',
+		ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
 	},
 
 	-- {
