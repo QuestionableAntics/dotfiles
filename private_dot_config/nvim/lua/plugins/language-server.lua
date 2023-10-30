@@ -9,6 +9,16 @@ return {
 		ft = { 'cs' },
 	},
 
+	{
+		'https://github.com/lhKipp/nvim-nu',
+		config = function()
+			require('nu').setup{
+				use_lsp_features = false
+			}
+		end,
+		build = ':TSInstall nu'
+	},
+
 	-- General external editor tooling installation management (Language servers, dap servers, linters, formatters)
 	{
 		'williamboman/mason.nvim',

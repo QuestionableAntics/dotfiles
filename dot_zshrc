@@ -84,7 +84,6 @@ alias la="ls -lAh"
 #################################################################################
 
 # fast directory switching
-# safe_source "$HOME/.config/scripts/z.sh"
 eval "$(lua $HOME/.config/scripts/z.lua --init zsh)"
 
 # fzf
@@ -115,52 +114,6 @@ ds() {
         docker run -it -v $(pwd):/app --name "$container_name" nvim-config:latest
     fi
 }
-
-# open the current git repository in the browser
-ogr() {
-	# Get current directory
-	dir=$(pwd)
-
-	# Find the root of the git repository
-	while [[ "$dir" != "/" ]] && ! git -C "$dir" rev-parse --is-inside-work-tree > /dev/null 2>&1; do
-		dir=$(dirname "$dir")
-	done
-
-	# If we reached the root directory and it is not a git repository, exit with an error
-	if [[ "$dir" == "/" ]]; then
-		echo "Error: Not a git repository" >&2
-		return 1
-	fi
-
-    # Get the remote URL of the git repository
-    remote_url=$(git -C "$dir" config --get remote.origin.url)
-
-	# is this git or http?
-	if [[ "$remote_url" == "git@"* ]]; then
-		# remove git@ and everything after the :
-		base_url=$(echo "$remote_url" | cut -d':' -f1 | sed 's/git@//')
-	else
-		# remove https:// and everything after the /
-		base_url=$(echo "$remote_url" | cut -d'/' -f1-3)
-	fi
-
-    # Extract the domain and repository path from the remote URL
-    domain=$(echo "$remote_url" | cut -d':' -f2 | cut -d'/' -f1)
-    repo_path=$(echo "$remote_url" | cut -d':' -f2 | cut -d'/' -f2- | sed 's/\.git$//')
-	
-    # Construct the URL to open in the browser
-    url="https://$base_url/$domain/$repo_path"
-
-    # Open the URL in the default browser
-    if [[ "$OSTYPE" == "darwin"* ]]; then  # for macOS
-        open "$url"
-    elif [[ "$OSTYPE" == "linux-gnu"* ]]; then  # for Linux
-        xdg-open "$url"
-    elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then  # for Windows
-        start "$url"
-    fi
-}
-
 
 #################################################################################
 # Keep at bottom
