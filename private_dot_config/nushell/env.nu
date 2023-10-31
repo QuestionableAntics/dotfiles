@@ -53,3 +53,4 @@ if ('~/.config/nushell/secrets.nu' | path exists)  {
 }
 
 zoxide init nushell | save -f ~/.zoxide.nu
+oh-my-posh init nu --config '~/.config/oh-my-posh/themes/emodipt-extend.omp.json'

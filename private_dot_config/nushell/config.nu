@@ -646,6 +646,7 @@ $env.config = {
 }
 
 source "/Users/kean.mattingly@equipmentshare.com/.config/nushell/rtx.nu"
-use ~/.cache/starship/init.nu
+# use ~/.cache/starship/init.nu
 source ~/.zoxide.nu
 source ~/.local/share/atuin/init.nu
+source ~/.oh-my-posh.nu

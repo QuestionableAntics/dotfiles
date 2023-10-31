@@ -2,21 +2,23 @@
 font:
   # Normal (roman):
   normal:
-    family: MesloLGS NF
+    family: JetBrainsMono Nerd Font Mono
     style: Regular
    
   bold:
-    family: MesloLGS NF
+    family: JetBrainsMono Nerd Font Mono
     style: Bold
    
   italic:
-    family: MesloLGS NF
+    family: JetBrainsMono Nerd Font Mono
     style: Italic
    
   bold_italic:
-    family: MesloLGS NF
+    family: JetBrainsMono Nerd Font Mono
     style: Bold Italic
    
   book:
-    family: MesloLGS NF
-    style: Book 
+    family: JetBrainsMono Nerd Font Mono
+    style: Book
+
+  size: 12.0
