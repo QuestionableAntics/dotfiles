@@ -1,7 +1,3 @@
-# Nushell Environment Config File
-#
-# version = "0.86.0"
-
 # Specifies how environment variables are:
 # - converted from a string to a value on Nushell startup (from_string)
 # - converted from a value back to a string when running external commands (to_string)
@@ -33,6 +29,12 @@ $env.EDITOR = {|| "nvim" }
 $env.DOCKER_HOST = unix://($env.HOME)/.colima/default/docker.sock
 $env.LDFLAGS = "-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
 $env.CPPFLAGS = "-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
+
+# The prompt indicators are environmental variables that represent
+# the state of the prompt
+$env.PROMPT_INDICATOR = {|| "" }
+$env.PROMPT_INDICATOR_VI_INSERT = {|| "" }
+$env.PROMPT_INDICATOR_VI_NORMAL = {|| "" }
 
 $env.LC_ALL = "en_US.UTF-8"
 

@@ -5,21 +5,18 @@
 use ~/.config/nushell/extras.nu *
 
 
-
 #################################################################################
 # Aliases
 #################################################################################
 
 alias v = nvim
 alias la = ls -a
+alias s = zellij
 
 
 #################################################################################
 # Keep at bottom of file
 #################################################################################
-
-source ~/.zoxide.nu
-
 
 #################################################################################
 # Nushell Default
@@ -650,3 +647,5 @@ $env.config = {
 
 source "/Users/kean.mattingly@equipmentshare.com/.config/nushell/rtx.nu"
 use ~/.cache/starship/init.nu
+source ~/.zoxide.nu
+source ~/.local/share/atuin/init.nu

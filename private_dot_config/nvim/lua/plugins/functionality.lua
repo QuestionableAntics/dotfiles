@@ -63,6 +63,10 @@ return {
 			require('auto-session').setup {
 				auto_session_root_dir = os.getenv('HOME') .. '/.vim/sessions/',
 				auto_session_suppress_dirs = { os.getenv('HOME') },
+				pre_cwd_changed_hook = function()
+					-- close all language servers
+					vim.lsp.stop_client(vim.lsp.get_active_clients())
+				end,
 			}
 		end
 	},
