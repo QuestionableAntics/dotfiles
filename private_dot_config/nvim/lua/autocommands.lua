@@ -90,16 +90,44 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
--- Show code action lightbulb on cursorhold
-local lightbulb = require('nvim-lightbulb')
-vim.api.nvim_create_autocmd({ "CursorHold" }, {
-	callback = lightbulb.update_lightbulb
-})
-
-
 -- Format go files on save
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.go",
 	callback = function() require('go.format').goimport() end,
 	group = vim.api.nvim_create_augroup("GoFormat", {}),
+})
+
+
+-- Write session on exit
+vim.api.nvim_create_autocmd("VimLeavePre", {
+	callback = function()
+		local cwd = vim.fn.getcwd()
+
+		-- if home dir, don't save session
+		if cwd == vim.fn.expand("$HOME") then return end
+
+		-- save session to ~/.nvim/sessions
+		local session_dir = vim.fn.expand("$HOME/.nvim/sessions")
+		local session_file = session_dir .. "/" .. vim.fn.fnamemodify(cwd, ":p:h:t") .. ".vim"
+		vim.fn.mkdir(session_dir, "p")
+		vim.cmd("mksession! " .. session_file)
+	end,
+})
+
+-- Read session on start
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		local cwd = vim.fn.getcwd()
+
+		-- if home dir, don't save session
+		if cwd == vim.fn.expand("$HOME") then return end
+
+		-- save session to ~/.nvim/sessions
+		local session_dir = vim.fn.expand("$HOME/.nvim/sessions")
+		local session_file = session_dir .. "/" .. vim.fn.fnamemodify(cwd, ":p:h:t") .. ".vim"
+		if vim.fn.filereadable(session_file) == 1 then
+			vim.cmd("source " .. session_file)
+		end
+	end,
+	nested = true,
 })

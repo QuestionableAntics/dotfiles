@@ -64,6 +64,85 @@ local Unused_local = {
 			require('distant'):setup()
 		end
 	},
+
+	-- Code actions lightbulb
+	{
+		'kosayoda/nvim-lightbulb',
+		event = "VeryLazy",
+	},
+
+	-- Modify quickfix buffer
+	{
+		'gabrielpoca/replacer.nvim',
+		opts = { rename_files = false },
+		keys = {
+			{
+				'<leader>h',
+				function() require('replacer').run() end,
+				desc = "run replacer.nvim"
+			}
+		},
+		event = 'VeryLazy',
+	},
+
+	{
+		"arnaupv/nvim-devcontainer-cli",
+		opts = {}
+	},
+
+	{
+		'https://github.com/joshuavial/aider.nvim',
+		config = function() require("aider").setup() end,
+		event = "VeryLazy",
+	},
+
+	{
+		'nvim-pack/nvim-spectre',
+		config = function()
+			require('spectre').setup()
+		end,
+		keys = {
+			{
+				'<leader>sp',
+				function()
+					require('spectre').toggle()
+				end,
+				desc = "open spectre"
+			}
+		},
+		event = 'VeryLazy',
+	},
+
+	-- Open paired files
+	{
+		'rgroli/other.nvim',
+		config = function() require('other-nvim').setup {} end
+	},
+
+	{
+		"harrisoncramer/gitlab.nvim",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"stevearc/dressing.nvim", -- Recommended but not required. Better UI for pickers.
+			enabled = true,
+		},
+		build = function() require("gitlab.server").build(true) end, -- Builds the Go binary
+		config = function()
+			require("gitlab").setup()                          -- Uses delta reviewer by default
+		end,
+		event = "VeryLazy",
+		enabled = false,
+	},
+
+	{
+		'simrat39/rust-tools.nvim',
+		config = function()
+			require('rust-tools').setup({})
+		end,
+		ft = { 'rust' },
+	},
+
 }
 
 return {}

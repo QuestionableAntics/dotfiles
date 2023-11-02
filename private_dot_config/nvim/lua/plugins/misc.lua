@@ -11,7 +11,7 @@ return {
 	-- Types for vim api
 	{
 		'folke/neodev.nvim',
-		event = 'VeryLazy',
+		ft = { 'lua' },
 	},
 
 	---- General dependencies

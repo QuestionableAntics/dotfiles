@@ -6,18 +6,6 @@ return {
 		event = 'VeryLazy',
 	},
 
-	-- Code actions lightbulb
-	{
-		'kosayoda/nvim-lightbulb',
-		event = "VeryLazy",
-	},
-
-	{
-		'https://github.com/joshuavial/aider.nvim',
-		config = function() require("aider").setup() end,
-		event = "VeryLazy",
-	},
-
 	-- GPT chat interface
 	{
 		'Bryley/neoai.nvim',
@@ -60,7 +48,7 @@ The following marks the beginning of your conversation with the user.
 				}
 			}
 		end,
-		event = "VeryLazy",
+		lazy = true,
 	},
 
 	-- AI in my code

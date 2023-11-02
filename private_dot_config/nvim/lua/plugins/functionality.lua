@@ -15,7 +15,7 @@ return {
 			}
 		},
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		event = 'VeryLazy',
+		lazy = true,
 	},
 
 	-- Fast Motions
@@ -57,19 +57,19 @@ return {
 	},
 
 	-- Session Management
-	{
-		'rmagatti/auto-session',
-		config = function()
-			require('auto-session').setup {
-				auto_session_root_dir = os.getenv('HOME') .. '/.vim/sessions/',
-				auto_session_suppress_dirs = { os.getenv('HOME') },
-				pre_cwd_changed_hook = function()
-					-- close all language servers
-					vim.lsp.stop_client(vim.lsp.get_active_clients())
-				end,
-			}
-		end
-	},
+	-- {
+	-- 	'rmagatti/auto-session',
+	-- 	config = function()
+	-- 		require('auto-session').setup {
+	-- 			auto_session_root_dir = os.getenv('HOME') .. '/.vim/sessions/',
+	-- 			auto_session_suppress_dirs = { os.getenv('HOME') },
+	-- 			pre_cwd_changed_hook = function()
+	-- 				-- close all language servers
+	-- 				vim.lsp.stop_client(vim.lsp.get_active_clients())
+	-- 			end,
+	-- 		}
+	-- 	end
+	-- },
 
 	-- Better Quickfix
 	{
@@ -124,43 +124,8 @@ return {
 			}
 		end,
 		config = true,
-		event = 'VeryLazy',
+		lazy = true,
 	},
-
-	-- {
-	-- 	"arnaupv/nvim-devcontainer-cli",
-	-- 	opts = {}
-	-- },
-
-	-- Open paired files
-	-- {
-	-- 	'rgroli/other.nvim',
-	-- 	config = function() require('other-nvim').setup {} end
-	-- },
-
-	{
-		"harrisoncramer/gitlab.nvim",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"stevearc/dressing.nvim", -- Recommended but not required. Better UI for pickers.
-			enabled = true,
-		},
-		build = function() require("gitlab.server").build(true) end, -- Builds the Go binary
-		config = function()
-			require("gitlab").setup()                          -- Uses delta reviewer by default
-		end,
-		event = "VeryLazy",
-		enabled = false,
-	},
-
-	-- {
-	-- 	'Wansmer/symbol-usage.nvim',
-	-- 	event = 'LspAttach',
-	-- 	config = function()
-	-- 		require('symbol-usage').setup()
-	-- 	end
-	-- },
 
 	-- stupid easy indentation
 	{

@@ -21,9 +21,13 @@ vim.g.mapleader = ' '
 vim.loader.enable()
 
 require('ensure-installed')
-require('lazy').setup('plugins')
+require('lazy').setup('plugins', {
+	dev = {
+		path = '~/.config/nvim/lua/custom-plugins/',
+	}
+})
 require('telescope-config')
-require('language-servers')
+-- require('language-servers')
 require('config')
 require('mappings')
 require('autocommands')

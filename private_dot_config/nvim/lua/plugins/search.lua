@@ -15,7 +15,7 @@ return {
 			local lga_actions = require 'telescope-live-grep-args.actions'
 			local telescope = require('telescope')
 
-			require("telescope").setup({
+			telescope.setup({
 				defaults = {
 					-- rip grep really lives up to the rip part in certain projects otherwise
 					file_ignore_patterns = {
@@ -78,7 +78,7 @@ return {
 
 			local telescope_extensions = {
 				"smart_open",
-				"session-lens",
+				-- "session-lens",
 				"undo",
 				"ast_grep",
 				"live_grep_args",
@@ -133,11 +133,11 @@ return {
 					function() require('telescope').extensions.smart_open.smart_open { cwd_only = true } end,
 					desc = 'Smart Open'
 				},
-				{
-					'<Leader>fd',
-					require("auto-session.session-lens").search_session,
-					desc = 'Find Sessions'
-				},
+				-- {
+				-- 	'<Leader>fd',
+				-- 	require("auto-session.session-lens").search_session,
+				-- 	desc = 'Find Sessions'
+				-- },
 				{
 					'<Leader>fxd',
 					function() require('telescope.builtin').diagnostics { bufnr = 0 } end,
@@ -165,7 +165,7 @@ return {
 				}
 			}
 		end,
-		event = "VeryLazy"
+		lazy = true,
 	},
 
 	-- Telescope fzf integration
@@ -175,7 +175,7 @@ return {
 		cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && \
 		cmake --build build --config Release && cmake --install build --prefix build
 		]],
-		event = "VeryLazy",
+		lazy = true,
 	},
 
 	{
@@ -185,7 +185,7 @@ return {
 			"kkharji/sqlite.lua",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
-		event = "VeryLazy",
+		lazy = true,
 	},
 
 	{
@@ -193,10 +193,10 @@ return {
 		keys = {
 			{
 				'<Leader>fa',
-				':Telescope ast_grep<CR>',
+				'<cmd>Telescope ast_grep<CR>',
 				desc = 'Find by AST'
 			}
 		},
-		event = "VeryLazy",
+		lazy = true,
 	},
 }

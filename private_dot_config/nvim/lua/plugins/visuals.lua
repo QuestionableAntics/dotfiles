@@ -1,6 +1,9 @@
 return {
 	-- More pretty icons
-	'nvim-tree/nvim-web-devicons',
+	{
+		'nvim-tree/nvim-web-devicons',
+		event = 'VeryLazy',
+	},
 
 	-- highlight matching html tags
 	{
@@ -36,6 +39,7 @@ return {
 				},
 			}
 		end,
+		event = 'VeryLazy',
 	},
 
 	-- Virtual text to add indentation guides

@@ -7,6 +7,7 @@ return {
 	{
 		'https://github.com/jmederosalvarado/roslyn.nvim',
 		ft = { 'cs' },
+		enabled = false,
 	},
 
 	{
@@ -16,7 +17,8 @@ return {
 				use_lsp_features = false
 			}
 		end,
-		build = ':TSInstall nu'
+		build = ':TSInstall nu',
+		ft = { 'nu' },
 	},
 
 	-- General external editor tooling installation management (Language servers, dap servers, linters, formatters)
@@ -43,9 +45,13 @@ return {
 					"sqlls",
 				}
 			}
+
+			require('language-servers').setup()
 		end,
-		dependencies = { 'williamboman/mason-lspconfig.nvim' },
-		event = 'VeryLazy',
+		dependencies = {
+			'williamboman/mason-lspconfig.nvim',
+			'neovim/nvim-lspconfig',
+		},
 	},
 
 	-- direct integration with tsserver
@@ -59,24 +65,13 @@ return {
 		ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
 	},
 
-	-- {
-	-- 	'simrat39/rust-tools.nvim',
-	-- 	config = function()
-	-- 		require('rust-tools').setup({})
-	-- 	end,
-	-- },
-
 	{
 		'https://github.com/ray-x/go.nvim',
 		dependencies = {
 			'ray-x/guihua.lua',
 		},
-		config = function()
-			require('go').setup()
-		end,
-		event = {'CmdlineEnter'},
+		config = function() require('go').setup() end,
 		ft = {'go', 'gomod'},
 		build = function() require('go.install').update_all_sync() end,
 	},
-
 }

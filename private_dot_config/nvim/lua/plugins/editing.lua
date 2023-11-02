@@ -10,15 +10,13 @@ return {
 			-- additional targets to jump to next/prev
 			require('mini.bracketed').setup {}
 		end,
-		event = 'VeryLazy',
+		-- event = 'VeryLazy',
 	},
 
 	-- Commenting
 	{
 		'numToStr/Comment.nvim',
-		config = function()
-			require('Comment').setup()
-		end,
+		config = function() require('Comment').setup() end,
 		event = 'VeryLazy',
 	},
 
@@ -107,8 +105,9 @@ return {
 	-- Manipulate object surrounding characters
 	{
 		'https://github.com/kylechui/nvim-surround',
-		event = 'VeryLazy',
+		-- event = 'VeryLazy',
 		config = function() require('nvim-surround').setup() end,
+		lazy = true,
 	},
 
 	-- Structural find and replace
@@ -121,47 +120,13 @@ return {
 				desc = "Structural find and replace"
 			}
 		},
-		event = 'VeryLazy',
-	},
-
-	-- Modify quickfix buffer
-	{
-		'gabrielpoca/replacer.nvim',
-		opts = { rename_files = false },
-		keys = {
-			{
-				'<leader>h',
-				function() require('replacer').run() end,
-				desc = "run replacer.nvim"
-			}
-		},
-		event = 'VeryLazy',
+		lazy = true,
 	},
 
 	-- Formatter plugin
 	{
 		'stevearc/conform.nvim',
 		opts = {},
-		config = function()
-			require('conform').setup({
-				formatters_by_ft = {
-					sql = { "psql" },
-				},
-				formatters = {
-					psql = {
-						command = "sql-formatter",
-						args = function(ctx)
-							return {
-								"--config=$HOME/.config/sql-formatter/postgres-config.json",
-								"--language=postgresql",
-								-- ctx.filename
-								-- "$FILENAME",
-							}
-						end,
-					}
-				},
-			})
-		end,
 		keys = {
 			{
 				'<leader>fq',
@@ -169,23 +134,6 @@ return {
 					require('conform').format({ bufnr = 0, lsp_fallback = true })
 				end,
 				desc = 'format sql'
-			}
-		},
-		event = 'VeryLazy',
-	},
-
-	{
-		'nvim-pack/nvim-spectre',
-		config = function()
-			require('spectre').setup()
-		end,
-		keys = {
-			{
-				'<leader>sp',
-				function()
-					require('spectre').toggle()
-				end,
-				desc = "open spectre"
 			}
 		},
 		event = 'VeryLazy',

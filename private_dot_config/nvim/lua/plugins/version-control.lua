@@ -81,7 +81,14 @@ return {
 			"sindrets/diffview.nvim", -- optional
 			"ibhagwan/fzf-lua",     -- optional
 		},
+		keys = {
+			{
+				"<Leader>gg",
+				function() require("neogit").open() end,
+				desc = "Neogit",
+			},
+		},
 		config = true,
-		event = "VeryLazy",
+		lazy = true,
 	}
 }
