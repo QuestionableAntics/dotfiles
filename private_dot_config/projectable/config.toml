@@ -1,8 +1,0 @@
-# https://github.com/dzfrias/projectable/blob/main/src/config_defaults/_my_config.toml
-# https://github.com/dzfrias/projectable/blob/main/extras/CONFIG.md
-
-[preview]
-preview_cmd = "bat {}"
-
-[filetree]
-show_hidden_by_default = true
