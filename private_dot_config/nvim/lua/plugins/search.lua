@@ -133,11 +133,6 @@ return {
 					function() require('telescope').extensions.smart_open.smart_open { cwd_only = true } end,
 					desc = 'Smart Open'
 				},
-				-- {
-				-- 	'<Leader>fd',
-				-- 	require("auto-session.session-lens").search_session,
-				-- 	desc = 'Find Sessions'
-				-- },
 				{
 					'<Leader>fxd',
 					function() require('telescope.builtin').diagnostics { bufnr = 0 } end,

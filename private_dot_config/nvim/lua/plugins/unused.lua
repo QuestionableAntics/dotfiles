@@ -143,6 +143,41 @@ local Unused_local = {
 		ft = { 'rust' },
 	},
 
+	-- Structural find and replace
+	{
+		'cshuaimin/ssr.nvim',
+		keys = {
+			{
+				'<leader>sr',
+				function() require('ssr').open() end,
+				desc = "Structural find and replace"
+			}
+		},
+		lazy = true,
+	},
+
+	-- Session Management
+	{
+		'rmagatti/auto-session',
+		config = function()
+			require('auto-session').setup {
+				auto_session_root_dir = os.getenv('HOME') .. '/.vim/sessions/',
+				auto_session_suppress_dirs = { os.getenv('HOME') },
+				pre_cwd_changed_hook = function()
+					-- close all language servers
+					vim.lsp.stop_client(vim.lsp.get_active_clients())
+				end,
+			}
+		end
+	},
+
+	-- Auto close and update jsx tags
+	{
+		'windwp/nvim-ts-autotag',
+		config = function() require('nvim-ts-autotag').setup() end,
+		ft = { 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
+		lazy = true
+	},
 }
 
 return {}

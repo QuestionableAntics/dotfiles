@@ -117,6 +117,9 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
 -- Read session on start
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
+		-- if neovim was called with a path to a specifc file, don't load session
+		if vim.fn.argc() > 0 then return end
+
 		local cwd = vim.fn.getcwd()
 
 		-- if home dir, don't save session

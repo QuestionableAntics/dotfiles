@@ -9,14 +9,16 @@ return {
 			require('mini.pairs').setup {}
 			-- additional targets to jump to next/prev
 			require('mini.bracketed').setup {}
+			-- commenting
+			require('mini.comment').setup {
+				options = {
+					custom_commentstring = function()
+						return require('ts_context_commentstring.internal').calculate_commentstring() or
+						vim.bo.commentstring
+					end,
+				}
+			}
 		end,
-		-- event = 'VeryLazy',
-	},
-
-	-- Commenting
-	{
-		'numToStr/Comment.nvim',
-		config = function() require('Comment').setup() end,
 		event = 'VeryLazy',
 	},
 
@@ -89,13 +91,6 @@ return {
 		event = 'VeryLazy',
 	},
 
-	-- Auto close and update jsx tags
-	{
-		'windwp/nvim-ts-autotag',
-		config = function() require('nvim-ts-autotag').setup() end,
-		ft = { 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
-	},
-
 	-- jsx aware commenting
 	{
 		'JoosepAlviste/nvim-ts-context-commentstring',
@@ -107,19 +102,6 @@ return {
 		'https://github.com/kylechui/nvim-surround',
 		-- event = 'VeryLazy',
 		config = function() require('nvim-surround').setup() end,
-		lazy = true,
-	},
-
-	-- Structural find and replace
-	{
-		'cshuaimin/ssr.nvim',
-		keys = {
-			{
-				'<leader>sr',
-				function() require('ssr').open() end,
-				desc = "Structural find and replace"
-			}
-		},
 		lazy = true,
 	},
 

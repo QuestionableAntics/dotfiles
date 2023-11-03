@@ -28,9 +28,6 @@ return {
 			require('mason').setup()
 			require('mason-lspconfig').setup {
 				ensure_installed = {
-					"omnisharp",
-					"pyright",
-					"terraformls",
 					"ansiblels",
 					"bashls",
 					"cssls",
@@ -42,7 +39,10 @@ return {
 					"html",
 					"jsonls",
 					"lua_ls",
+					"omnisharp",
+					"pyright",
 					"sqlls",
+					"terraformls",
 				}
 			}
 
@@ -51,6 +51,22 @@ return {
 		dependencies = {
 			'williamboman/mason-lspconfig.nvim',
 			'neovim/nvim-lspconfig',
+		},
+		lazy = true,
+		ft = {
+			'cs',
+			'bash',
+			'css',
+			'graphql',
+			'html',
+			'javascript',
+			'json',
+			'lua',
+			'python',
+			'sql',
+			'terraform',
+			'typescript',
+			'yaml',
 		},
 	},
 

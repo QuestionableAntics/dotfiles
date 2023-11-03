@@ -56,21 +56,6 @@ return {
 		event = 'VeryLazy',
 	},
 
-	-- Session Management
-	-- {
-	-- 	'rmagatti/auto-session',
-	-- 	config = function()
-	-- 		require('auto-session').setup {
-	-- 			auto_session_root_dir = os.getenv('HOME') .. '/.vim/sessions/',
-	-- 			auto_session_suppress_dirs = { os.getenv('HOME') },
-	-- 			pre_cwd_changed_hook = function()
-	-- 				-- close all language servers
-	-- 				vim.lsp.stop_client(vim.lsp.get_active_clients())
-	-- 			end,
-	-- 		}
-	-- 	end
-	-- },
-
 	-- Better Quickfix
 	{
 		'kevinhwang91/nvim-bqf',
@@ -128,9 +113,9 @@ return {
 	},
 
 	-- stupid easy indentation
-	{
-		'https://github.com/Darazaki/indent-o-matic',
-		config = function() require('indent-o-matic').setup {} end,
-		event = "VeryLazy",
-	},
+	-- {
+	-- 	'https://github.com/Darazaki/indent-o-matic',
+	-- 	config = function() require('indent-o-matic').setup {} end,
+	-- 	event = "VeryLazy",
+	-- },
 }
