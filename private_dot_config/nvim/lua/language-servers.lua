@@ -200,7 +200,6 @@ M.setup = function()
 	for server, config in pairs(server_configs) do
 		lspconfig[server].setup(config)
 	end
-
 end
 
 return M

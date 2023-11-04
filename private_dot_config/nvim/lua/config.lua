@@ -19,9 +19,6 @@ opt.completeopt = {
 	'noselect', -- do not auto select match
 }
 
--- opt.winblend = 0
--- o.avoid_statusline = true
-
 -- Set default grep to ripgrep (faster fuzzy finding)
 opt.grepprg = [[rg\]] ---vimgrep
 

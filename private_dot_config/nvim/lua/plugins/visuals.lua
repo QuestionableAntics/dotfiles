@@ -96,4 +96,9 @@ return {
 		'https://github.com/nvim-treesitter/nvim-treesitter-context',
 		event = 'VeryLazy',
 	},
+
+	{
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 }

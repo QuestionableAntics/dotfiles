@@ -8,6 +8,7 @@ local config = wezterm.config_builder and wezterm.config_builder() or {}
 --------------------------------------------------------------------------------
 
 config.color_scheme = "Dracula"
+config.font = wezterm.font("Cascadia Code")
 config.font_size = 14.0
 
 

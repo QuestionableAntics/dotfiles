@@ -1,3 +1,6 @@
+local utils = require('utils')
+
+
 ------------------------------------------------------------------------------------------
 -- Other
 ------------------------------------------------------------------------------------------
@@ -103,31 +106,39 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
 	callback = function()
 		local cwd = vim.fn.getcwd()
 
-		-- if home dir, don't save session
-		if cwd == vim.fn.expand("$HOME") then return end
+		-- if neovim was called with a path to a specifc file, don't write session
+		if vim.fn.argc() > 0 then return end
 
-		-- save session to ~/.nvim/sessions
-		local session_dir = vim.fn.expand("$HOME/.nvim/sessions")
-		local session_file = session_dir .. "/" .. vim.fn.fnamemodify(cwd, ":p:h:t") .. ".vim"
-		vim.fn.mkdir(session_dir, "p")
-		vim.cmd("mksession! " .. session_file)
+		local buffer_name = vim.fn.expand("%:~")
+
+		-- if the open buffer is oil
+		-- or we're in the home directory,
+		-- don't save session
+		if (
+			string.find(buffer_name, "oil://")
+			or cwd == vim.fn.expand("$HOME")
+		) then
+			return
+		end
+
+		utils.save_session()
 	end,
 })
 
--- Read session on start
+-- Load session on start
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
-		-- if neovim was called with a path to a specifc file, don't load session
-		if vim.fn.argc() > 0 then return end
-
 		local cwd = vim.fn.getcwd()
 
-		-- if home dir, don't save session
+		-- if neovim was called with a path to a specifc file, don't load session
+		if vim.fn.argc() > 0 then return end
+		-- if home dir, don't load session
 		if cwd == vim.fn.expand("$HOME") then return end
 
 		-- save session to ~/.nvim/sessions
 		local session_dir = vim.fn.expand("$HOME/.nvim/sessions")
 		local session_file = session_dir .. "/" .. vim.fn.fnamemodify(cwd, ":p:h:t") .. ".vim"
+
 		if vim.fn.filereadable(session_file) == 1 then
 			vim.cmd("source " .. session_file)
 		end

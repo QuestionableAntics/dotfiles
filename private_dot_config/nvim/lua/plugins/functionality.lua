@@ -10,7 +10,10 @@ return {
 		keys = {
 			{
 				'<Leader>v',
-				function() require('oil').open() end,
+				function()
+					require('utils').save_session()
+					require('oil').open()
+				end,
 				desc = 'Open File Explorer',
 			}
 		},

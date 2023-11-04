@@ -49,6 +49,7 @@
   "telescope-undo.nvim": { "branch": "main", "commit": "3dec002ea3e7952071d26fbb5d01e2038a58a554" },
   "telescope.nvim": { "branch": "master", "commit": "4522d7e3ea75ffddabdc39957168a8a7060b5df0" },
   "toggleterm.nvim": { "branch": "main", "commit": "faee9d60428afc7857e0927fdc18daa6c409fa64" },
+  "trouble.nvim": { "branch": "main", "commit": "f1168feada93c0154ede4d1fe9183bf69bac54ea" },
   "typescript-tools.nvim": { "branch": "master", "commit": "102ba313f87e1f9f9864f681dd7779cac8f6d3ea" },
   "vim-dadbod": { "branch": "master", "commit": "fecf5a3ecfb1869f34252c7c27351de99f01ab0e" },
   "vim-dadbod-completion": { "branch": "master", "commit": "bcdf3ff768cc7e544a0f78b0383d8719c2116569" },
