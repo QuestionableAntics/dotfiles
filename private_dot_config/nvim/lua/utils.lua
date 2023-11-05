@@ -53,12 +53,4 @@ function M.get_hlgroup(name, fallback)
 	return fallback or {}
 end
 
-function M.save_session()
-	-- save session to ~/.nvim/sessions
-	local session_dir = vim.fn.expand("$HOME/.nvim/sessions")
-	local session_file = session_dir .. "/" .. vim.fn.fnamemodify(cwd, ":p:h:t") .. ".vim"
-	vim.fn.mkdir(session_dir, "p")
-	vim.cmd("mksession! " .. session_file)
-end
-
 return M

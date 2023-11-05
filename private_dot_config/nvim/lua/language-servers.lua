@@ -1,33 +1,3 @@
-------------------------------------------------------------------------------------------
--- Config
-------------------------------------------------------------------------------------------
-
--- Source is automatically added, you just need to include it in the chain complete list
-vim.g.completion_chain_complete_list = {
-	sql = {
-		complete_items = { 'vim-dadbod-completion' }
-	}
-}
-
--- Auto start coq (must be run before require 'coq')
-vim.g.coq_settings = {
-	-- always start coq (silently)
-	auto_start = 'shut-up',
-	-- this takes over <C-h>?
-	keymap = { jump_to_mark = '' },
-	-- a lot of what I want from autocomplete is exploring properties on objects
-	-- this makes those properties more visible in large projects by prioritizing lsp results
-	clients = {
-		lsp = { weight_adjust = 1.6 },
-		snippets = { warn = {} },
-	},
-}
-
-
-------------------------------------------------------------------------------------------
--- Setup
-------------------------------------------------------------------------------------------
-
 local M = {}
 
 M.setup = function()

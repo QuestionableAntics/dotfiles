@@ -14,7 +14,7 @@ return {
 				options = {
 					custom_commentstring = function()
 						return require('ts_context_commentstring.internal').calculate_commentstring() or
-						vim.bo.commentstring
+							vim.bo.commentstring
 					end,
 				}
 			}
@@ -94,15 +94,14 @@ return {
 	-- jsx aware commenting
 	{
 		'JoosepAlviste/nvim-ts-context-commentstring',
-		ft = { 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
+		lazy = true,
 	},
 
 	-- Manipulate object surrounding characters
 	{
 		'https://github.com/kylechui/nvim-surround',
-		-- event = 'VeryLazy',
+		event = 'VeryLazy',
 		config = function() require('nvim-surround').setup() end,
-		lazy = true,
 	},
 
 	-- Formatter plugin
@@ -115,7 +114,7 @@ return {
 				function()
 					require('conform').format({ bufnr = 0, lsp_fallback = true })
 				end,
-				desc = 'format sql'
+				desc = 'Format buffer',
 			}
 		},
 		event = 'VeryLazy',

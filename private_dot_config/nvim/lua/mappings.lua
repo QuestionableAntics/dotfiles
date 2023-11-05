@@ -105,7 +105,7 @@ mappings['lsp'] = {
 	['gs'] = { mode = 'n', action = vim.lsp.buf.signature_help, label = 'Signature help' },
 	['gr'] = { mode = 'n', action = vim.lsp.buf.rename, label = 'Rename' },
 	['gt'] = { mode = 'n', action = vim.lsp.buf.type_definition, label = 'Go to type definition' },
-	['gh'] = { mode = 'n', action = '<CMD>Glance references<CR>', label =  'Find references' },
+	['gh'] = { mode = 'n', action = function() require('glance').open('references') end, label =  'Find references' },
 	['ca'] = { mode = { 'n', 'v' }, action = vim.lsp.buf.code_action, label = 'Code Action' },
 	['K'] = { mode = 'n', action = vim.lsp.buf.hover, label = 'Hover' },
 	['[e'] = { mode = 'n', action = vim.diagnostic.goto_prev, label = 'Previous diagnostic' },

@@ -11,7 +11,7 @@ return {
 			{
 				'<Leader>v',
 				function()
-					require('utils').save_session()
+					require('custom-plugins.jury').save_session()
 					require('oil').open()
 				end,
 				desc = 'Open File Explorer',
@@ -114,6 +114,35 @@ return {
 		config = true,
 		lazy = true,
 	},
+
+	-- local plugin 
+	{
+		name = 'jury.nvim',
+		dir = '~/.config/nvim/lua/custom-plugins/jury',
+		dev = true,
+		config = function()
+			require('custom-plugins.jury').setup()
+		end,
+		keys = function()
+			local jury = require('custom-plugins.jury')
+
+			return {
+				{
+					'<Leader>sd',
+					jury.delete_session,
+					desc = 'Delete session',
+					mode = { 'n' },
+				},
+				{
+					'<Leader>ss',
+					jury.save_session,
+					desc = 'Save session',
+					mode = { 'n' },
+				}
+			}
+		end,
+		lazy = false
+	}
 
 	-- stupid easy indentation
 	-- {

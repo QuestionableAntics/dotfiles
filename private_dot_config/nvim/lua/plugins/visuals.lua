@@ -87,8 +87,20 @@ return {
 	-- VS Code style references view
 	{
 		'DNLHC/glance.nvim',
-		config = function() require('glance').setup({}) end,
-		event = 'VeryLazy',
+		config = function()
+			require('glance').setup({
+				hooks = {
+					before_open = function(results, open, jump, method)
+						if #results == 1 then
+							jump(results[1])
+						else
+							open(results)
+						end
+					end,
+				}
+			})
+		end,
+		lazy = true
 	},
 
 	-- Show context at the top of the file
