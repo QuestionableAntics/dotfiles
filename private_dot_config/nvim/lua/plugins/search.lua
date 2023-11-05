@@ -5,7 +5,6 @@ return {
 		dependencies = {
 			'nvim-telescope/telescope-live-grep-args.nvim',
 			'nvim-telescope/telescope-fzf-native.nvim',
-			'nvim-telescope/telescope-fzy-native.nvim',
 			'nvim-telescope/telescope-ui-select.nvim',
 			'danielfalk/smart-open.nvim',
 			'Marskey/telescope-sg',
@@ -14,6 +13,7 @@ return {
 		config = function()
 			local lga_actions = require 'telescope-live-grep-args.actions'
 			local telescope = require('telescope')
+			local actions = require('telescope.actions')
 			local trouble = require("trouble.providers.telescope")
 
 			telescope.setup({
@@ -43,8 +43,15 @@ return {
 						"--trim"
 					},
 					mappings = {
-						i = { ["<C-t>"] = trouble.open_with_trouble, },
-						n = { ["<C-t>"] = trouble.open_with_trouble, }
+						i = {
+							["<C-t>"] = trouble.open_with_trouble,
+							["<C-c>"] = actions.close,
+						},
+						n = {
+							["<C-t>"] = trouble.open_with_trouble,
+							["<C-c>"] = actions.close,
+							["q"] = actions.close,
+						}
 					},
 					prompt_prefix = "  ",
 					selection_caret = "  ",
@@ -78,17 +85,19 @@ return {
 						lang = nil, -- string value, sepcify language for ast-grep `nil` for default
 					},
 					["undo"] = {},
+					["smart_open"] = {
+						match_algorithm = "fzf",
+						show_scores = true,
+					}
 				},
 			})
 
 			local telescope_extensions = {
 				"smart_open",
-				-- "session-lens",
 				"undo",
 				"ast_grep",
 				"live_grep_args",
 				"fzf",
-				"fzy_native",
 				"ui-select",
 			}
 
@@ -105,7 +114,9 @@ return {
 			return {
 				{
 					'<Leader>ff',
-					function() require('telescope.builtin').find_files() end,
+
+					function() require('telescope').extensions.smart_open.smart_open { cwd_only = true } end,
+					-- function() require('telescope.builtin').find_files() end,
 					desc = 'Find files'
 				},
 				{
@@ -133,11 +144,11 @@ return {
 					function() require('telescope.builtin').resume() end,
 					desc = 'Last Search Results'
 				},
-				{
-					'<Leader>fs',
-					function() require('telescope').extensions.smart_open.smart_open { cwd_only = true } end,
-					desc = 'Smart Open'
-				},
+				-- {
+				-- 	'<Leader>fs',
+				-- 	function() require('telescope').extensions.smart_open.smart_open { cwd_only = true } end,
+				-- 	desc = 'Smart Open'
+				-- },
 				{
 					'<Leader>fxd',
 					function() require('telescope.builtin').diagnostics { bufnr = 0 } end,
@@ -166,6 +177,15 @@ return {
 			}
 		end,
 		lazy = true,
+	},
+
+	-- fzf
+	{
+		'junegunn/fzf',
+		build = function()
+			vim.fn['fzf#install']()
+		end,
+		event = 'VeryLazy',
 	},
 
 	-- Telescope fzf integration

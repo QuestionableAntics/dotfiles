@@ -121,7 +121,14 @@ return {
 		dir = '~/.config/nvim/lua/custom-plugins/jury',
 		dev = true,
 		config = function()
-			require('custom-plugins.jury').setup()
+			require('custom-plugins.jury').setup({
+				ignored_directories = {
+					vim.fn.expand("$HOME"),
+				},
+				ignored_buffer_patterns = {
+					"oil://",
+				}
+			})
 		end,
 		keys = function()
 			local jury = require('custom-plugins.jury')
