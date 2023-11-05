@@ -14,6 +14,7 @@ return {
 		config = function()
 			local lga_actions = require 'telescope-live-grep-args.actions'
 			local telescope = require('telescope')
+			local trouble = require("trouble.providers.telescope")
 
 			telescope.setup({
 				defaults = {
@@ -40,6 +41,10 @@ return {
 						"--column",
 						"--smart-case",
 						"--trim"
+					},
+					mappings = {
+						i = { ["<C-t>"] = trouble.open_with_trouble, },
+						n = { ["<C-t>"] = trouble.open_with_trouble, }
 					},
 					prompt_prefix = "  ",
 					selection_caret = "  ",
