@@ -18,7 +18,10 @@ Debugging = false
 -- Needs to be set before any plugins are loaded
 vim.g.mapleader = ' '
 
-vim.loader.enable()
+-- built in replacement for impatient.nvim
+if vim.loader then
+	vim.loader.enable()
+end
 
 require('ensure-installed')
 require('lazy').setup('plugins', {
@@ -27,7 +30,6 @@ require('lazy').setup('plugins', {
 	}
 })
 require('telescope-config')
--- require('language-servers')
 require('config')
 require('mappings')
 require('autocommands')

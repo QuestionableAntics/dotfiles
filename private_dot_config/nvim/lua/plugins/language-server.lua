@@ -52,22 +52,7 @@ return {
 			'williamboman/mason-lspconfig.nvim',
 			'neovim/nvim-lspconfig',
 		},
-		lazy = true,
-		ft = {
-			'cs',
-			'bash',
-			'css',
-			'graphql',
-			'html',
-			'javascript',
-			'json',
-			'lua',
-			'python',
-			'sql',
-			'terraform',
-			'typescript',
-			'yaml',
-		},
+		event = 'VeryLazy',
 	},
 
 	-- direct integration with tsserver
