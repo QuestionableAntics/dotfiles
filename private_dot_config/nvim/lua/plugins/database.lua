@@ -2,18 +2,18 @@ return {
 	-- DB interface
 	{
 		'tpope/vim-dadbod',
-		event = 'VeryLazy',
+		ft = { 'sql', 'mysql', 'pgsql', 'sqlite' },
 	},
 
 	-- UI for DB interface
 	{
 		'kristijanhusak/vim-dadbod-ui',
-		event = 'VeryLazy',
+		ft = { 'sql', 'mysql', 'pgsql', 'sqlite' },
 	},
 
 	-- Postgres driver
 	{
 		'jackc/pgx',
-		event = 'VeryLazy',
+		ft = { 'sql', 'mysql', 'pgsql', 'sqlite' },
 	},
 }

@@ -11,7 +11,7 @@ return {
 			{
 				'<Leader>v',
 				function()
-					require('custom-plugins.jury').save_session()
+					require('custom-plugins.judge').save_session()
 					require('oil').open()
 				end,
 				desc = 'Open File Explorer',
@@ -50,7 +50,7 @@ return {
 				desc = "Remote Flash",
 			},
 		},
-		event = "VeryLazy",
+		lazy = true,
 	},
 
 	-- Additional treesitter functionality (in/around function/class/etc. operations)
@@ -117,11 +117,11 @@ return {
 
 	-- local plugin 
 	{
-		name = 'jury.nvim',
-		dir = '~/.config/nvim/lua/custom-plugins/jury',
+		name = 'judge.nvim',
+		dir = '~/.config/nvim/lua/custom-plugins/judge',
 		dev = true,
 		config = function()
-			require('custom-plugins.jury').setup({
+			require('custom-plugins.judge').setup({
 				ignored_directories = {
 					vim.fn.expand("$HOME"),
 				},
@@ -131,18 +131,18 @@ return {
 			})
 		end,
 		keys = function()
-			local jury = require('custom-plugins.jury')
+			local judge = require('custom-plugins.judge')
 
 			return {
 				{
 					'<Leader>sd',
-					jury.delete_session,
+					judge.delete_session,
 					desc = 'Delete session',
 					mode = { 'n' },
 				},
 				{
 					'<Leader>ss',
-					jury.save_session,
+					judge.save_session,
 					desc = 'Save session',
 					mode = { 'n' },
 				}
