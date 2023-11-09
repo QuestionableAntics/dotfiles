@@ -21,6 +21,7 @@ M.opts = {
 	end,
 }
 
+
 -- telescope options when searching sessions
 M.telescope_opts = {
 	prompt_title = "Sessions",
@@ -49,12 +50,14 @@ function M.should_save()
 	return true
 end
 
+
 function M.should_load()
 	-- if neovim was called with a path to a specifc file, don't write session
 	if M.ignore_argv and vim.fn.argc() > 0 then return false end
 
 	return true
 end
+
 
 function M.cleanup_buffers()
 	-- get all open buffers
@@ -73,6 +76,7 @@ function M.cleanup_buffers()
 	end
 end
 
+
 function M.save_session()
 	if not M.should_save() then return end
 
@@ -86,8 +90,11 @@ function M.save_session()
 	vim.cmd("mksession! " .. M.session_file)
 end
 
+
 function M.load_session(session_file)
 	if not M.should_load() then return end
+
+	M.previous_session_file = M.session_file
 
 	if session_file ~= nil then
 		M.session_file = session_file
@@ -98,6 +105,7 @@ function M.load_session(session_file)
 	end
 end
 
+
 function M.delete_session(session_file)
 	local sf = session_file or M.session_file
 
@@ -106,12 +114,14 @@ function M.delete_session(session_file)
 	end
 end
 
+
 -- Use telescope to search for sessions
 function M.search_sessions(search_options)
 	local opts = vim.tbl_extend("force", M.telescope_opts, search_options)
 
 	require("telescope.builtin").find_files(opts)
 end
+
 
 local find_command = (function()
 	if 1 == vim.fn.executable "rg" then
@@ -126,6 +136,7 @@ local find_command = (function()
 		return { "where", "/r", ".", "*" }
 	end
 end)()
+
 
 function M.search_switch_sessions()
 	-- open session when selected
@@ -150,6 +161,7 @@ function M.search_switch_sessions()
 	M.search_sessions(M.telescope_opts)
 end
 
+
 function M.search_delete_session()
 	-- delete session when selected
 	local function on_select(prompt_bufnr, map)
@@ -169,9 +181,11 @@ function M.search_delete_session()
 	M.search_sessions(M.telescope_opts)
 end
 
+
 function M.go_to_previous_session()
 	M.load_session(M.previous_session_file)
 end
+
 
 function M.setup(opts)
 	M.opts = vim.tbl_extend("force", M.opts, opts)
@@ -195,5 +209,6 @@ function M.setup(opts)
 		{ callback = M.save_session }
 	)
 end
+
 
 return M
