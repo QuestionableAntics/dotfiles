@@ -10,7 +10,7 @@ vim.opt.emoji = true
 ------------------------------------------------------------------------------------------
 
 -- Set up some sensible defaults and plugins for pairing
-Pairing = false
+Pairing = false or vim.fn.argv()[1] == 'pairing'
 
 -- Debugging functionality
 Debugging = false

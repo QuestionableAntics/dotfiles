@@ -10,6 +10,7 @@ use ~/.config/nushell/extras.nu *
 #################################################################################
 
 alias v = nvim
+alias vp = nvim pairing
 alias la = ls -a
 alias s = zellij
 
@@ -645,8 +646,8 @@ $env.config = {
     ]
 }
 
-source "/Users/kean.mattingly@equipmentshare.com/.config/nushell/rtx.nu"
-# use ~/.cache/starship/init.nu
-source ~/.zoxide.nu
+source ~/.config/nushell/rtx.nu
+# possible alternative to atuin: mcfly
 source ~/.local/share/atuin/init.nu
 source ~/.oh-my-posh.nu
+source ~/.zoxide.nu

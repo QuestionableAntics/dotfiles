@@ -74,9 +74,18 @@ mappings['random'] = {
 
 
 ------------------------------------------------------------------------------------------
--- Neovide Copy/Paste
+-- Neovide
 ------------------------------------------------------------------------------------------
 
+mappings['neovide'] = {
+	['<Leader>nv'] = {
+		mode = 'n',
+		action = function() vim.cmd('silent !neovide &') end,
+		label = 'Open neovide'
+	}
+}
+
+-- copy paste
 if vim.g.neovide then
   vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
   vim.keymap.set('v', '<D-c>', '"+y') -- Copy

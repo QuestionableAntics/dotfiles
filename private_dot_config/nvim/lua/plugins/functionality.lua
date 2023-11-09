@@ -10,10 +10,7 @@ return {
 		keys = {
 			{
 				'<Leader>v',
-				function()
-					require('custom-plugins.judge').save_session()
-					require('oil').open()
-				end,
+				function() require('oil').open() end,
 				desc = 'Open File Explorer',
 			}
 		},
@@ -145,6 +142,17 @@ return {
 					judge.save_session,
 					desc = 'Save session',
 					mode = { 'n' },
+				},
+				{
+					'<Leader>sl',
+					judge.go_to_previous_session,
+					desc = 'Load previous session',
+					mode = { 'n' },
+				},
+				{
+					'<Leader>fd',
+					judge.search_switch_sessions,
+					desc = 'Search sessions',
 				}
 			}
 		end,
