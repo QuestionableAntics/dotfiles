@@ -153,6 +153,7 @@ return {
 					'<Leader>fd',
 					judge.search_switch_sessions,
 					desc = 'Search sessions',
+					mode = { 'n' },
 				}
 			}
 		end,

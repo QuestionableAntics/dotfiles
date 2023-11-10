@@ -8,7 +8,7 @@ M.opts = {
 	ignored_buffer_patterns = {},
 	-- don't save session if neovim was called with a path to a specific file
 	ignore_argv = true,
-	-- direcotry to save sessions in
+	-- directory to save sessions in
 	session_dir = vim.fn.expand("$HOME/.nvim/sessions"),
 	-- how to build the session name
 	build_session_name = function()
@@ -116,26 +116,24 @@ end
 
 
 -- Use telescope to search for sessions
-function M.search_sessions(search_options)
+function M.search_sessions(on_select)
+	-- copy telescope options
+	local search_options = {}
+	vim.tbl_extend("force", search_options, M.telescope_opts)
+
 	local opts = vim.tbl_extend("force", M.telescope_opts, search_options)
+
+	-- attach custom mappings
+	if on_select ~= nil then
+		opts.attach_mappings = function(_, map)
+			map("i", "<CR>", on_select)
+			map("n", "<CR>", on_select)
+			return true
+		end
+	end
 
 	require("telescope.builtin").find_files(opts)
 end
-
-
-local find_command = (function()
-	if 1 == vim.fn.executable "rg" then
-		return { "rg", "--files", "--color", "never" }
-	elseif 1 == vim.fn.executable "fd" then
-		return { "fd", "--type", "f", "--color", "never" }
-	elseif 1 == vim.fn.executable "fdfind" then
-		return { "fdfind", "--type", "f", "--color", "never" }
-	elseif 1 == vim.fn.executable "find" and vim.fn.has "win32" == 0 then
-		return { "find", ".", "-type", "f" }
-	elseif 1 == vim.fn.executable "where" then
-		return { "where", "/r", ".", "*" }
-	end
-end)()
 
 
 function M.search_switch_sessions()
@@ -152,13 +150,7 @@ function M.search_switch_sessions()
 		M.load_session(session_file)
 	end
 
-	M.telescope_opts.attach_mappings = function(_, map)
-		map("i", "<CR>", on_select)
-		map("n", "<CR>", on_select)
-		return true
-	end
-
-	M.search_sessions(M.telescope_opts)
+	M.search_sessions(on_select)
 end
 
 
@@ -172,18 +164,14 @@ function M.search_delete_session()
 		end)
 	end
 
-	M.telescope_opts.attach_mappings = function(_, map)
-		map("i", "<CR>", on_select)
-		map("n", "<CR>", on_select)
-		return true
-	end
-
-	M.search_sessions(M.telescope_opts)
+	M.search_sessions(on_select)
 end
 
 
 function M.go_to_previous_session()
-	M.load_session(M.previous_session_file)
+	if M.previous_session_file ~= M.session_file then
+		M.load_session(M.previous_session_file)
+	end
 end
 
 
