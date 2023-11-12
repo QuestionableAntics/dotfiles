@@ -99,3 +99,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	callback = function() require('go.format').goimport() end,
 	group = vim.api.nvim_create_augroup("GoFormat", {}),
 })
+
+
+-- If neovim is called with the database arg, open the database ui
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		if Database then
+			vim.cmd [[DBUI]]
+		end
+	end,
+	group = vim.api.nvim_create_augroup("Database", {}),
+})

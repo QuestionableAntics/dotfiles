@@ -12,6 +12,9 @@ vim.opt.emoji = true
 -- Set up some sensible defaults and plugins for pairing
 Pairing = false or vim.fn.argv()[1] == 'pairing'
 
+-- Open up vim dadbod ui on enter
+Database = false or vim.fn.argv()[1] == 'database'
+
 -- Debugging functionality
 Debugging = false
 

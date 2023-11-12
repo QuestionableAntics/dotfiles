@@ -157,7 +157,8 @@ return {
 				}
 			}
 		end,
-		lazy = false
+		lazy = false,
+		enabled = not Database
 	}
 
 	-- stupid easy indentation

@@ -11,6 +11,7 @@ use ~/.config/nushell/extras.nu *
 
 alias v = nvim
 alias vp = nvim pairing
+alias vd = nvim database
 alias la = ls -a
 alias s = zellij
 

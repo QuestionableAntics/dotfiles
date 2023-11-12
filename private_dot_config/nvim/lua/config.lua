@@ -70,9 +70,6 @@ opt.smartindent = true
 -- Visuals
 ------------------------------------------------------------------------------------------
 
--- Nice icons for DBUI
-vim.g.db_ui_use_nerd_fonts = 1
-
 -- Highlight the current line
 opt.cursorline = true
 

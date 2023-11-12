@@ -17,7 +17,7 @@ M.opts = {
 	-- function to call when switching to a session
 	on_session_switch = function()
 		-- stop all lsp servers
-		vim.lsp.stop_client(vim.lsp.get_active_clients())
+		vim.lsp.stop_client(vim.lsp.get_clients())
 	end,
 }
 
@@ -37,8 +37,8 @@ M.telescope_opts = {
 function M.should_save()
 	local cwd = vim.fn.getcwd()
 
-	-- if neovim was called with a path to a specifc file, don't write session
-	if M.ignore_argv and vim.fn.argc() > 0 then return false end
+	-- if neovim was called with arguments, don't save session
+	if M.opts.ignore_argv and vim.fn.argc() > 0 then return false end
 
 	-- if the current directory is in the ignored directories, don't save session
 	for _, ignored_directory in ipairs(M.opts.ignored_directories) do
@@ -52,8 +52,8 @@ end
 
 
 function M.should_load()
-	-- if neovim was called with a path to a specifc file, don't write session
-	if M.ignore_argv and vim.fn.argc() > 0 then return false end
+	-- if neovim was called with arguments, don't load session
+	if M.opts.ignore_argv and vim.fn.argc() > 0 then return false end
 
 	return true
 end
@@ -63,13 +63,14 @@ function M.cleanup_buffers()
 	-- get all open buffers
 	local buffers = vim.api.nvim_list_bufs()
 
-	-- for all open buffers
 	for _, buffer in ipairs(buffers) do
 		local buffer_name = vim.fn.expand("#" .. buffer .. ":~")
 
-		-- if the buffer matches an ignored pattern, delete it
+		-- check against each ignored buffer pattern
 		for _, ignored_buffer_pattern in ipairs(M.opts.ignored_buffer_patterns) do
+			-- if the buffer matches an ignored pattern
 			if string.find(buffer_name, ignored_buffer_pattern) then
+				-- delete it
 				vim.api.nvim_buf_delete(buffer, { force = true })
 			end
 		end
@@ -115,7 +116,7 @@ function M.delete_session(session_file)
 end
 
 
--- Use telescope to search for sessions
+--- Use telescope to search for sessions
 function M.search_sessions(on_select)
 	-- copy telescope options
 	local search_options = {}
@@ -176,7 +177,7 @@ end
 
 
 function M.setup(opts)
-	M.opts = vim.tbl_extend("force", M.opts, opts)
+	M.opts = vim.tbl_deep_extend("force", M.opts, opts)
 
 	M.session_file = M.opts.session_dir .. "/" .. M.opts.build_session_name() .. ".vim"
 

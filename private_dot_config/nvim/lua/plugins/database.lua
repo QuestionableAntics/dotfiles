@@ -1,19 +1,33 @@
 return {
-	-- DB interface
-	{
-		'tpope/vim-dadbod',
-		ft = { 'sql', 'mysql', 'pgsql', 'sqlite' },
-	},
-
-	-- UI for DB interface
-	{
-		'kristijanhusak/vim-dadbod-ui',
-		ft = { 'sql', 'mysql', 'pgsql', 'sqlite' },
-	},
-
 	-- Postgres driver
 	{
 		'jackc/pgx',
-		ft = { 'sql', 'mysql', 'pgsql', 'sqlite' },
+		event = 'VeryLazy',
+		lazy = true,
 	},
+
+	{
+		'kristijanhusak/vim-dadbod-ui',
+		dependencies = {
+			-- DB interface
+			{
+				'tpope/vim-dadbod',
+				lazy = true
+			},
+			{
+				'kristijanhusak/vim-dadbod-completion',
+				ft = { 'sql', 'mysql', 'plsql', 'sqlite' },
+				lazy = true
+			},
+		},
+		cmd = {
+			'DBUI',
+			'DBUIToggle',
+			'DBUIAddConnection',
+			'DBUIFindBuffer',
+		},
+		init = function()
+			vim.g.db_ui_use_nerd_fonts = 1
+		end,
+	}
 }
