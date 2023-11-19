@@ -1,2 +1,5 @@
 pack
 ~
+./lua/custom-plugins/
+lua/custom-plugins
+lua/custom-plugins-old

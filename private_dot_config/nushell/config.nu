@@ -649,6 +649,6 @@ $env.config = {
 
 source ~/.config/nushell/rtx.nu
 # possible alternative to atuin: mcfly
-source ~/.local/share/atuin/init.nu
+# source ~/.local/share/atuin/init.nu
 source ~/.oh-my-posh.nu
 source ~/.zoxide.nu

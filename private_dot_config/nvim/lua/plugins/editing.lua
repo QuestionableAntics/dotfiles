@@ -9,6 +9,8 @@ return {
 			require('mini.pairs').setup {}
 			-- additional targets to jump to next/prev
 			require('mini.bracketed').setup {}
+			-- additional around/in functionality
+			require('mini.ai').setup {}
 			-- commenting
 			require('mini.comment').setup {
 				options = {
@@ -30,10 +32,10 @@ return {
 		build = ':TSUpdate',
 		config = function()
 			require('nvim-treesitter.configs').setup {
-				-- either 'all' or {'a', 'list', 'of', 'languages'}
 				modules = {},
 				auto_install = true,
 				ignore_install = {},
+				-- either 'all' or {'a', 'list', 'of', 'languages'}
 				ensure_installed = {
 					'python',
 					'javascript',

@@ -159,7 +159,30 @@ return {
 		end,
 		lazy = false,
 		enabled = not Database
-	}
+	},
+
+	-- local plugin
+	{
+		name = 'gitar.nvim',
+		dir = '~/.config/nvim/lua/custom-plugins/gitar',
+		dev = true,
+		config = function()
+			require('custom-plugins.gitar').setup()
+		end,
+		keys = function()
+			local gitar = require('custom-plugins.gitar')
+
+			return {
+				{
+					'<Leader>gf',
+					gitar.open,
+					desc = 'Open Gitar',
+					mode = { 'n' },
+				},
+			}
+		end,
+		lazy = false,
+	},
 
 	-- stupid easy indentation
 	-- {

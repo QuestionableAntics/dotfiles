@@ -46,11 +46,18 @@ $env.PATH = (
     | prepend $'($env.HOME)/.local/bin'
     | prepend '/usr/local/opt/ruby/bin'
     | prepend '/usr/local/lib/ruby/gems/2.6.0/bin'
+	| prepend '/usr/local/bin'
 )
 
 if ('~/.config/nushell/secrets.nu' | path exists)  {
 	use ~/.config/nushell/secrets.nu
 }
 
-oh-my-posh init nu --config '~/.config/oh-my-posh/themes/emodipt-extend.omp.json'
-zoxide init nushell | save -f ~/.zoxide.nu
+use ~/.config/nushell/completions/git/git-completions.nu *
+use ~/.config/nushell/completions/npm/npm-completions.nu *
+use ~/.config/nushell/completions/yarn/yarn-completions.nu *
+
+# These throw errors and don't seem to be needed,
+# but the docs for each say to keep them at the end of the env file.
+# oh-my-posh init nu --config '~/.config/oh-my-posh/themes/emodipt-extend.omp.json'
+# zoxide init nushell | save -f ~/.zoxide.nu
