@@ -31,7 +31,7 @@ return {
 						"obj/",
 						".yarn/*",
 						".obsidian/*",
-						".venv/*"
+						".venv/"
 					},
 					vimgrep_arguments = {
 						"rg",

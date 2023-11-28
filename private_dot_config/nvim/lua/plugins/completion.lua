@@ -44,22 +44,24 @@ return {
 					},
 				},
 				prompts = {
-					context = function(context)
-						return [[
-						You are a software engineer, helping people solve problems related to all areas of development.
-						If you are asked to provide only code, only respond with code blocks correctly labeled in the relevant language.
-						The following marks the beginning of your conversation with the user.
-						]] .. context
+					context_prompt = function(context)
+						return "You are a software engineer, collaborating with other sotware engineers to solve problems related to all areas of development.\n"
+							.. "If you are asked to provide only code, only respond with code blocks correctly labeled in the relevant language,\n"
+							.. "otherwise keep answers short and to the point.\n"
+							.. "Incorrect and long answers have a significant impact on the software engineer's reputation and career.\n"
+							.. context
 					end
 				}
 			})
 		end,
 		keys = function()
 			require('which-key').register({ ['<Leader>a'] = 'AI' })
+			local neoai = require("neoai")
 
 			return {
 				{
 					'<Leader>ait',
+					function() neoai.toggle(true) end,
 					':NeoAIToggle<CR>',
 					desc = 'Toggle Neo AI'
 				},

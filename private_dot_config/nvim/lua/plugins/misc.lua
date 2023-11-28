@@ -75,7 +75,6 @@ return {
 			return {
 				workspaces = workspaces,
 				completion = { nvim_cmp = false },
-				overwrite_mappings = true,
 			}
 		end,
 		keys = {
