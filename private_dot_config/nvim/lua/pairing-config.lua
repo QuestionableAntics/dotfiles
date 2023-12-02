@@ -5,7 +5,6 @@
 local wo = vim.wo
 local opt = vim.opt
 
-
 -- Unless accustomed to relative line numbers, they can be distracting and confusing
 wo.relativenumber = false
 

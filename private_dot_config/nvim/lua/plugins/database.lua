@@ -1,33 +1,33 @@
 return {
 	-- Postgres driver
 	{
-		'jackc/pgx',
-		event = 'VeryLazy',
+		"jackc/pgx",
+		event = "VeryLazy",
 		lazy = true,
 	},
 
 	{
-		'kristijanhusak/vim-dadbod-ui',
+		"kristijanhusak/vim-dadbod-ui",
 		dependencies = {
 			-- DB interface
 			{
-				'tpope/vim-dadbod',
-				lazy = true
+				"tpope/vim-dadbod",
+				lazy = true,
 			},
 			{
-				'kristijanhusak/vim-dadbod-completion',
-				ft = { 'sql', 'mysql', 'plsql', 'sqlite' },
-				lazy = true
+				"kristijanhusak/vim-dadbod-completion",
+				ft = { "sql", "mysql", "plsql", "sqlite" },
+				lazy = true,
 			},
 		},
 		cmd = {
-			'DBUI',
-			'DBUIToggle',
-			'DBUIAddConnection',
-			'DBUIFindBuffer',
+			"DBUI",
+			"DBUIToggle",
+			"DBUIAddConnection",
+			"DBUIFindBuffer",
 		},
 		init = function()
 			vim.g.db_ui_use_nerd_fonts = 1
 		end,
-	}
+	},
 }

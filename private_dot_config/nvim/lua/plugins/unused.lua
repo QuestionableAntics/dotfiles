@@ -1,122 +1,133 @@
 local Unused_local = {
-	-- Breakdown of what vim spends time on when starting up
-	'dstein64/vim-startuptime',
-
 	-- Additional Omnisharp functionality
-	'Hoffs/omnisharp-extended-lsp.nvim',
-
-	-- Develop inside Docker containers
-	'jamestthompson3/nvim-remote-containers',
+	"Hoffs/omnisharp-extended-lsp.nvim",
 
 	-- Markdown previewer
 	{
-		'iamcco/markdown-preview.nvim',
-		build = 'cd app && npm install',
+		"iamcco/markdown-preview.nvim",
+		build = "cd app && npm install",
 	},
 
 	-- Edit terminal
 	{
-		'chomosuke/term-edit.nvim',
+		"chomosuke/term-edit.nvim",
 		config = function()
-			require 'term-edit'.setup { prompt_end = '%$ ' }
+			require("term-edit").setup({ prompt_end = "%$ " })
 		end,
 		lazy = false, -- or ft = 'toggleterm' if you use toggleterm.nvim
-		version = '1.*',
+		version = "1.*",
 	},
 
 	-- Remote environment interactions
-	'miversen33/netman.nvim',
+	"miversen33/netman.nvim",
 
-	'jamestthompson3/nvim-remote-containers',
+	------------------------------------------------------------
+	--- Containers
+	------------------------------------------------------------
+
+	"jamestthompson3/nvim-remote-containers",
 
 	{
-		'esensar/nvim-dev-container',
-		config = function() require('devcontainer').setup {} end
+		"esensar/nvim-dev-container",
+		config = function()
+			require("devcontainer").setup({})
+		end,
 	},
 
 	{
-		'michaelb/sniprun',
-		config = function() require('sniprun').setup {} end,
-		build = 'bash install.sh',
+		"arnaupv/nvim-devcontainer-cli",
+		opts = {},
+	},
+
+	-- Develop inside Docker containers
+	"jamestthompson3/nvim-remote-containers",
+
+	{
+		"michaelb/sniprun",
+		config = function()
+			require("sniprun").setup({})
+		end,
+		build = "bash install.sh",
 	},
 
 	-- Refactoring capabilities
 	{
-		'ThePrimeagen/refactoring.nvim',
+		"ThePrimeagen/refactoring.nvim",
 		config = function()
-			require('refactoring').setup {}
+			require("refactoring").setup({})
 		end,
 		depenencies = {
-			'nvim-treesitter/nvim-treesitter',
-			'nvim-lua/plenary.nvim',
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-lua/plenary.nvim",
 		},
 	},
 
 	-- dap integration
-	'nvim-telescope/telescope-dap.nvim',
+	"nvim-telescope/telescope-dap.nvim",
 
-	'nvim-zh/better-escape.vim',
+	"nvim-zh/better-escape.vim",
 
 	{
-		'chipsenkbeil/distant.nvim',
-		branch = 'v0.3',
+		"chipsenkbeil/distant.nvim",
+		branch = "v0.3",
 		config = function()
-			require('distant'):setup()
-		end
+			require("distant"):setup()
+		end,
 	},
 
 	-- Code actions lightbulb
 	{
-		'kosayoda/nvim-lightbulb',
+		"kosayoda/nvim-lightbulb",
 		event = "VeryLazy",
 	},
 
 	-- Modify quickfix buffer
 	{
-		'gabrielpoca/replacer.nvim',
+		"gabrielpoca/replacer.nvim",
 		opts = { rename_files = false },
 		keys = {
 			{
-				'<leader>h',
-				function() require('replacer').run() end,
-				desc = "run replacer.nvim"
-			}
+				"<leader>h",
+				function()
+					require("replacer").run()
+				end,
+				desc = "run replacer.nvim",
+			},
 		},
-		event = 'VeryLazy',
-	},
-
-	{
-		"arnaupv/nvim-devcontainer-cli",
-		opts = {}
-	},
-
-	{
-		'https://github.com/joshuavial/aider.nvim',
-		config = function() require("aider").setup() end,
 		event = "VeryLazy",
 	},
 
 	{
-		'nvim-pack/nvim-spectre',
+		"https://github.com/joshuavial/aider.nvim",
 		config = function()
-			require('spectre').setup()
+			require("aider").setup()
+		end,
+		event = "VeryLazy",
+	},
+
+	{
+		"nvim-pack/nvim-spectre",
+		config = function()
+			require("spectre").setup()
 		end,
 		keys = {
 			{
-				'<leader>sp',
+				"<leader>sp",
 				function()
-					require('spectre').toggle()
+					require("spectre").toggle()
 				end,
-				desc = "open spectre"
-			}
+				desc = "open spectre",
+			},
 		},
-		event = 'VeryLazy',
+		event = "VeryLazy",
 	},
 
 	-- Open paired files
 	{
-		'rgroli/other.nvim',
-		config = function() require('other-nvim').setup {} end
+		"rgroli/other.nvim",
+		config = function()
+			require("other-nvim").setup({})
+		end,
 	},
 
 	{
@@ -127,56 +138,62 @@ local Unused_local = {
 			"stevearc/dressing.nvim", -- Recommended but not required. Better UI for pickers.
 			enabled = true,
 		},
-		build = function() require("gitlab.server").build(true) end, -- Builds the Go binary
+		build = function()
+			require("gitlab.server").build(true)
+		end, -- Builds the Go binary
 		config = function()
-			require("gitlab").setup()                          -- Uses delta reviewer by default
+			require("gitlab").setup() -- Uses delta reviewer by default
 		end,
 		event = "VeryLazy",
 		enabled = false,
 	},
 
 	{
-		'simrat39/rust-tools.nvim',
+		"simrat39/rust-tools.nvim",
 		config = function()
-			require('rust-tools').setup({})
+			require("rust-tools").setup({})
 		end,
-		ft = { 'rust' },
+		ft = { "rust" },
 	},
 
 	-- Structural find and replace
 	{
-		'cshuaimin/ssr.nvim',
+		"cshuaimin/ssr.nvim",
 		keys = {
 			{
-				'<leader>sr',
-				function() require('ssr').open() end,
-				desc = "Structural find and replace"
-			}
+				"<leader>sr",
+				function()
+					require("ssr").open()
+				end,
+				desc = "Structural find and replace",
+			},
 		},
 		lazy = true,
 	},
 
 	-- Session Management
 	{
-		'rmagatti/auto-session',
+		"rmagatti/auto-session",
 		config = function()
-			require('auto-session').setup {
-				auto_session_root_dir = os.getenv('HOME') .. '/.vim/sessions/',
-				auto_session_suppress_dirs = { os.getenv('HOME') },
+			require("auto-session").setup({
+				auto_session_root_dir = os.getenv("HOME") .. "/.vim/sessions/",
+				auto_session_suppress_dirs = { os.getenv("HOME") },
 				pre_cwd_changed_hook = function()
 					-- close all language servers
 					vim.lsp.stop_client(vim.lsp.get_active_clients())
 				end,
-			}
-		end
+			})
+		end,
 	},
 
 	-- Auto close and update jsx tags
 	{
-		'windwp/nvim-ts-autotag',
-		config = function() require('nvim-ts-autotag').setup() end,
-		ft = { 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
-		lazy = true
+		"windwp/nvim-ts-autotag",
+		config = function()
+			require("nvim-ts-autotag").setup()
+		end,
+		ft = { "javascript", "typescript", "typescriptreact", "javascriptreact" },
+		lazy = true,
 	},
 }
 

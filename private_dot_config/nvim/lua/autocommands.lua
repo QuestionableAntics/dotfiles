@@ -1,36 +1,32 @@
-local utils = require('utils')
-
+local utils = require("utils")
 
 ------------------------------------------------------------------------------------------
 -- Other
 ------------------------------------------------------------------------------------------
 
 -- Highlight yanked text on yank
-vim.api.nvim_create_autocmd('TextYankPost', {
-	callback = function() vim.highlight.on_yank() end,
-	group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
-	pattern = '*',
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+	group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
+	pattern = "*",
 })
 
-
 -- Check if we need to reload the file when it changed
-vim.api.nvim_create_autocmd(
-	{
-		"FocusGained",
-		"TermClose",
-		"TermLeave",
-		"CursorHold",
-		"InsertLeave",
-		"WinEnter",
-		"BufEnter",
-		"BufWritePost",
-		"BufWritePre",
-		"BufReadPost",
-		"BufReadPre",
-	},
-	{ command = "checktime" }
-)
-
+vim.api.nvim_create_autocmd({
+	"FocusGained",
+	"TermClose",
+	"TermLeave",
+	"CursorHold",
+	"InsertLeave",
+	"WinEnter",
+	"BufEnter",
+	"BufWritePost",
+	"BufWritePre",
+	"BufReadPost",
+	"BufReadPre",
+}, { command = "checktime" })
 
 -- Show cursor line only in active window
 vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
@@ -52,13 +48,12 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
 	end,
 })
 
-
 -- Resize splits if window was resized
-vim.api.nvim_create_autocmd(
-	{ "VimResized" },
-	{ callback = function() vim.cmd("tabdo wincmd =") end }
-)
-
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+	callback = function()
+		vim.cmd("tabdo wincmd =")
+	end,
+})
 
 -- Go to last location when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
@@ -71,7 +66,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 		end
 	end,
 })
-
 
 -- Close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
@@ -92,20 +86,20 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-
 -- Format go files on save
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.go",
-	callback = function() require('go.format').goimport() end,
+	callback = function()
+		require("go.format").goimport()
+	end,
 	group = vim.api.nvim_create_augroup("GoFormat", {}),
 })
-
 
 -- If neovim is called with the database arg, open the database ui
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
 		if Database then
-			vim.cmd [[DBUI]]
+			vim.cmd([[DBUI]])
 		end
 	end,
 	group = vim.api.nvim_create_augroup("Database", {}),

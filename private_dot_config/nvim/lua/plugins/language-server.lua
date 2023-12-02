@@ -1,32 +1,32 @@
 return {
 	-- A collection of common configurations for Neovim's built-in language server client
 	-- Handles automatically launching and initializing installed language servers
-	'neovim/nvim-lspconfig',
+	"neovim/nvim-lspconfig",
 
 	-- beta roslyn lsp support, ideally can be removed eventually if this gets moved into mason
 	{
-		'https://github.com/jmederosalvarado/roslyn.nvim',
-		ft = { 'cs' },
+		"https://github.com/jmederosalvarado/roslyn.nvim",
+		ft = { "cs" },
 		enabled = false,
 	},
 
 	{
-		'https://github.com/lhKipp/nvim-nu',
+		"https://github.com/lhKipp/nvim-nu",
 		config = function()
-			require('nu').setup{
-				use_lsp_features = false
-			}
+			require("nu").setup({
+				use_lsp_features = false,
+			})
 		end,
-		build = ':TSInstall nu',
-		ft = { 'nu' },
+		build = ":TSInstall nu",
+		ft = { "nu" },
 	},
 
 	-- General external editor tooling installation management (Language servers, dap servers, linters, formatters)
 	{
-		'williamboman/mason.nvim',
+		"williamboman/mason.nvim",
 		config = function()
-			require('mason').setup()
-			require('mason-lspconfig').setup {
+			require("mason").setup()
+			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"ansiblels",
 					"bashls",
@@ -43,16 +43,16 @@ return {
 					"pyright",
 					"sqlls",
 					"terraformls",
-				}
-			}
+				},
+			})
 
-			require('language-servers').setup()
+			require("language-servers").setup()
 		end,
 		dependencies = {
-			'williamboman/mason-lspconfig.nvim',
-			'neovim/nvim-lspconfig',
+			"williamboman/mason-lspconfig.nvim",
+			"neovim/nvim-lspconfig",
 		},
-		event = 'VeryLazy',
+		event = "VeryLazy",
 	},
 
 	-- direct integration with tsserver
@@ -63,16 +63,20 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		opts = {},
-		ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
+		ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
 	},
 
 	{
-		'https://github.com/ray-x/go.nvim',
+		"https://github.com/ray-x/go.nvim",
 		dependencies = {
-			'ray-x/guihua.lua',
+			"ray-x/guihua.lua",
 		},
-		config = function() require('go').setup() end,
-		ft = {'go', 'gomod'},
-		build = function() require('go.install').update_all_sync() end,
+		config = function()
+			require("go").setup()
+		end,
+		ft = { "go", "gomod" },
+		build = function()
+			require("go.install").update_all_sync()
+		end,
 	},
 }

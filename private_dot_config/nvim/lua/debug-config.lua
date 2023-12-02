@@ -1,6 +1,6 @@
-local dap_python = require 'dap-python'
-local dap_ui = require 'dapui'
-local dap_vscode_ext = require 'dap.ext.vscode'
+local dap_python = require("dap-python")
+local dap_ui = require("dapui")
+local dap_vscode_ext = require("dap.ext.vscode")
 -- local dap = require 'dap'
 -- local dap_utils = require 'dap.utils'
 -- renamed the entire package and now everything's broke lol
@@ -13,7 +13,7 @@ local dap_vscode_ext = require 'dap.ext.vscode'
 vim.g.dap_virtual_text = true
 
 -- Fancy breakpoint symbol.
-vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
+vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
 
 -- logs live at ~/.cache/nvim/dap.log
 -- one of TRACE, DEBUG, INFO, WARN, ERROR
@@ -29,7 +29,6 @@ vim.diagnostic.config({
 })
 -- vim.cmd [[ let test#javascript#runner = "jest" ]]
 
-
 ------------------------------------------------------------------------------------------
 -- Debug
 ------------------------------------------------------------------------------------------
@@ -37,9 +36,8 @@ vim.diagnostic.config({
 -- Reference for debugging setup
 -- https://github.com/mfussenegger/dotfiles/blob/master/vim/.config/nvim/lua/me/dap.lua
 
-dap_python.setup(os.getenv('HOME') .. '/.pyenv/versions/debugpy/bin/python')
-dap_python.test_runner = 'pytest'
-
+dap_python.setup(os.getenv("HOME") .. "/.pyenv/versions/debugpy/bin/python")
+dap_python.test_runner = "pytest"
 
 -- 	dap.adapters.firefox = {
 -- 		type = 'exectuable',

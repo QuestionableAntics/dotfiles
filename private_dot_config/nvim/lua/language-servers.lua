@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function()
-	local lspconfig = require 'lspconfig'
+	local lspconfig = require("lspconfig")
 	local pid = vim.fn.getpid()
 
 	-- Add more paths to the lua package search path
@@ -19,13 +19,13 @@ M.setup = function()
 					},
 					diagnostics = { globals = { "vim", "coq" } },
 					workspace = {
-						library = vim.api.nvim_get_runtime_file('', true),
+						library = vim.api.nvim_get_runtime_file("", true),
 					},
 					telemetry = {
 						enable = false,
 					},
 				},
-			}
+			},
 		},
 
 		eslint = {},
@@ -36,7 +36,7 @@ M.setup = function()
 		-- https://nicolaiarocci.com/making-csharp-and-omnisharp-play-well-with-neovim/
 		omnisharp = {
 			on_attach = function(client, bufnr)
-				vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+				vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 				-- Periodically check if this is stil required
 				-- Right now semantic tokens provided by roslyn are causing issues
 				client.server_capabilities.semanticTokensProvider = {
@@ -119,7 +119,7 @@ M.setup = function()
 				"/Users/kean.mattingly@equipmentshare.com/.local/share/nvim/mason/packages/omnisharp/libexec/OmniSharp.dll",
 				"--languageserver",
 				"--hostPID",
-				tostring(pid)
+				tostring(pid),
 			},
 			-- Enables support for reading code style, naming convention and analyzer
 			-- settings from .editorconfig.

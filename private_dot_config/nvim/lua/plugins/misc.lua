@@ -1,22 +1,22 @@
 return {
 	-- Speed up
-	'nathom/filetype.nvim',
+	"nathom/filetype.nvim",
 
 	-- Hints for keybindings
 	{
-		'folke/which-key.nvim',
-		event = 'VeryLazy',
+		"folke/which-key.nvim",
+		event = "VeryLazy",
 	},
 
 	-- Types for vim api
 	{
-		'folke/neodev.nvim',
-		ft = { 'lua' },
+		"folke/neodev.nvim",
+		ft = { "lua" },
 	},
 
 	---- General dependencies
 	-- popup window interface
-	'nvim-lua/popup.nvim',
+	"nvim-lua/popup.nvim",
 
 	{
 		"kawre/leetcode.nvim",
@@ -43,7 +43,7 @@ return {
 		"epwalsh/obsidian.nvim",
 		lazy = true,
 		event = function()
-			local parent_directory = vim.fn.expand '~' .. '/Library/Mobile Documents/iCloud~md~obsidian/Documents'
+			local parent_directory = vim.fn.expand("~") .. "/Library/Mobile Documents/iCloud~md~obsidian/Documents"
 
 			local events = {
 				"BufReadPre " .. parent_directory .. "/**/*.md",
@@ -56,20 +56,17 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 		opts = function()
-			local parent_directory = vim.fn.expand '~' .. '/Library/Mobile Documents/iCloud~md~obsidian/Documents'
+			local parent_directory = vim.fn.expand("~") .. "/Library/Mobile Documents/iCloud~md~obsidian/Documents"
 
-			local sub_directories = vim.fn.globpath(parent_directory, '*', true, true)
+			local sub_directories = vim.fn.globpath(parent_directory, "*", true, true)
 
 			local workspaces = {}
 
 			for _, directory in ipairs(sub_directories) do
-				table.insert(
-					workspaces,
-					{
-						name = directory,
-						path = parent_directory .. '/' .. directory,
-					}
-				)
+				table.insert(workspaces, {
+					name = directory,
+					path = parent_directory .. "/" .. directory,
+				})
 			end
 
 			return {
@@ -79,13 +76,15 @@ return {
 		end,
 		keys = {
 			{
-				'<Leader>gd',
-				function() require('obsidian').util.gf_passthrough() end,
-				desc = 'Go to file in Obsidian'
+				"<Leader>gd",
+				function()
+					require("obsidian").util.gf_passthrough()
+				end,
+				desc = "Go to file in Obsidian",
 			},
 		},
 		-- disabled until multi vault support
 		-- https://github.com/epwalsh/obsidian.nvim/pull/155
 		-- enabled = false
-	}
+	},
 }

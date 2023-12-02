@@ -126,6 +126,7 @@ return {
 					python = { "black" },
 					typescript = { "prettierd" },
 					typescriptreact = { "prettierd" },
+					sql = { "sqlformat" },
 				},
 			})
 		end,
@@ -139,5 +140,11 @@ return {
 			},
 		},
 		-- lazy = true,
+	},
+
+	{
+		"andrewferrier/debugprint.nvim",
+		opts = {},
+		event = "VeryLazy",
 	},
 }

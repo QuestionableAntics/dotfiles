@@ -1,25 +1,25 @@
 return {
 	-- More pretty icons
 	{
-		'nvim-tree/nvim-web-devicons',
-		event = 'VeryLazy',
+		"nvim-tree/nvim-web-devicons",
+		event = "VeryLazy",
 	},
 
 	-- highlight matching html tags
 	{
-		'gregsexton/MatchTag',
-		ft = { 'html', 'xml', 'javascript', 'typescriptreact', 'javascriptreact' },
+		"gregsexton/MatchTag",
+		ft = { "html", "xml", "javascript", "typescriptreact", "javascriptreact" },
 	},
 
 	-- VS Code theme
 	{
-		'Mofiqul/vscode.nvim',
+		"Mofiqul/vscode.nvim",
 		config = function()
-			local vscode = require('vscode')
-			vscode.setup {
+			local vscode = require("vscode")
+			vscode.setup({
 				transparent = true,
 				italic_comments = true,
-			}
+			})
 			vscode.load()
 		end,
 		priority = 1000,
@@ -27,36 +27,36 @@ return {
 
 	-- Nice status bar
 	{
-		'nvim-lualine/lualine.nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			require('lualine').setup {
-				options = { theme = require('lualine.themes.onedark') },
+			require("lualine").setup({
+				options = { theme = require("lualine.themes.onedark") },
 				sections = {
 					lualine_a = {
-						{ 'filename', path = 1 },
+						{ "filename", path = 1 },
 					},
 				},
-			}
+			})
 		end,
-		event = 'VeryLazy',
+		event = "VeryLazy",
 	},
 
 	-- Virtual text to add indentation guides
 	{
-		'shellRaining/hlchunk.nvim',
-		event = { 'VeryLazy' },
+		"shellRaining/hlchunk.nvim",
+		event = { "VeryLazy" },
 		config = function()
-			require('hlchunk').setup({
-				indent = { chars = { '┆' } },
-				blank = { enable = false }
+			require("hlchunk").setup({
+				indent = { chars = { "┆" } },
+				blank = { enable = false },
 			})
 		end,
 	},
 
 	-- A ton of pretty UI things
 	{
-		'folke/noice.nvim',
+		"folke/noice.nvim",
 		event = "VeryLazy",
 		config = function()
 			require("noice").setup({
@@ -76,19 +76,19 @@ return {
 					lsp_doc_border = false, -- add a border to hover docs and signature help
 				},
 			})
-			require('notify').setup { background_colour = '#000000' }
+			require("notify").setup({ background_colour = "#000000" })
 		end,
 		dependencies = {
-			'MunifTanjim/nui.nvim',
-			'rcarriga/nvim-notify',
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
 		},
 	},
 
 	-- VS Code style references view
 	{
-		'DNLHC/glance.nvim',
+		"DNLHC/glance.nvim",
 		config = function()
-			require('glance').setup({
+			require("glance").setup({
 				hooks = {
 					before_open = function(results, open, jump, method)
 						if #results == 1 then
@@ -97,16 +97,16 @@ return {
 							open(results)
 						end
 					end,
-				}
+				},
 			})
 		end,
-		lazy = true
+		lazy = true,
 	},
 
 	-- Show context at the top of the file
 	{
-		'https://github.com/nvim-treesitter/nvim-treesitter-context',
-		event = 'VeryLazy',
+		"https://github.com/nvim-treesitter/nvim-treesitter-context",
+		event = "VeryLazy",
 	},
 
 	{

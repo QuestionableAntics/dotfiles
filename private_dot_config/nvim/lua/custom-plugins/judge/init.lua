@@ -1,4 +1,8 @@
 ------------------------------------------------------------
+-- someone else's utils
+------------------------------------------------------------
+
+------------------------------------------------------------
 -- Utils
 ------------------------------------------------------------
 
@@ -48,6 +52,11 @@ function utils.should_load(opts)
 		return false
 	end
 
+	-- if the session file doesn't exist, don't load it
+	if vim.fn.filereadable(JudgeState.session_path) == 0 then
+		return false
+	end
+
 	return true
 end
 
@@ -87,8 +96,12 @@ M.opts = {
 	ignore_argv = true,
 	-- directory to save sessions in
 	session_dir = vim.fn.expand("$HOME/.nvim/sessions"),
-	-- function to call when switching to a session
-	on_session_switch = function() end,
+	-- executed before saving a session
+	-- accepts judge's current state as an argument
+	pre_load_hook = function(_) end,
+	-- executed after loading a session
+	-- accepts judge's current state as an argument
+	post_load_hook = function(_) end,
 }
 
 -- telescope options when searching sessions
@@ -122,15 +135,14 @@ function M.load_session(session_name)
 		return
 	end
 
-	utils.update_session_state(JudgeState, {
+	M.opts.pre_load_hook()
+
+	vim.api.nvim_command("silent source " .. utils.update_session_state(JudgeState, {
 		session_name = session_name,
 		session_dir = M.opts.session_dir,
-	})
+	}).session_path)
 
-	if vim.fn.filereadable(JudgeState.session_path) == 1 then
-		vim.api.nvim_command("silent source " .. JudgeState.session_path)
-		M.opts.on_session_switch()
-	end
+	M.opts.post_load_hook(JudgeState)
 end
 
 function M.delete_session(session_name)

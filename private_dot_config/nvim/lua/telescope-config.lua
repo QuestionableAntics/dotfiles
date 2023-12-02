@@ -40,15 +40,15 @@ local highlights = {
 	-- Results
 	TelescopeResultsTitle = {
 		fg = results_title,
-		bg = '#732929',
+		bg = "#732929",
 	},
 	TelescopeResultsBorder = {
-		fg = '#222222',
-		bg = '#222222',
+		fg = "#222222",
+		bg = "#222222",
 	},
 	TelescopeResultsNormal = {
 		fg = light_gray,
-		bg = '#222222',
+		bg = "#222222",
 	},
 	TelescopeResultsLine = {
 		bg = background,
@@ -60,12 +60,12 @@ local highlights = {
 		bg = yellow_orange,
 	},
 	TelescopePreviewBorder = {
-		fg = '#222222',
-		bg = '#222222'
+		fg = "#222222",
+		bg = "#222222",
 	},
 	TelescopePreviewNormal = {
 		fg = light_gray,
-		bg = '#222222',
+		bg = "#222222",
 	},
 }
 

@@ -1,19 +1,19 @@
 return {
 	-- Pretty Pick List
 	{
-		'nvim-telescope/telescope.nvim',
+		"nvim-telescope/telescope.nvim",
 		dependencies = {
-			'nvim-telescope/telescope-live-grep-args.nvim',
-			'nvim-telescope/telescope-fzf-native.nvim',
-			'nvim-telescope/telescope-ui-select.nvim',
-			'danielfalk/smart-open.nvim',
-			'Marskey/telescope-sg',
-			'debugloop/telescope-undo.nvim',
+			"nvim-telescope/telescope-live-grep-args.nvim",
+			"nvim-telescope/telescope-fzf-native.nvim",
+			"nvim-telescope/telescope-ui-select.nvim",
+			"danielfalk/smart-open.nvim",
+			"Marskey/telescope-sg",
+			"debugloop/telescope-undo.nvim",
 		},
 		config = function()
-			local lga_actions = require 'telescope-live-grep-args.actions'
-			local telescope = require('telescope')
-			local actions = require('telescope.actions')
+			local lga_actions = require("telescope-live-grep-args.actions")
+			local telescope = require("telescope")
+			local actions = require("telescope.actions")
 			local trouble = require("trouble.providers.telescope")
 
 			telescope.setup({
@@ -31,7 +31,7 @@ return {
 						"obj/",
 						".yarn/*",
 						".obsidian/*",
-						".venv/"
+						".venv/",
 					},
 					vimgrep_arguments = {
 						"rg",
@@ -41,7 +41,7 @@ return {
 						"--line-number",
 						"--column",
 						"--smart-case",
-						"--trim"
+						"--trim",
 					},
 					mappings = {
 						i = {
@@ -52,7 +52,7 @@ return {
 							["<C-t>"] = trouble.open_with_trouble,
 							["<C-c>"] = actions.close,
 							["q"] = actions.close,
-						}
+						},
 					},
 					prompt_prefix = "  ",
 					selection_caret = "  ",
@@ -63,25 +63,25 @@ return {
 						-- use fd to find files
 						find_command = { "fd" },
 						-- search hidden files in the directory
-						hidden = true
-					}
+						hidden = true,
+					},
 				},
 				extensions = {
-					["ui-select"] = { require("telescope.themes").get_dropdown {} },
+					["ui-select"] = { require("telescope.themes").get_dropdown({}) },
 					["live_grep_args"] = {
 						mappings = {
 							i = {
 								["<C-k>"] = lga_actions.quote_prompt(),
 								["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-							}
-						}
+							},
+						},
 					},
 					["ast_grep"] = {
 						command = {
 							"sg",
 							"--json=stream",
 							-- "-p",
-						},     -- must have --json and -p
+						}, -- must have --json and -p
 						grep_open_files = false, -- search in opened files
 						lang = nil, -- string value, sepcify language for ast-grep `nil` for default
 					},
@@ -89,7 +89,7 @@ return {
 					["smart_open"] = {
 						match_algorithm = "fzf",
 						show_scores = true,
-					}
+					},
 				},
 			})
 
@@ -107,43 +107,55 @@ return {
 			end
 		end,
 		keys = function()
-			local which_key = require 'which-key'
+			local which_key = require("which-key")
 
-			which_key.register({ ['<Leader>f'] = 'Fuzzy Finder' })
-			which_key.register({ ['<Leader>fx'] = 'Find Diagnostics' })
+			which_key.register({ ["<Leader>f"] = "Fuzzy Finder" })
+			which_key.register({ ["<Leader>fx"] = "Find Diagnostics" })
 
 			return {
 				{
-					'<Leader>ff',
+					"<Leader>ff",
 
-					function() require('telescope').extensions.smart_open.smart_open { cwd_only = true } end,
+					function()
+						require("telescope").extensions.smart_open.smart_open({ cwd_only = true })
+					end,
 					-- function() require('telescope.builtin').find_files() end,
-					desc = 'Find files'
+					desc = "Find files",
 				},
 				{
-					'<Leader>fg',
-					function() require('telescope').extensions.live_grep_args.live_grep_args() end,
-					desc = 'Live Grep'
+					"<Leader>fg",
+					function()
+						require("telescope").extensions.live_grep_args.live_grep_args()
+					end,
+					desc = "Live Grep",
 				},
 				{
-					'<Leader>fb',
-					function() require('telescope.builtin').buffers() end,
-					desc = 'Find Buffers'
+					"<Leader>fb",
+					function()
+						require("telescope.builtin").buffers()
+					end,
+					desc = "Find Buffers",
 				},
 				{
-					'<Leader>fh',
-					function() require('telescope.builtin').help_tags() end,
-					desc = 'Find Help Tags'
+					"<Leader>fh",
+					function()
+						require("telescope.builtin").help_tags()
+					end,
+					desc = "Find Help Tags",
 				},
 				{
-					'<Leader>fo',
-					function() require('telescope.builtin').oldfiles() end,
-					desc = 'Find Old Files'
+					"<Leader>fo",
+					function()
+						require("telescope.builtin").oldfiles()
+					end,
+					desc = "Find Old Files",
 				},
 				{
-					'<Leader>fl',
-					function() require('telescope.builtin').resume() end,
-					desc = 'Last Search Results'
+					"<Leader>fl",
+					function()
+						require("telescope.builtin").resume()
+					end,
+					desc = "Last Search Results",
 				},
 				-- {
 				-- 	'<Leader>fs',
@@ -151,30 +163,38 @@ return {
 				-- 	desc = 'Smart Open'
 				-- },
 				{
-					'<Leader>fxd',
-					function() require('telescope.builtin').diagnostics { bufnr = 0 } end,
-					desc = 'Find Diagnostics in Focused Buffer'
-				},
-				{
-					'<Leader>fxw',
-					function() require('telescope.builtin').diagnostics() end,
-					desc = 'Find Diagnostics in Open Buffers'
-				},
-				{
-					'<Leader>/',
+					"<Leader>fxd",
 					function()
-						require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-							winblend = 10,
-							previewer = false,
-						})
+						require("telescope.builtin").diagnostics({ bufnr = 0 })
 					end,
-					desc = 'Fuzzily search in current buffer'
+					desc = "Find Diagnostics in Focused Buffer",
+				},
+				{
+					"<Leader>fxw",
+					function()
+						require("telescope.builtin").diagnostics()
+					end,
+					desc = "Find Diagnostics in Open Buffers",
+				},
+				{
+					"<Leader>/",
+					function()
+						require("telescope.builtin").current_buffer_fuzzy_find(
+							require("telescope.themes").get_dropdown({
+								winblend = 10,
+								previewer = false,
+							})
+						)
+					end,
+					desc = "Fuzzily search in current buffer",
 				},
 				{
 					"<leader>fu",
-					function() require("telescope").extensions.undo.undo() end,
-					desc = "open telescope-undo.nvim"
-				}
+					function()
+						require("telescope").extensions.undo.undo()
+					end,
+					desc = "open telescope-undo.nvim",
+				},
 			}
 		end,
 		lazy = true,
@@ -182,16 +202,16 @@ return {
 
 	-- fzf
 	{
-		'junegunn/fzf',
+		"junegunn/fzf",
 		build = function()
-			vim.fn['fzf#install']()
+			vim.fn["fzf#install"]()
 		end,
-		event = 'VeryLazy',
+		event = "VeryLazy",
 	},
 
 	-- Telescope fzf integration
 	{
-		'nvim-telescope/telescope-fzf-native.nvim',
+		"nvim-telescope/telescope-fzf-native.nvim",
 		build = [[
 		cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && \
 		cmake --build build --config Release && cmake --install build --prefix build
@@ -210,13 +230,13 @@ return {
 	},
 
 	{
-		'Marskey/telescope-sg',
+		"Marskey/telescope-sg",
 		keys = {
 			{
-				'<Leader>fa',
-				'<cmd>Telescope ast_grep<CR>',
-				desc = 'Find by AST'
-			}
+				"<Leader>fa",
+				"<cmd>Telescope ast_grep<CR>",
+				desc = "Find by AST",
+			},
 		},
 		lazy = true,
 	},
